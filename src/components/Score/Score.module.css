@@ -1,0 +1,7 @@
+.score {
+  position: absolute;
+  top: 10px;
+  background-color: red;
+  height: 49px;
+  width: calc(90vw - 8px);
+}
