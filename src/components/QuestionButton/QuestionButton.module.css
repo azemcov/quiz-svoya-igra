@@ -16,6 +16,19 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-button:hover {
-  background-color: red;
+.blinking {
+  animation: 0.15s ease-in-out 0s infinite blinking;
+  -webkit-animation: 0.15s ease-in-out 0s infinite blinking;
+}
+
+@keyframes blinking {
+  0% {
+    background-color: none;
+  }
+  50% {
+    background-color: #f8e848;
+  }
+  100% {
+    background-color: none;
+  }
 }
