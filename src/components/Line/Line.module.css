@@ -1,19 +1,18 @@
 .line {
   display: flex;
 }
-.normalTheme {
+.theme {
   width: 20vw;
   height: 14vh;
   margin: -0.5px;
   box-sizing: border-box;
   cursor: default;
-  background-color: transparent;
   border: 1px solid #f8e848;
   display: flex;
   justify-content: center;
   place-items: center;
 }
-.themeText {
+.text {
   color: #ffffffde;
   font-family: "NanumGothic-Regular", sans-serif;
   font-weight: 400;
@@ -23,4 +22,19 @@
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+.blinking {
+  animation: 0.15s ease-in-out 0s infinite blinking;
+  -webkit-animation: 0.15s ease-in-out 0s infinite blinking;
+}
+@keyframes blinking {
+  0% {
+    background-color: none;
+  }
+  50% {
+    background-color: #f8e848;
+  }
+  100% {
+    background-color: none;
+  }
 }

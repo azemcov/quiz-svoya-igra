@@ -4,15 +4,16 @@ import ModalQuestion from "/src/components/modal/ModalQuestion.jsx";
 import { round1Questions } from "/data.js";
 import classes from "/src/components/QuestionButton/QuestionButton.module.css";
 
-export default function QuestionButton({ children, lineN, columnN }) {
+export default function QuestionButton({ children, lineN, columnN, onClick }) {
   let [isModalOpen, setIsModalOpen] = useState(false);
   let [question, setQuestion] = useState("");
-  let [isBlinking, setIsBlinking] = useState(false);
+  let [isBlinking, setIsBlinking] = useState("ready");
 
   function flash() {
-    setIsBlinking(true);
+    onClick();
+    setIsBlinking("blink");
     setTimeout(() => {
-      setIsBlinking(false);
+      setIsBlinking("sleep");
       setIsModalOpen(true);
       setQuestion(round1Questions[lineN].line[columnN].question);
     }, 700);
@@ -22,11 +23,16 @@ export default function QuestionButton({ children, lineN, columnN }) {
     <>
       <button
         onClick={flash}
+        disabled={isBlinking === "sleep"}
         className={`${classes.normalButton} ${
-          isBlinking ? classes.blinking : ""
+          isBlinking === "blink"
+            ? classes.blinking
+            : isBlinking === "sleep"
+            ? classes.sleep
+            : ""
         }`}
       >
-        {children}
+        {isBlinking === "sleep" ? "" : children}
       </button>
       <ModalQuestion open={isModalOpen}>
         <p>{question}</p>

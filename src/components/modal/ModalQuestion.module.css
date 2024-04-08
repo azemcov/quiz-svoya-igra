@@ -1,10 +1,15 @@
 .question {
+  position: absolute;
+  top: 11vh;
+  right: 5vw;
+  bottom: 4vh;
+  left: 5vw;
   background-color: #119;
   border-radius: 0;
   border: 1px solid #f8e848;
   position: fixed;
-  width: 90%;
-  height: 85%;
+  width: auto;
+  height: auto;
   z-index: 99;
   -webkit-border-radius: 0;
   -moz-border-radius: 0;

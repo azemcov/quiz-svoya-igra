@@ -5,14 +5,12 @@
   box-sizing: border-box;
   cursor: pointer;
   background-color: transparent;
-  border: 1px solid #f8e848;
+  border: 1px solid #e8e4b2;
   color: #ffffffde;
-
   font-family: "NanumGothic-Regular", sans-serif;
   font-weight: 400;
   font-style: normal;
   font-size: 2.5vw;
-  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -20,7 +18,9 @@
   animation: 0.15s ease-in-out 0s infinite blinking;
   -webkit-animation: 0.15s ease-in-out 0s infinite blinking;
 }
-
+.sleep {
+  cursor: not-allowed;
+}
 @keyframes blinking {
   0% {
     background-color: none;

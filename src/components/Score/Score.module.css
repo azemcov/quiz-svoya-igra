@@ -1,6 +1,8 @@
 .score {
-  top: 10px;
-  background-color: red;
-  height: 49px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 12vh;
   width: calc(90vw - 8px);
+  box-sizing: border-box;
 }

@@ -1,0 +1,16 @@
+.text {
+  max-width: 25vw;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-right: -3vw;
+}
+.points {
+  margin: 0;
+  padding-left: -3vw;
+}
+.command {
+  display: "block";
+  /* line-height: 1; */
+}

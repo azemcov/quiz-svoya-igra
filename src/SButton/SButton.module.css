@@ -1,0 +1,10 @@
+.score_button {
+  width: 3vw;
+  height: 3vh;
+  background-color: gray;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
