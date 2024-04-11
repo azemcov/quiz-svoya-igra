@@ -1,12 +1,11 @@
 .normalButton {
   width: 10vw;
-  height: 14vh;
+  height: 13vh;
   margin: -0.5px;
   box-sizing: border-box;
   cursor: pointer;
   background-color: transparent;
   border: 1px solid #e8e4b2;
-  color: #ffffffde;
   font-family: "NanumGothic-Regular", sans-serif;
   font-weight: 400;
   font-style: normal;
@@ -19,6 +18,7 @@
   -webkit-animation: 0.15s ease-in-out 0s infinite blinking;
 }
 .sleep {
+  color: transparent;
   cursor: not-allowed;
 }
 @keyframes blinking {

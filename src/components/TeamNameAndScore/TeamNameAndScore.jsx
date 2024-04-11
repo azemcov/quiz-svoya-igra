@@ -1,4 +1,4 @@
-import classes from "/src/components/TeamNameAndCrore/TeamNameAndCrore.module.css";
+import classes from "/src/components/TeamNameAndScore/TeamNameAndScore.module.css";
 
 export default function TeamNameAndCrore({ name, score }) {
   return (
