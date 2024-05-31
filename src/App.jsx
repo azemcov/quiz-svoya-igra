@@ -8,6 +8,7 @@ import { allRoundQuetions, finalQuestions } from "/data.js";
 import "./App.css";
 import AdSection from "./components/AdSection/AdSection";
 import StartSection from "/src/components/StartSection/StartSection.jsx";
+import StartRegistrationSection from "./components/StartRegistrationSection/StartRegistrationSection";
 
 function App() {
   let [roundN, setRoundN] = useState(0);
@@ -43,14 +44,14 @@ function App() {
   });
   let [questionXY, setQuestionXY] = useState([0, 0]);
   let [buttonClicked, setButtonClicked] = useState({ 1: 0, 2: 0, 3: 0 });
-  let [buttonVisibility, setButtonVisibility] = useState(true);
+  let [buttonVisibility, setButtonVisibility] = useState(false);
   let [final, setFinal] = useState(false);
 
   useEffect(() => {
     function keyboard(event) {
       if (event.key === "!" && boardCondition === "question" && bet !== 0) {
         decrease(1);
-      } else if (event.code === "KeyQ") {
+      } else if (event.code === "KeyQ" && boardCondition === "table") {
         setButtonCondition([
           ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
           ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
@@ -59,6 +60,10 @@ function App() {
           ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
           ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", 7000],
         ]);
+      } else if (event.code === "Enter" && boardCondition === "start") {
+        setBoardCondition("registration");
+      } else if (event.code === "Enter" && boardCondition === "registration") {
+        setBoardCondition("tableAd");
       } else if (event.code === "KeyR") {
         setBoardCondition("results");
       } else if (event.code === "KeyF") {
@@ -135,10 +140,19 @@ function App() {
       {boardCondition === "start" && (
         <>
           <StartSection
-            setTeams={setTeams}
             buttonVisibility={buttonVisibility}
             setBoardCondition={setBoardCondition}
           ></StartSection>
+        </>
+      )}
+      {boardCondition === "registration" && (
+        <>
+          <StartRegistrationSection
+            teams={teams}
+            setTeams={setTeams}
+            buttonVisibility={buttonVisibility}
+            setBoardCondition={setBoardCondition}
+          ></StartRegistrationSection>
         </>
       )}
       {boardCondition === "tableAd" && (
