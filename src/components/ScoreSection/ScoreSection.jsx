@@ -1,42 +1,32 @@
-import { useState } from "react";
-import SButton from "/src/components/ScoreButton/ScoreButton.jsx";
+import Button from "/src/components/Button/Button.jsx";
 import TeamNameAndCrore from "/src/components/TeamNameAndScore/TeamNameAndScore.jsx";
 import classes from "/src/components/ScoreSection/ScoreSection.module.css";
 
 export default function ScoreSection({
   teams,
   score,
-  setScore,
-  bet,
-  setBet,
-  setBoardCondition,
+  buttonClicked,
+  increase,
+  decrease,
+  buttonVisibility,
 }) {
-  function increase(num) {
-    setScore({
-      ...score,
-      ["score" + num]: score["score" + num] + bet,
-    });
-    setBet(0);
-    setBoardCondition("table");
-  }
-  function decrease(num) {
-    setScore({ ...score, ["score" + num]: score["score" + num] - bet });
-  }
   return (
-    <>
-      <div className={classes.score}>
-        <SButton onClick={() => decrease("1")}>-</SButton>
-        <TeamNameAndCrore name={teams.team1} score={score.score1} />
-        <SButton onClick={() => increase("1")}>+</SButton>
-        <div style={{ width: "1vw" }}></div>
-        <SButton onClick={() => decrease("2")}>-</SButton>
-        <TeamNameAndCrore name={teams.team2} score={score.score2} />
-        <SButton onClick={() => increase("2")}>+</SButton>
-        <div style={{ width: "1vw" }}></div>
-        <SButton onClick={() => decrease("3")}>-</SButton>
-        <TeamNameAndCrore name={teams.team3} score={score.score3} />
-        <SButton onClick={() => increase("3")}>+</SButton>
-      </div>
-    </>
+    <div className={classes.score}>
+      {Array.from({ length: 3 }).map((m, i) => (
+        <div key={i} style={{ display: "flex", margin: "0 0.2rem" }}>
+          {buttonVisibility && (
+            <Button onClick={() => decrease(`${i + 1}`)}>-</Button>
+          )}
+          <TeamNameAndCrore
+            name={teams[`team${i + 1}`]}
+            score={score[`score${i + 1}`]}
+            buttonClicked={buttonClicked[i + 1]}
+          />
+          {buttonVisibility && (
+            <Button onClick={() => increase(`${i + 1}`)}>+</Button>
+          )}
+        </div>
+      ))}
+    </div>
   );
 }

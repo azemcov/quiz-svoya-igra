@@ -1,11 +1,12 @@
 .question {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   width: calc(100% + 1px);
-  height: 78%;
+  height: calc(78% - 5px);
   margin: -0.5px;
   box-sizing: border-box;
   cursor: default;
   border: 1px solid #f8e848;
-  display: flex;
-  justify-content: center;
-  place-items: center;
 }

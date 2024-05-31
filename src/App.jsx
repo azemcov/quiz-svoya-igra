@@ -2,17 +2,34 @@ import { useState, useEffect } from "react";
 import LineSection from "/src/components/LineSection/LineSection.jsx";
 import ScoreSection from "/src/components/ScoreSection/ScoreSection.jsx";
 import QuestionSection from "/src/components/QuestionSection/QuestionSection.jsx";
-import { allRoundQuetions } from "/data.js";
+import ResultSection from "/src/components/ResultSection/ResultSection.jsx";
+import FinalSection from "/src/components/FinalSection/FinalSection.jsx";
+import { allRoundQuetions, finalQuestions } from "/data.js";
 import "./App.css";
+import AdSection from "./components/AdSection/AdSection";
+import StartSection from "/src/components/StartSection/StartSection.jsx";
 
-function App({ keydown }) {
+function App() {
   let [roundN, setRoundN] = useState(0);
-  let [actualRound, setActualRound] = useState([...allRoundQuetions[roundN]]);
-  let [actualFinal, setActualFinal] = useState();
-  let [boardCondition, setBoardCondition] = useState("table");
-  let [buttonCondition, setButtonCondition] = useState(
-    Array(6).fill([100, 200, 300, 400, 500, 600, 700])
+  let [qtyOfRounds, setQtyOfRounds] = useState(allRoundQuetions.length);
+  let [actualRound, setActualRound] = useState(
+    roundN !== "final"
+      ? [...allRoundQuetions[roundN]]
+      : [...allRoundQuetions[0]]
   );
+  let [boardCondition, setBoardCondition] = useState("start");
+  let [buttonCondition, setButtonCondition] = useState(
+    Array(6).fill([
+      (roundN + 1) * 1 * 100,
+      (roundN + 1) * 2 * 100,
+      (roundN + 1) * 3 * 100,
+      (roundN + 1) * 4 * 100,
+      (roundN + 1) * 5 * 100,
+      (roundN + 1) * 6 * 100,
+      (roundN + 1) * 7 * 100,
+    ])
+  );
+  let [finalCondition, setFinalCondition] = useState([1, 1, 1, 1, 1, 1, 1]);
   let [bet, setBet] = useState(0);
   let [teams, setTeams] = useState({
     team1: "команда 1",
@@ -25,11 +42,33 @@ function App({ keydown }) {
     score3: 3300,
   });
   let [questionXY, setQuestionXY] = useState([0, 0]);
+  let [buttonClicked, setButtonClicked] = useState({ 1: 0, 2: 0, 3: 0 });
+  let [buttonVisibility, setButtonVisibility] = useState(true);
+  let [final, setFinal] = useState(false);
 
   useEffect(() => {
     function keyboard(event) {
-      if (event.code === "KeyN") {
+      if (event.key === "!" && boardCondition === "question" && bet !== 0) {
+        decrease(1);
+      } else if (event.code === "KeyQ") {
+        setButtonCondition([
+          ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
+          ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
+          ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
+          ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
+          ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
+          ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", 7000],
+        ]);
+      } else if (event.code === "KeyR") {
+        setBoardCondition("results");
+      } else if (event.code === "KeyF") {
+        setBoardCondition("final");
+      } else if (event.code === "KeyT") {
         setBoardCondition("table");
+      } else if (event.code === "KeyV") {
+        setButtonVisibility((prev) => !prev);
+      } else if (event.code === "Digit0") {
+        setButtonVisibility(console.log("текущий раунд:", roundN));
       } else {
         console.log(event.code);
       }
@@ -37,21 +76,92 @@ function App({ keydown }) {
     document.addEventListener("keydown", keyboard);
     return () => {
       document.removeEventListener("keydown", keyboard);
+      keyboard;
     };
   }, []);
 
+  function isQuestionsOver() {
+    return buttonCondition
+      .map((arr) => arr.every((e) => e === "sleep"))
+      .every((e) => e === true);
+  }
+
+  function increase(num) {
+    if (bet > 0) {
+      setButtonClicked({ ...buttonClicked, [num]: "green" });
+    }
+    setScore({
+      ...score,
+      ["score" + num]: score["score" + num] + bet,
+    });
+    setBet(0);
+    setTimeout(() => setButtonClicked({ 1: 0, 2: 0, 3: 0 }), 1000);
+    setBoardCondition(isQuestionsOver() ? "results" : "table");
+  }
+  function decrease(num) {
+    if (bet > 0) {
+      setButtonClicked({ ...buttonClicked, [num]: "red" });
+    }
+    setScore({ ...score, ["score" + num]: score["score" + num] - bet });
+    setTimeout(() => setButtonClicked({ 1: 0, 2: 0, 3: 0 }), 1000);
+  }
+  function noAnswer() {
+    setBoardCondition(isQuestionsOver() ? "results" : "table");
+  }
+
+  useEffect(() => {
+    setActualRound(
+      roundN !== "final"
+        ? [...allRoundQuetions[roundN]]
+        : [...allRoundQuetions[0]]
+    );
+    setButtonCondition(
+      Array(6).fill([
+        (roundN + 1) * 1 * 100,
+        (roundN + 1) * 2 * 100,
+        (roundN + 1) * 3 * 100,
+        (roundN + 1) * 4 * 100,
+        (roundN + 1) * 5 * 100,
+        (roundN + 1) * 6 * 100,
+        (roundN + 1) * 7 * 100,
+      ])
+    );
+
+    return () => {};
+  }, [roundN]);
+
   return (
     <>
-      <ScoreSection
-        teams={teams}
-        score={score}
-        setScore={setScore}
-        bet={bet}
-        setBet={setBet}
-        setBoardCondition={setBoardCondition}
-      ></ScoreSection>
+      {boardCondition === "start" && (
+        <>
+          <StartSection
+            setTeams={setTeams}
+            buttonVisibility={buttonVisibility}
+            setBoardCondition={setBoardCondition}
+          ></StartSection>
+        </>
+      )}
+      {boardCondition === "tableAd" && (
+        <>
+          <AdSection
+            setBoardCondition={setBoardCondition}
+            boardCondition={boardCondition}
+            buttonVisibility={buttonVisibility}
+          >
+            {`Раунд № ${roundN + 1}`}
+          </AdSection>
+        </>
+      )}
       {boardCondition === "table" && (
         <>
+          <ScoreSection
+            teams={teams}
+            score={score}
+            buttonClicked={buttonClicked}
+            increase={increase}
+            decrease={decrease}
+            buttonVisibility={buttonVisibility}
+          ></ScoreSection>
           {actualRound.map((_, i) => (
             <LineSection
               setBoardCondition={setBoardCondition}
@@ -69,9 +179,66 @@ function App({ keydown }) {
       )}
       {boardCondition === "question" && (
         <>
-          <QuestionSection>
-            {actualRound[questionXY[0]].line[questionXY[1]].question}
+          <ScoreSection
+            teams={teams}
+            score={score}
+            buttonClicked={buttonClicked}
+            increase={increase}
+            decrease={decrease}
+            buttonVisibility={buttonVisibility}
+          ></ScoreSection>
+          <QuestionSection
+            buttonVisibility={buttonVisibility}
+            noAnswer={noAnswer}
+          >
+            {typeof final === "number"
+              ? finalQuestions[final].question
+              : actualRound[questionXY[0]].line[questionXY[1]].question}
           </QuestionSection>
+        </>
+      )}
+      {boardCondition === "results" && (
+        <>
+          <ResultSection
+            teams={teams}
+            score={score}
+            roundN={roundN}
+            setRoundN={setRoundN}
+            qtyOfRounds={qtyOfRounds}
+            setActualRound={setActualRound}
+            setButtonCondition={setButtonCondition}
+            setBoardCondition={setBoardCondition}
+            buttonVisibility={buttonVisibility}
+          />
+        </>
+      )}
+      {boardCondition === "finalAd" && (
+        <>
+          <AdSection
+            setBoardCondition={setBoardCondition}
+            boardCondition={boardCondition}
+            buttonVisibility={buttonVisibility}
+          >
+            {"Финал"}
+          </AdSection>
+        </>
+      )}
+      {boardCondition === "final" && (
+        <>
+          <ScoreSection
+            teams={teams}
+            score={score}
+            buttonClicked={buttonClicked}
+            buttonVisibility={false}
+          ></ScoreSection>
+          <FinalSection
+            finalQuestions={finalQuestions}
+            finalCondition={finalCondition}
+            setFinalCondition={setFinalCondition}
+            setBoardCondition={setBoardCondition}
+            setButtonVisibility={setButtonVisibility}
+            setFinal={setFinal}
+          ></FinalSection>
         </>
       )}
     </>

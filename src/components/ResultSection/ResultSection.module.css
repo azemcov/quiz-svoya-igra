@@ -1,0 +1,19 @@
+.result {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.teams {
+  padding: 1rem;
+}
+.text {
+  max-width: 25vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-right: -3vw;
+}
+.center {
+  display: flex;
+  flex-direction: column;
+}

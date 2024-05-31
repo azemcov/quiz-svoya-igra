@@ -1,0 +1,14 @@
+.score_button {
+  display: flex;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  height: 4vh;
+  background-color: gray;
+  border-radius: 1rem;
+  -webkit-border-radius: 1rem;
+  -moz-border-radius: 1rem;
+  -ms-border-radius: 1rem;
+  -o-border-radius: 1rem;
+  font-size: 1vw;
+}

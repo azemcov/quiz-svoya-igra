@@ -13,6 +13,7 @@ export default function QuestionButton({
   onClick,
 }) {
   let [buttonClicked, setButtonClicked] = useState(false);
+
   function flash() {
     setButtonClicked(true);
     setTimeout(() => {
@@ -45,7 +46,6 @@ export default function QuestionButton({
         }`}
       >
         {children}
-        {/* {buttonCondition === "sleep" ? "" : children} */}
       </button>
     </>
   );

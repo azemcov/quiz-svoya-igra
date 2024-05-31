@@ -9,6 +9,11 @@
 .points {
   margin: 0;
   padding-left: -3vw;
+  border-radius: 1rem;
+  -webkit-border-radius: 1rem;
+  -moz-border-radius: 1rem;
+  -ms-border-radius: 1rem;
+  -o-border-radius: 1rem;
 }
 .command {
   display: "block";
@@ -20,12 +25,23 @@
 }
 @keyframes redBlink {
   0% {
-    background-color: none;
+    background-color: red;
   }
-  50% {
-    background-color: #f8e848;
-  }
+
   100% {
-    background-color: none;
+    background-color: transparent;
+  }
+}
+.greenBlink {
+  animation: 1s ease-in-out 0s infinite greenBlink;
+  -webkit-animation: 1s ease-in-out 0s infinite greenBlink;
+}
+@keyframes greenBlink {
+  0% {
+    background-color: green;
+  }
+
+  100% {
+    background-color: transparent;
   }
 }
