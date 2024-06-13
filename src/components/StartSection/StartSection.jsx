@@ -7,10 +7,11 @@ export default function StartSection({ setBoardCondition, buttonVisibility }) {
       <div className={classes.result}>
         <div className={classes.center}>
           <div>
-            <p>Стартовое лого</p>
+            <img src="/public/logo.svg" alt="Logo" className={classes.image} />
           </div>
           {buttonVisibility && (
             <>
+              <br />
               <Button
                 onClick={() => {
                   setBoardCondition("registration");

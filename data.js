@@ -8,20 +8,22 @@ export const allRoundQuetions = [
       theme: "Тема № 1",
       line: [
         {
-          typeOfQuestion: "text",
-          question: "Это вопрос № 1 1",
-          linkQ: "",
-          typeOfAnswer: "text",
-          answer: "Это ответ № 1 1",
-          linkA: "",
+          typeOfQuestion: "picture",
+          question: "Фото-вопрос № 1 1",
+          linkQ:
+            "https://www.vtl.de/wp-content/uploads/2020/10/VTL-Logo-RGB-1.png",
+          typeOfAnswer: "audio",
+          answer: "Аудио-ответ № 1 1",
+          linkA: "https://sheba.spb.ru/go/mz/kd/KabyNeByloZimy.mp3",
         },
         {
-          typeOfQuestion: "text",
-          question: "Это вопрос № 1 2",
-          linkQ: "",
-          typeOfAnswer: "text",
-          answer: "Это ответ № 1 2",
-          linkA: "",
+          typeOfQuestion: "audio",
+          question: "Аудио-вопрос № 1 2",
+          linkQ: "https://sheba.spb.ru/go/mz/kd/KabyNeByloZimy.mp3",
+          typeOfAnswer: "picture",
+          answer: "Фото-ответ № 1 2",
+          linkA:
+            "https://www.vtl.de/wp-content/uploads/2020/10/VTL-Logo-RGB-1.png",
         },
         {
           typeOfQuestion: "text",

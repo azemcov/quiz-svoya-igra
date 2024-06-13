@@ -1,18 +1,19 @@
 import { useState, useEffect } from "react";
+import { allRoundQuetions, finalQuestions } from "/data.js";
+import "./App.css";
 import LineSection from "/src/components/LineSection/LineSection.jsx";
 import ScoreSection from "/src/components/ScoreSection/ScoreSection.jsx";
 import QuestionSection from "/src/components/QuestionSection/QuestionSection.jsx";
 import ResultSection from "/src/components/ResultSection/ResultSection.jsx";
 import FinalSection from "/src/components/FinalSection/FinalSection.jsx";
-import { allRoundQuetions, finalQuestions } from "/data.js";
-import "./App.css";
-import AdSection from "./components/AdSection/AdSection";
+import AdSection from "./components/AdSection/AdSection.jsx";
 import StartSection from "/src/components/StartSection/StartSection.jsx";
-import StartRegistrationSection from "./components/StartRegistrationSection/StartRegistrationSection";
+import StartRegistrationSection from "./components/StartRegistrationSection/StartRegistrationSection.jsx";
+import AnswerSection from "./components/AnswerSection/AnswerSection.jsx";
 
-function App() {
+export default function App() {
   let [roundN, setRoundN] = useState(0);
-  let [qtyOfRounds, setQtyOfRounds] = useState(allRoundQuetions.length);
+  let qtyOfRounds = allRoundQuetions.length;
   let [actualRound, setActualRound] = useState(
     roundN !== "final"
       ? [...allRoundQuetions[roundN]]
@@ -38,44 +39,105 @@ function App() {
     team3: "команда 3",
   });
   let [score, setScore] = useState({
-    score1: 1100,
-    score2: 2200,
-    score3: 3300,
+    score1: 0,
+    score2: 0,
+    score3: 0,
   });
   let [questionXY, setQuestionXY] = useState([0, 0]);
   let [buttonClicked, setButtonClicked] = useState({ 1: 0, 2: 0, 3: 0 });
-  let [buttonVisibility, setButtonVisibility] = useState(false);
+  let [buttonVisibility, setButtonVisibility] = useState(true);
   let [final, setFinal] = useState(false);
+  let [playAnswerAudioPicture, setPlayAnswerAudioPicture] = useState(false);
+  useEffect(() => {
+    return setPlayAnswerAudioPicture(false);
+  }, [boardCondition]);
+
+  let [playIndex, setPlayIndex] = useState(null);
+  let audioFiles = [
+    "/public/0_start.mp3",
+    "/public/1_table.mp3",
+    "/public/2_round_end.mp3",
+    "/public/3_final_start.mp3",
+    "/public/4_final_30sec.mp3",
+    "/public/5_end.mp3",
+    "/public/6_incorrect.mp3",
+    "/public/7_noanswer.mp3",
+    "/public/8_applause.mp3",
+  ];
+
+  useEffect(() => {
+    if (playIndex !== null) {
+      const audio = new Audio(audioFiles[playIndex]);
+
+      function handleEnded() {
+        setPlayIndex(null);
+      }
+
+      audio.addEventListener("ended", handleEnded);
+      audio.play();
+
+      return () => {
+        audio.pause();
+        audio.currentTime = 0;
+        setPlayIndex(null);
+        audio.removeEventListener("ended", handleEnded);
+      };
+    }
+  }, [playIndex, boardCondition, score]);
 
   useEffect(() => {
     function keyboard(event) {
-      if (event.key === "!" && boardCondition === "question" && bet !== 0) {
-        decrease(1);
-      } else if (event.code === "KeyQ" && boardCondition === "table") {
-        setButtonCondition([
-          ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
-          ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
-          ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
-          ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
-          ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
-          ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", 7000],
-        ]);
-      } else if (event.code === "Enter" && boardCondition === "start") {
-        setBoardCondition("registration");
-      } else if (event.code === "Enter" && boardCondition === "registration") {
-        setBoardCondition("tableAd");
-      } else if (event.code === "KeyR") {
-        setBoardCondition("results");
-      } else if (event.code === "KeyF") {
-        setBoardCondition("final");
-      } else if (event.code === "KeyT") {
-        setBoardCondition("table");
-      } else if (event.code === "KeyV") {
-        setButtonVisibility((prev) => !prev);
-      } else if (event.code === "Digit0") {
-        setButtonVisibility(console.log("текущий раунд:", roundN));
-      } else {
-        console.log(event.code);
+      // клавиша Enter
+      if (event.code === "Enter") {
+        if (boardCondition === "start") {
+          setBoardCondition("registration");
+          setPlayIndex(0);
+        } else if (boardCondition === "registration") {
+          setBoardCondition("tableAd");
+        } else if (boardCondition === "tableAd") {
+          setBoardCondition("table");
+          setPlayIndex(1);
+        } else if (boardCondition === "question") {
+          setPlayAnswerAudioPicture((p) => !p);
+        }
+      }
+      //управление счетом с клавиатуры
+      else if (boardCondition === "question" && bet !== 0) {
+        if (event.key === "=") {
+          setBoardCondition("answer");
+        } else if (event.key === "1") {
+          increase(1);
+        } else if (event.key === "q") {
+          decrease(1);
+        } else if (event.key === "2") {
+          increase(2);
+        } else if (event.key === "w") {
+          decrease(2);
+        } else if (event.key === "3") {
+          increase(3);
+        } else if (event.key === "e") {
+          decrease(3);
+        }
+      } else if (boardCondition === "answer") {
+        if (event.key === "Backspace") {
+          noAnswer();
+        } else if (event.key === "1") {
+          increase(1);
+        } else if (event.key === "q") {
+          decrease(1);
+        } else if (event.key === "2") {
+          increase(2);
+        } else if (event.key === "w") {
+          decrease(2);
+        } else if (event.key === "3") {
+          increase(3);
+        } else if (event.key === "e") {
+          decrease(3);
+        }
+      } else if (boardCondition === "bable") {
+        if (event.key === "Backspace") {
+          noAnswer();
+        }
       }
     }
     document.addEventListener("keydown", keyboard);
@@ -83,7 +145,7 @@ function App() {
       document.removeEventListener("keydown", keyboard);
       keyboard;
     };
-  }, []);
+  }, [boardCondition, score]);
 
   function isQuestionsOver() {
     return buttonCondition
@@ -93,24 +155,29 @@ function App() {
 
   function increase(num) {
     if (bet > 0) {
-      setButtonClicked({ ...buttonClicked, [num]: "green" });
+      setButtonClicked((prev) => ({ ...prev, [num]: "green" }));
     }
+    setPlayIndex(8);
     setScore({
       ...score,
       ["score" + num]: score["score" + num] + bet,
     });
     setBet(0);
-    setTimeout(() => setButtonClicked({ 1: 0, 2: 0, 3: 0 }), 1000);
+    setTimeout(() => setButtonClicked((prev) => ({ 1: 0, 2: 0, 3: 0 })), 1000);
     setBoardCondition(isQuestionsOver() ? "results" : "table");
   }
+
   function decrease(num) {
     if (bet > 0) {
-      setButtonClicked({ ...buttonClicked, [num]: "red" });
+      setButtonClicked((prev) => ({ ...prev, [num]: "red" }));
     }
+    setPlayIndex(6);
     setScore({ ...score, ["score" + num]: score["score" + num] - bet });
-    setTimeout(() => setButtonClicked({ 1: 0, 2: 0, 3: 0 }), 1000);
+    setTimeout(() => setButtonClicked((prev) => ({ 1: 0, 2: 0, 3: 0 })), 1000);
   }
+
   function noAnswer() {
+    setPlayIndex(7);
     setBoardCondition(isQuestionsOver() ? "results" : "table");
   }
 
@@ -120,6 +187,7 @@ function App() {
         ? [...allRoundQuetions[roundN]]
         : [...allRoundQuetions[0]]
     );
+
     setButtonCondition(
       Array(6).fill([
         (roundN + 1) * 1 * 100,
@@ -203,12 +271,40 @@ function App() {
           ></ScoreSection>
           <QuestionSection
             buttonVisibility={buttonVisibility}
+            setBoardCondition={setBoardCondition}
+            typeOfQuestion={
+              actualRound[questionXY[0]].line[questionXY[1]].typeOfQuestion
+            }
+            question={
+              typeof final === "number"
+                ? finalQuestions[final].question
+                : actualRound[questionXY[0]].line[questionXY[1]].question
+            }
+            linkQ={actualRound[questionXY[0]].line[questionXY[1]].linkQ}
+            playAnswerAudioPicture={playAnswerAudioPicture}
+            setPlayAnswerAudioPicture={setPlayAnswerAudioPicture}
+          ></QuestionSection>
+        </>
+      )}
+      {boardCondition === "answer" && (
+        <>
+          <ScoreSection
+            teams={teams}
+            score={score}
+            buttonClicked={buttonClicked}
+            increase={increase}
+            decrease={decrease}
+            buttonVisibility={buttonVisibility}
+          ></ScoreSection>
+          <AnswerSection
+            buttonVisibility={buttonVisibility}
             noAnswer={noAnswer}
-          >
-            {typeof final === "number"
-              ? finalQuestions[final].question
-              : actualRound[questionXY[0]].line[questionXY[1]].question}
-          </QuestionSection>
+            typeOfAnswer={
+              actualRound[questionXY[0]].line[questionXY[1]].typeOfAnswer
+            }
+            answer={actualRound[questionXY[0]].line[questionXY[1]].answer}
+            linkA={actualRound[questionXY[0]].line[questionXY[1]].linkA}
+          ></AnswerSection>
         </>
       )}
       {boardCondition === "results" && (
@@ -258,5 +354,3 @@ function App() {
     </>
   );
 }
-
-export default App;

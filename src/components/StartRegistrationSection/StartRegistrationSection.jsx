@@ -13,7 +13,7 @@ export default function StartRegistrationSection({
         <div>
           <img src="/public/logo.svg" alt="Logo" className={classes.image} />
           <div>
-            <p>Registration</p>
+            <p>Названия команд</p>
           </div>
           <div className={classes.teams}>
             <input
