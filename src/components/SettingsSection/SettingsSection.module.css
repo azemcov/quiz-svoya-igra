@@ -1,0 +1,16 @@
+.cat {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.center {
+  display: flex;
+  flex-direction: column;
+}
+
+.checkbox {
+  width: 3vw;
+  height: 3vh;
+}

@@ -1,3 +1,10 @@
+.cat {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 .question {
   display: flex;
   align-items: center;
@@ -13,9 +20,21 @@
   white-space: normal;
   word-wrap: break-word;
 }
+.text {
+  font-size: 5vw;
+  max-width: 50vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-right: -3vw;
+}
+.center {
+  display: flex;
+  flex-direction: column;
+}
 
 .image {
-  max-width: 70vw;
+  max-width: 30vw;
   max-height: 40vh;
   margin-bottom: 3vh;
 }

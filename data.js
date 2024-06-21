@@ -8,6 +8,7 @@ export const allRoundQuetions = [
       theme: "Тема № 1",
       line: [
         {
+          cat: false,
           typeOfQuestion: "picture",
           question: "Фото-вопрос № 1 1",
           linkQ:
@@ -17,6 +18,7 @@ export const allRoundQuetions = [
           linkA: "https://sheba.spb.ru/go/mz/kd/KabyNeByloZimy.mp3",
         },
         {
+          cat: true,
           typeOfQuestion: "audio",
           question: "Аудио-вопрос № 1 2",
           linkQ: "https://sheba.spb.ru/go/mz/kd/KabyNeByloZimy.mp3",
@@ -26,6 +28,7 @@ export const allRoundQuetions = [
             "https://www.vtl.de/wp-content/uploads/2020/10/VTL-Logo-RGB-1.png",
         },
         {
+          cat: true,
           typeOfQuestion: "text",
           question: "Это вопрос № 1 3",
           linkQ: "",
@@ -34,6 +37,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 1 4",
           linkQ: "",
@@ -42,6 +46,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 1 5",
           linkQ: "",
@@ -50,6 +55,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 1 6",
           linkQ: "",
@@ -58,6 +64,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 1 7",
           linkQ: "",
@@ -71,6 +78,7 @@ export const allRoundQuetions = [
       theme: "Тема № 2",
       line: [
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 2 1",
           linkQ: "",
@@ -79,6 +87,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 2 2",
           linkQ: "",
@@ -87,6 +96,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 2 3",
           linkQ: "",
@@ -95,6 +105,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 2 4",
           linkQ: "",
@@ -103,6 +114,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 2 5",
           linkQ: "",
@@ -111,6 +123,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 2 6",
           linkQ: "",
@@ -119,6 +132,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 2 7",
           linkQ: "",
@@ -132,6 +146,7 @@ export const allRoundQuetions = [
       theme: "Тема № 3",
       line: [
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 3 1",
           linkQ: "",
@@ -140,6 +155,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 3 2",
           linkQ: "",
@@ -148,6 +164,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 3 3",
           linkQ: "",
@@ -156,6 +173,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 3 4",
           linkQ: "",
@@ -164,6 +182,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 3 5",
           linkQ: "",
@@ -172,6 +191,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 3 6",
           linkQ: "",
@@ -180,6 +200,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 3 7",
           linkQ: "",
@@ -193,6 +214,7 @@ export const allRoundQuetions = [
       theme: "Тема № 4",
       line: [
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 4 1",
           linkQ: "",
@@ -201,6 +223,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 4 2",
           linkQ: "",
@@ -209,6 +232,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 4 3",
           linkQ: "",
@@ -217,6 +241,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 4 4",
           linkQ: "",
@@ -225,6 +250,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 4 5",
           linkQ: "",
@@ -233,6 +259,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 4 6",
           linkQ: "",
@@ -241,6 +268,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 4 7",
           linkQ: "",
@@ -254,6 +282,7 @@ export const allRoundQuetions = [
       theme: "Тема № 5",
       line: [
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 5 1",
           linkQ: "",
@@ -262,6 +291,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 5 2",
           linkQ: "",
@@ -270,6 +300,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 5 3",
           linkQ: "",
@@ -278,6 +309,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 5 4",
           linkQ: "",
@@ -286,6 +318,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 5 5",
           linkQ: "",
@@ -294,6 +327,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 5 6",
           linkQ: "",
@@ -302,6 +336,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 5 7",
           linkQ: "",
@@ -315,6 +350,7 @@ export const allRoundQuetions = [
       theme: "Тема № 6",
       line: [
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 6 1",
           linkQ: "",
@@ -323,6 +359,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 6 2",
           linkQ: "",
@@ -331,6 +368,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 6 3",
           linkQ: "",
@@ -339,6 +377,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 6 4",
           linkQ: "",
@@ -347,6 +386,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 6 5",
           linkQ: "",
@@ -355,6 +395,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 6 6",
           linkQ: "",
@@ -363,6 +404,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 6 7",
           linkQ: "",
@@ -378,6 +420,7 @@ export const allRoundQuetions = [
       theme: "Тема № 7",
       line: [
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 1 1",
           linkQ: "",
@@ -386,6 +429,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 1 2",
           linkQ: "",
@@ -394,6 +438,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 1 3",
           linkQ: "",
@@ -402,6 +447,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 1 4",
           linkQ: "",
@@ -410,6 +456,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 1 5",
           linkQ: "",
@@ -418,6 +465,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 1 6",
           linkQ: "",
@@ -426,6 +474,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 1 7",
           linkQ: "",
@@ -439,6 +488,7 @@ export const allRoundQuetions = [
       theme: "Тема № 8",
       line: [
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 2 1",
           linkQ: "",
@@ -447,6 +497,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 2 2",
           linkQ: "",
@@ -455,6 +506,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 2 3",
           linkQ: "",
@@ -463,6 +515,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 2 4",
           linkQ: "",
@@ -471,6 +524,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 2 5",
           linkQ: "",
@@ -479,6 +533,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 2 6",
           linkQ: "",
@@ -487,6 +542,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 2 7",
           linkQ: "",
@@ -500,6 +556,7 @@ export const allRoundQuetions = [
       theme: "Тема № 9",
       line: [
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 3 1",
           linkQ: "",
@@ -508,6 +565,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 3 2",
           linkQ: "",
@@ -516,6 +574,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 3 3",
           linkQ: "",
@@ -524,6 +583,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 3 4",
           linkQ: "",
@@ -532,6 +592,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 3 5",
           linkQ: "",
@@ -540,6 +601,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 3 6",
           linkQ: "",
@@ -548,6 +610,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 3 7",
           linkQ: "",
@@ -561,6 +624,7 @@ export const allRoundQuetions = [
       theme: "Тема № 10",
       line: [
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 4 1",
           linkQ: "",
@@ -569,6 +633,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 4 2",
           linkQ: "",
@@ -577,6 +642,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 4 3",
           linkQ: "",
@@ -585,6 +651,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 4 4",
           linkQ: "",
@@ -593,6 +660,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 4 5",
           linkQ: "",
@@ -601,6 +669,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 4 6",
           linkQ: "",
@@ -609,6 +678,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 4 7",
           linkQ: "",
@@ -622,6 +692,7 @@ export const allRoundQuetions = [
       theme: "Тема № 11",
       line: [
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 5 1",
           linkQ: "",
@@ -630,6 +701,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 5 2",
           linkQ: "",
@@ -638,6 +710,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 5 3",
           linkQ: "",
@@ -646,6 +719,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 5 4",
           linkQ: "",
@@ -654,6 +728,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 5 5",
           linkQ: "",
@@ -662,6 +737,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 5 6",
           linkQ: "",
@@ -670,6 +746,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 5 7",
           linkQ: "",
@@ -683,6 +760,7 @@ export const allRoundQuetions = [
       theme: "Тема № 12",
       line: [
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 6 1",
           linkQ: "",
@@ -691,6 +769,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 6 2",
           linkQ: "",
@@ -699,6 +778,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 6 3",
           linkQ: "",
@@ -707,6 +787,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 6 4",
           linkQ: "",
@@ -715,6 +796,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 6 5",
           linkQ: "",
@@ -723,6 +805,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 6 6",
           linkQ: "",
@@ -731,6 +814,7 @@ export const allRoundQuetions = [
           linkA: "",
         },
         {
+          cat: false,
           typeOfQuestion: "text",
           question: "Это вопрос № 6 7",
           linkQ: "",
@@ -746,12 +830,13 @@ export const allRoundQuetions = [
 export const finalQuestions = [
   {
     theme: "Это супертема № 1",
-    typeOfQuestion: "text",
-    question: "Это супервопрос № 1",
-    linkQ: "",
-    typeOfAnswer: "text",
-    answer: "Это суперответ № 1",
-    linkA: "",
+    typeOfQuestion: "audio",
+    question: "СУПЕР Аудио-вопрос № 1 !!!",
+    linkQ: "https://sheba.spb.ru/go/mz/kd/KabyNeByloZimy.mp3",
+    typeOfAnswer: "picture",
+    answer: "СУПЕР Фото-ответ № 1 !!!",
+    linkA:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Road_42_sign-FIN.svg/1517px-Road_42_sign-FIN.svg.png",
   },
   {
     theme: "Это супертема № 2",

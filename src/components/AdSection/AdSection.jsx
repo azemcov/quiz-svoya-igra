@@ -6,6 +6,7 @@ export default function AdSection({
   setBoardCondition,
   buttonVisibility,
   children,
+  setPlayIndex,
 }) {
   return (
     <>
@@ -16,15 +17,16 @@ export default function AdSection({
           </div>
           {buttonVisibility && (
             <Button
-              onClick={() =>
+              onClick={() => {
                 setBoardCondition(
                   boardCondition === "tableAd"
                     ? "table"
                     : boardCondition === "finalAd"
                     ? "final"
                     : 0
-                )
-              }
+                );
+                setPlayIndex(1);
+              }}
             >
               Начать
             </Button>

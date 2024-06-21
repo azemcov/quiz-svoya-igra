@@ -8,8 +8,10 @@ import ResultSection from "/src/components/ResultSection/ResultSection.jsx";
 import FinalSection from "/src/components/FinalSection/FinalSection.jsx";
 import AdSection from "./components/AdSection/AdSection.jsx";
 import StartSection from "/src/components/StartSection/StartSection.jsx";
-import StartRegistrationSection from "./components/StartRegistrationSection/StartRegistrationSection.jsx";
+import RegistrationSection from "/src/components/RegistrationSection/RegistrationSection.jsx";
 import AnswerSection from "./components/AnswerSection/AnswerSection.jsx";
+import SettingsSection from "./components/SettingsSection/SettingsSection.jsx";
+import CatAdSection from "./components/CatAdSection/CatAdSection.jsx";
 
 export default function App() {
   let [roundN, setRoundN] = useState(0);
@@ -45,7 +47,7 @@ export default function App() {
   });
   let [questionXY, setQuestionXY] = useState([0, 0]);
   let [buttonClicked, setButtonClicked] = useState({ 1: 0, 2: 0, 3: 0 });
-  let [buttonVisibility, setButtonVisibility] = useState(true);
+  let [buttonVisibility, setButtonVisibility] = useState(false);
   let [final, setFinal] = useState(false);
   let [playAnswerAudioPicture, setPlayAnswerAudioPicture] = useState(false);
   useEffect(() => {
@@ -63,6 +65,7 @@ export default function App() {
     "/public/6_incorrect.mp3",
     "/public/7_noanswer.mp3",
     "/public/8_applause.mp3",
+    "/public/9_cat.mp3",
   ];
 
   useEffect(() => {
@@ -99,6 +102,11 @@ export default function App() {
           setPlayIndex(1);
         } else if (boardCondition === "question") {
           setPlayAnswerAudioPicture((p) => !p);
+        } else if (boardCondition === "finalAd") {
+          setBoardCondition("final");
+          setPlayIndex(1);
+        } else if (boardCondition === "cat") {
+          setBoardCondition("question");
         }
       }
       //управление счетом с клавиатуры
@@ -118,6 +126,10 @@ export default function App() {
         } else if (event.key === "e") {
           decrease(3);
         }
+      } else if (boardCondition === "question" && typeof final === "number") {
+        if (event.key === "=") {
+          setBoardCondition("answer");
+        }
       } else if (boardCondition === "answer") {
         if (event.key === "Backspace") {
           noAnswer();
@@ -134,9 +146,9 @@ export default function App() {
         } else if (event.key === "e") {
           decrease(3);
         }
-      } else if (boardCondition === "bable") {
-        if (event.key === "Backspace") {
-          noAnswer();
+      } else if (boardCondition === "table") {
+        if (event.key === "0") {
+          setBoardCondition("finalAd");
         }
       }
     }
@@ -181,6 +193,12 @@ export default function App() {
     setBoardCondition(isQuestionsOver() ? "results" : "table");
   }
 
+  function ifItsCat() {
+    actualRound[questionXY[0]].line[questionXY[1]].cat
+      ? setBoardCondition("cat")
+      : setBoardCondition("question");
+  }
+
   useEffect(() => {
     setActualRound(
       roundN !== "final"
@@ -210,17 +228,19 @@ export default function App() {
           <StartSection
             buttonVisibility={buttonVisibility}
             setBoardCondition={setBoardCondition}
+            setPlayIndex={setPlayIndex}
           ></StartSection>
         </>
       )}
       {boardCondition === "registration" && (
         <>
-          <StartRegistrationSection
+          <RegistrationSection
             teams={teams}
             setTeams={setTeams}
             buttonVisibility={buttonVisibility}
             setBoardCondition={setBoardCondition}
-          ></StartRegistrationSection>
+            setButtonVisibility={setButtonVisibility}
+          ></RegistrationSection>
         </>
       )}
       {boardCondition === "tableAd" && (
@@ -229,6 +249,7 @@ export default function App() {
             setBoardCondition={setBoardCondition}
             boardCondition={boardCondition}
             buttonVisibility={buttonVisibility}
+            setPlayIndex={setPlayIndex}
           >
             {`Раунд № ${roundN + 1}`}
           </AdSection>
@@ -253,10 +274,28 @@ export default function App() {
               setQuestionXY={setQuestionXY}
               lineN={i}
               key={i}
+              ifItsCat={ifItsCat}
             >
               {actualRound[i].theme}
             </LineSection>
           ))}
+        </>
+      )}
+      {boardCondition === "cat" && (
+        <>
+          <ScoreSection
+            teams={teams}
+            score={score}
+            buttonClicked={buttonClicked}
+            increase={increase}
+            decrease={decrease}
+            buttonVisibility={buttonVisibility}
+          ></ScoreSection>
+          <CatAdSection
+            setBoardCondition={setBoardCondition}
+            buttonVisibility={buttonVisibility}
+            setPlayIndex={setPlayIndex}
+          ></CatAdSection>
         </>
       )}
       {boardCondition === "question" && (
@@ -273,14 +312,20 @@ export default function App() {
             buttonVisibility={buttonVisibility}
             setBoardCondition={setBoardCondition}
             typeOfQuestion={
-              actualRound[questionXY[0]].line[questionXY[1]].typeOfQuestion
+              typeof final === "number"
+                ? finalQuestions[final].typeOfQuestion
+                : actualRound[questionXY[0]].line[questionXY[1]].typeOfQuestion
             }
             question={
               typeof final === "number"
                 ? finalQuestions[final].question
                 : actualRound[questionXY[0]].line[questionXY[1]].question
             }
-            linkQ={actualRound[questionXY[0]].line[questionXY[1]].linkQ}
+            linkQ={
+              typeof final === "number"
+                ? finalQuestions[final].linkQ
+                : actualRound[questionXY[0]].line[questionXY[1]].linkQ
+            }
             playAnswerAudioPicture={playAnswerAudioPicture}
             setPlayAnswerAudioPicture={setPlayAnswerAudioPicture}
           ></QuestionSection>
@@ -328,6 +373,7 @@ export default function App() {
             setBoardCondition={setBoardCondition}
             boardCondition={boardCondition}
             buttonVisibility={buttonVisibility}
+            setPlayIndex={setPlayIndex}
           >
             {"Финал"}
           </AdSection>

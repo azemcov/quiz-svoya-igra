@@ -1,11 +1,12 @@
 import Button from "/src/components/Button/Button.jsx";
-import classes from "/src/components/StartRegistrationSection/StartRegistrationSection.module.css";
+import classes from "/src/components/RegistrationSection/RegistrationSection.module.css";
 
-export default function StartRegistrationSection({
+export default function RegistrationSection({
   teams,
   setTeams,
   setBoardCondition,
   buttonVisibility,
+  setButtonVisibility,
 }) {
   return (
     <>
@@ -15,7 +16,7 @@ export default function StartRegistrationSection({
           <div>
             <p>Названия команд</p>
           </div>
-          <div className={classes.teams}>
+          <div>
             <input
               className={classes.inputText}
               type="text"
@@ -29,7 +30,7 @@ export default function StartRegistrationSection({
               }
             />
           </div>
-          <div className={classes.teams}>
+          <div>
             <input
               className={classes.inputText}
               type="text"
@@ -43,7 +44,7 @@ export default function StartRegistrationSection({
               }
             />
           </div>
-          <div className={classes.teams}>
+          <div>
             <input
               className={classes.inputText}
               type="text"
@@ -58,6 +59,18 @@ export default function StartRegistrationSection({
             />
           </div>
           <br />
+          <div
+            onClick={() => setButtonVisibility((bv) => !bv)}
+            className={classes.checkboxText}
+          >
+            <input
+              className={classes.checkbox}
+              type="checkbox"
+              checked={buttonVisibility}
+            />
+            Показывать кнопки
+          </div>
+          <br />
         </div>
         {buttonVisibility && (
           <>
@@ -66,7 +79,7 @@ export default function StartRegistrationSection({
                 setBoardCondition("tableAd");
               }}
             >
-              ok
+              Начать игру
             </Button>
           </>
         )}

@@ -1,27 +1,32 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import classes from "/src/components/QuestionButton/QuestionButton.module.css";
-console.log();
 
 export default function QuestionButton({
   children,
-  setBoardCondition,
   buttonCondition,
   setButtonCondition,
   setQuestionXY,
   lineN,
   columnN,
   onClick,
+  ifItsCat,
 }) {
   let [buttonClicked, setButtonClicked] = useState(false);
+  let [startQuestion, setStartQuestion] = useState(false);
+
+  useEffect(() => {
+    startQuestion ? ifItsCat() : 0;
+  }, [startQuestion]);
 
   function flash() {
     setButtonClicked(true);
     setTimeout(() => {
-      setButtonClicked(false);
       setButtonCondition(newButtonCondition(lineN, columnN, buttonCondition));
-      setBoardCondition("question");
+      setButtonClicked(false);
+      setStartQuestion(true);
     }, 700);
   }
+
   function newButtonCondition(l, c, arr) {
     let arr2 = arr.map((m) => [...m]);
     arr2[l][c] = "sleep";

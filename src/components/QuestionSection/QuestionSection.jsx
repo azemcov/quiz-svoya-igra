@@ -76,7 +76,8 @@ export default function QuestionSection({
           </>
         )}
         {buttonVisibility &&
-          (typeOfQuestion === "picture" || typeOfQuestion === "audio") && (
+          ((typeOfQuestion === "picture" && !showPic) ||
+            typeOfQuestion === "audio") && (
             <>
               <Button
                 onClick={() => {
@@ -84,15 +85,19 @@ export default function QuestionSection({
                 }}
               >
                 {typeOfQuestion === "picture"
-                  ? "pic"
+                  ? "Показать изображение"
                   : typeOfQuestion === "audio"
-                  ? "au"
+                  ? "play / stop"
                   : 0}
               </Button>
               <br />
-              <Button onClick={() => setBoardCondition("answer")}>Ответ</Button>
             </>
           )}
+        {buttonVisibility && (
+          <>
+            <Button onClick={() => setBoardCondition("answer")}>Ответ</Button>
+          </>
+        )}
       </div>
     </>
   );

@@ -30,3 +30,11 @@
   font-size: 2vw;
   text-align: center;
 }
+.checkboxText {
+  font-size: 2vw;
+  color: grey;
+}
+.checkbox {
+  width: 3vw;
+  height: 3vh;
+}

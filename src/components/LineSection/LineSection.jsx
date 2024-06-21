@@ -5,12 +5,12 @@ import {} from "/data.js";
 
 export default function Line({
   children,
-  setBoardCondition,
   buttonCondition,
   setButtonCondition,
   setBet,
   setQuestionXY,
   lineN,
+  ifItsCat,
 }) {
   let [buttonClicked, setButtonClicked] = useState(false);
   function flash() {
@@ -34,13 +34,13 @@ export default function Line({
             flash();
             setBet(buttonCondition[lineN][i]);
           }}
-          setBoardCondition={setBoardCondition}
           buttonCondition={buttonCondition}
           setButtonCondition={setButtonCondition}
           setQuestionXY={setQuestionXY}
           lineN={lineN}
           columnN={i}
           key={i}
+          ifItsCat={ifItsCat}
         >
           {buttonCondition[lineN][i]}
         </QuestionButton>
