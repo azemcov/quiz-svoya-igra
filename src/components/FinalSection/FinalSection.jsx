@@ -18,9 +18,7 @@ export default function FinalSection({
       setButtonClicked([0, 0, 0, 0, 0, 0, 0]);
       setFinalCondition(
         (newButtonCondition(num, finalCondition).reduce((a, c) => a + c) === 0
-          ? (setButtonVisibility(false),
-            setBoardCondition("question"),
-            setFinal(num))
+          ? (setBoardCondition("question"), setFinal(num))
           : 0,
         newButtonCondition(num, finalCondition))
       );

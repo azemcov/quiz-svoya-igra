@@ -12,6 +12,7 @@ export default function QuestionSection({
 
   playAnswerAudioPicture,
   setPlayAnswerAudioPicture,
+  final,
 }) {
   let [qPicture, setQPicture] = useState("");
   let [plays, setPlays] = useState(false);
@@ -95,7 +96,15 @@ export default function QuestionSection({
           )}
         {buttonVisibility && (
           <>
-            <Button onClick={() => setBoardCondition("answer")}>Ответ</Button>
+            <Button
+              onClick={() =>
+                final !== false
+                  ? setBoardCondition("finalAnswer")
+                  : setBoardCondition("answer")
+              }
+            >
+              Ответ
+            </Button>
           </>
         )}
       </div>

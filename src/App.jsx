@@ -12,6 +12,7 @@ import RegistrationSection from "/src/components/RegistrationSection/Registratio
 import AnswerSection from "./components/AnswerSection/AnswerSection.jsx";
 import SettingsSection from "./components/SettingsSection/SettingsSection.jsx";
 import CatAdSection from "./components/CatAdSection/CatAdSection.jsx";
+import FinalAnswerSection from "./components/FinalAnswerSection/FinalAnswerSection.jsx";
 
 export default function App() {
   let [roundN, setRoundN] = useState(0);
@@ -36,9 +37,9 @@ export default function App() {
   let [finalCondition, setFinalCondition] = useState([1, 1, 1, 1, 1, 1, 1]);
   let [bet, setBet] = useState(0);
   let [teams, setTeams] = useState({
-    team1: "команда 1",
-    team2: "команда 2",
-    team3: "команда 3",
+    team1: "",
+    team2: "",
+    team3: "",
   });
   let [score, setScore] = useState({
     score1: 0,
@@ -67,6 +68,17 @@ export default function App() {
     "/public/8_applause.mp3",
     "/public/9_cat.mp3",
   ];
+
+  let [FBS, setFBS] = useState({ B1: null, B2: null, B3: null });
+  let [done, setDone] = useState({ D1: NaN, D2: NaN, D3: NaN });
+
+  let [allDoneAreNumber, setAllDoneAreNumber] = useState(false);
+
+  useEffect(() => {
+    !Number.isNaN(done.D1) && !Number.isNaN(done.D2) && !Number.isNaN(done.D3)
+      ? setAllDoneAreNumber(true)
+      : setAllDoneAreNumber(false);
+  }, [done]);
 
   useEffect(() => {
     if (playIndex !== null) {
@@ -107,6 +119,8 @@ export default function App() {
           setPlayIndex(1);
         } else if (boardCondition === "cat") {
           setBoardCondition("question");
+        } else if (boardCondition === "finalAnswer" && allDoneAreNumber) {
+          setBoardCondition("end");
         }
       }
       //управление счетом с клавиатуры
@@ -128,7 +142,7 @@ export default function App() {
         }
       } else if (boardCondition === "question" && typeof final === "number") {
         if (event.key === "=") {
-          setBoardCondition("answer");
+          setBoardCondition("finalAnswer");
         }
       } else if (boardCondition === "answer") {
         if (event.key === "Backspace") {
@@ -146,8 +160,10 @@ export default function App() {
         } else if (event.key === "e") {
           decrease(3);
         }
-      } else if (boardCondition === "table") {
-        if (event.key === "0") {
+      }
+      ///////ОТЛАДКА!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!ы
+      else if (boardCondition === "table") {
+        if (event.key === "±") {
           setBoardCondition("finalAd");
         }
       }
@@ -157,7 +173,7 @@ export default function App() {
       document.removeEventListener("keydown", keyboard);
       keyboard;
     };
-  }, [boardCondition, score]);
+  }, [boardCondition, score, allDoneAreNumber]);
 
   function isQuestionsOver() {
     return buttonCondition
@@ -306,7 +322,7 @@ export default function App() {
             buttonClicked={buttonClicked}
             increase={increase}
             decrease={decrease}
-            buttonVisibility={buttonVisibility}
+            buttonVisibility={final !== false ? false : buttonVisibility}
           ></ScoreSection>
           <QuestionSection
             buttonVisibility={buttonVisibility}
@@ -328,6 +344,7 @@ export default function App() {
             }
             playAnswerAudioPicture={playAnswerAudioPicture}
             setPlayAnswerAudioPicture={setPlayAnswerAudioPicture}
+            final={final}
           ></QuestionSection>
         </>
       )}
@@ -395,6 +412,41 @@ export default function App() {
             setButtonVisibility={setButtonVisibility}
             setFinal={setFinal}
           ></FinalSection>
+        </>
+      )}
+      {boardCondition === "finalAnswer" && (
+        <>
+          <ScoreSection
+            teams={teams}
+            score={score}
+            buttonClicked={buttonClicked}
+            buttonVisibility={false}
+            final={final}
+          ></ScoreSection>
+          <FinalAnswerSection
+            buttonVisibility={buttonVisibility}
+            typeOfAnswer={finalQuestions[final].typeOfAnswer}
+            answer={finalQuestions[final].answer}
+            linkA={finalQuestions[final].linkA}
+            FBS={FBS}
+            setFBS={setFBS}
+            done={done}
+            setDone={setDone}
+            allDoneAreNumber={allDoneAreNumber}
+            setBoardCondition={setBoardCondition}
+          ></FinalAnswerSection>
+        </>
+      )}
+      {boardCondition === "end" && (
+        <>
+          <AdSection
+            setBoardCondition={setBoardCondition}
+            boardCondition={boardCondition}
+            buttonVisibility={buttonVisibility}
+            setPlayIndex={setPlayIndex}
+          >
+            {"Финал"}
+          </AdSection>
         </>
       )}
     </>

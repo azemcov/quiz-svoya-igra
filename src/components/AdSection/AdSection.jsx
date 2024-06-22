@@ -1,5 +1,6 @@
 import Button from "/src/components/Button/Button.jsx";
 import classes from "/src/components/AdSection/AdSection.module.css";
+import { useEffect } from "react";
 
 export default function AdSection({
   boardCondition,
@@ -8,14 +9,23 @@ export default function AdSection({
   children,
   setPlayIndex,
 }) {
+  useEffect(() => {
+    boardCondition === "end" ? setPlayIndex(5) : 0;
+  }, []);
+
   return (
     <>
       <div className={classes.result}>
         <div className={classes.center}>
+          {boardCondition === "end" && (
+            <>
+              <img src={"/public/win.png"} alt="win!" />
+            </>
+          )}
           <div>
             <p className={classes.text}>{children}</p>
           </div>
-          {buttonVisibility && (
+          {buttonVisibility && boardCondition !== "end" && (
             <Button
               onClick={() => {
                 setBoardCondition(
