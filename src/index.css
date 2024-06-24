@@ -28,6 +28,22 @@ body {
   background-image: radial-gradient(#119, #116);
 }
 
+.FAQ {
+  border: 1px dashed #ffffffde;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  font-size: 20px;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  cursor: pointer;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+
 @font-face {
   font-family: "Montserrat-Regular";
   src: url("public/Montserrat-VariableFont_wght.ttf");

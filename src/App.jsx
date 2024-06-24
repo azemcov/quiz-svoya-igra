@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { allRoundQuetions, finalQuestions } from "/data.js";
-import "./App.css";
 import LineSection from "/src/components/LineSection/LineSection.jsx";
 import ScoreSection from "/src/components/ScoreSection/ScoreSection.jsx";
 import QuestionSection from "/src/components/QuestionSection/QuestionSection.jsx";
@@ -361,6 +360,11 @@ export default function App() {
 
   return (
     <>
+      {
+        <>
+          <div className="FAQ">?</div>
+        </>
+      }
       {boardCondition === "start" && (
         <>
           <StartSection
