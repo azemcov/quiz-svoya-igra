@@ -13,6 +13,8 @@ export default function FinalAnswerSection({
   setDone,
   allDoneAreNumber,
   setBoardCondition,
+  score,
+  finalScore,
 }) {
   let [qPicture, setQPicture] = useState("");
   let [playIndex, setPlayIndex] = useState(null);
@@ -53,15 +55,20 @@ export default function FinalAnswerSection({
       {typeOfAnswer === "picture" && (
         <>
           <p>{answer}</p>
-          <img
-            src={qPicture}
-            alt="picture question"
-            className={classes.image}
-          />
+          <img src={qPicture} alt="picture answer" className={classes.image} />
         </>
       )}
 
-      {typeOfAnswer === "audio" && <p>{answer}</p>}
+      {typeOfAnswer === "audio" && (
+        <>
+          <p>{answer}</p>
+          <img
+            src={"/public/audio.png"}
+            alt="audio answer"
+            className={classes.smallimage}
+          />
+        </>
+      )}
 
       <div className={classes.score}>
         {Array.from({ length: 3 }).map((m, i) => (
@@ -70,23 +77,29 @@ export default function FinalAnswerSection({
               <Button
                 onClick={() => setFBS((e) => ({ ...e, [`B${i + 1}`]: true }))}
               >
-                true
+                Верно
               </Button>
             )}
             {FBS[`B${i + 1}`] === null && (
               <Button
                 onClick={() => setFBS((e) => ({ ...e, [`B${i + 1}`]: false }))}
               >
-                false
+                Неверно
               </Button>
             )}
             {FBS[`B${i + 1}`] === true && (
               <div>
                 <input
                   className={
-                    isNaN(done[`D${i + 1}`])
-                      ? classes.wrongText
-                      : classes.inputText
+                    (
+                      score[`score${i + 1}`] < 0
+                        ? done[`D${i + 1}`] === 0
+                        : score[`score${i + 1}`] -
+                            Math.abs(done[`D${i + 1}`]) >=
+                          0
+                    )
+                      ? classes.inputText
+                      : classes.wrongText
                   }
                   type="text"
                   placeholder="Ставка п1"
@@ -94,7 +107,13 @@ export default function FinalAnswerSection({
                     setDone((d) => ({
                       ...d,
                       [`D${i + 1}`]:
-                        e.target.value.trim() === "" ? NaN : +e.target.value,
+                        e.target.value.trim() === ""
+                          ? NaN
+                          : isNaN(+e.target.value)
+                          ? ((e.target.value = ""), NaN)
+                          : +e.target.value >= 0
+                          ? +e.target.value
+                          : (e.target.value = Math.abs(e.target.value)),
                     }))
                   }
                 />
@@ -104,9 +123,15 @@ export default function FinalAnswerSection({
               <div>
                 <input
                   className={
-                    isNaN(done[`D${i + 1}`])
-                      ? classes.wrongText
-                      : classes.inputText
+                    (
+                      score[`score${i + 1}`] < 0
+                        ? done[`D${i + 1}`] === 0
+                        : score[`score${i + 1}`] -
+                            Math.abs(done[`D${i + 1}`]) >=
+                          0
+                    )
+                      ? classes.inputText
+                      : classes.wrongText
                   }
                   type="text"
                   placeholder="Ставка н1"
@@ -114,7 +139,13 @@ export default function FinalAnswerSection({
                     setDone((d) => ({
                       ...d,
                       [`D${i + 1}`]:
-                        e.target.value.trim() === "" ? NaN : -+e.target.value,
+                        e.target.value.trim() === ""
+                          ? NaN
+                          : isNaN(+e.target.value)
+                          ? ((e.target.value = ""), NaN)
+                          : +e.target.value >= 0
+                          ? -+e.target.value
+                          : (e.target.value = Math.abs(e.target.value)),
                     }))
                   }
                 />
@@ -125,9 +156,10 @@ export default function FinalAnswerSection({
         {/* граница первой секции ставок */}
       </div>
       {/* граница ввода ставок */}
-      {buttonVisibility && allDoneAreNumber() && (
+      {buttonVisibility && allDoneAreNumber && (
         <Button
           onClick={() => {
+            finalScore();
             setBoardCondition("end");
           }}
         >

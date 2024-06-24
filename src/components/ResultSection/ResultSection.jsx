@@ -1,6 +1,7 @@
 import Button from "/src/components/Button/Button.jsx";
 import classes from "/src/components/ResultSection/ResultSection.module.css";
 import { allRoundQuetions } from "/data.js";
+import { useEffect } from "react";
 
 export default function ResultSection({
   teams,
@@ -11,7 +12,12 @@ export default function ResultSection({
   setBoardCondition,
   buttonVisibility,
   setActualRound,
+  setPlayIndex,
 }) {
+  useEffect(() => {
+    setPlayIndex(2);
+    setTimeout(() => setPlayIndex(2), 1);
+  }, []);
   return (
     <>
       <div className={classes.result}>
@@ -48,7 +54,7 @@ export default function ResultSection({
                     : (setBoardCondition("finalAd"), setRoundN("final"));
                 }}
               >
-                ok
+                Продолжить игру
               </Button>
             </>
           )}

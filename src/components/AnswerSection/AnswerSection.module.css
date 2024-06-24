@@ -19,3 +19,8 @@
   max-height: 40vh;
   margin-bottom: 3vh;
 }
+.smallimage {
+  max-width: 30vw;
+  max-height: 20vh;
+  margin-bottom: 3vh;
+}

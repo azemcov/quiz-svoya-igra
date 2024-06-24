@@ -8,6 +8,9 @@ export default function AnswerSection({
   typeOfAnswer,
   answer,
   linkA,
+  cat,
+  increase,
+  decrease,
 }) {
   let [qPicture, setQPicture] = useState("");
   let [playIndex, setPlayIndex] = useState(null);
@@ -58,11 +61,36 @@ export default function AnswerSection({
         {typeOfAnswer === "audio" && (
           <>
             <p>{answer}</p>
+            <img
+              src={"/public/audio.png"}
+              alt="audio question"
+              className={classes.smallimage}
+            />
             <br />
           </>
         )}
-        {buttonVisibility && (
+        {buttonVisibility && !cat && (
           <Button onClick={() => noAnswer()}>Нет верного ответа</Button>
+        )}
+        {buttonVisibility && cat && (
+          <>
+            <Button
+              style={{ margin: "10px" }}
+              onClick={() => {
+                increase(cat);
+              }}
+            >
+              Верно
+            </Button>
+            <Button
+              style={{ margin: "10px" }}
+              onClick={() => {
+                decrease(cat);
+              }}
+            >
+              Неверно
+            </Button>
+          </>
         )}
       </div>
     </>

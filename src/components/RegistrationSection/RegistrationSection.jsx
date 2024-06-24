@@ -7,6 +7,7 @@ export default function RegistrationSection({
   setBoardCondition,
   buttonVisibility,
   setButtonVisibility,
+  defaultTeamNames,
 }) {
   return (
     <>
@@ -77,6 +78,7 @@ export default function RegistrationSection({
             <Button
               onClick={() => {
                 setBoardCondition("tableAd");
+                defaultTeamNames();
               }}
             >
               Начать игру

@@ -13,6 +13,8 @@ export default function QuestionSection({
   playAnswerAudioPicture,
   setPlayAnswerAudioPicture,
   final,
+
+  music,
 }) {
   let [qPicture, setQPicture] = useState("");
   let [plays, setPlays] = useState(false);
@@ -55,13 +57,30 @@ export default function QuestionSection({
     setPlays(playAnswerAudioPicture);
   }, [playAnswerAudioPicture]);
 
+  useEffect(() => {
+    if (showPic && typeof final === "number" && typeOfQuestion !== "audio") {
+      music(4);
+    }
+  }, [showPic]);
+
   return (
     <>
       <div className={classes.question}>
-        {typeOfQuestion === "text" && <p>{question}</p>}
+        {typeOfQuestion === "text" && (
+          <>
+            <p>{question}</p>
+            {!showPic && typeof final === "number" && <p>{"(30 секунд)"}</p>}
+          </>
+        )}
+
         {typeOfQuestion === "picture" && (
           <>
             <p>{question}</p>
+            {!showPic && typeof final !== "number" && <p>{"(Фото)"}</p>}
+            {!showPic && typeof final === "number" && (
+              <p>{"(Фото) (30 секунд)"}</p>
+            )}
+
             {showPic && (
               <img
                 src={qPicture}
@@ -74,39 +93,68 @@ export default function QuestionSection({
         {typeOfQuestion === "audio" && (
           <>
             <p>{question}</p>
+            <img
+              src={"/public/audio.png"}
+              alt="audio question"
+              className={classes.smallimage}
+            />
           </>
         )}
         {buttonVisibility &&
           ((typeOfQuestion === "picture" && !showPic) ||
-            typeOfQuestion === "audio") && (
+            typeOfQuestion === "audio" ||
+            ((typeOfQuestion === "picture" || typeOfQuestion === "text") &&
+              typeof final === "number" &&
+              !showPic)) && (
             <>
               <Button
                 onClick={() => {
                   setPlayAnswerAudioPicture((p) => !p);
                 }}
               >
-                {typeOfQuestion === "picture"
-                  ? "Показать изображение"
-                  : typeOfQuestion === "audio"
-                  ? "play / stop"
-                  : 0}
+                {
+                  typeOfQuestion === "picture" && typeof final === "number"
+                    ? "Показать изображение таймер 30 секунд"
+                    : typeOfQuestion === "picture"
+                    ? "Показать изображение"
+                    : typeOfQuestion === "audio"
+                    ? "play / stop"
+                    : typeOfQuestion === "text" && typeof final === "number"
+                    ? "Таймер 30 секунд"
+                    : null /* В случае, если ни одно условие не выполнено */
+                }
               </Button>
               <br />
             </>
           )}
-        {buttonVisibility && (
-          <>
-            <Button
-              onClick={() =>
-                final !== false
-                  ? setBoardCondition("finalAnswer")
-                  : setBoardCondition("answer")
-              }
-            >
-              Ответ
-            </Button>
-          </>
-        )}
+        {typeof final === "number"
+          ? buttonVisibility &&
+            showPic && (
+              <>
+                <Button
+                  onClick={() =>
+                    final !== false
+                      ? setBoardCondition("finalAnswer")
+                      : setBoardCondition("answer")
+                  }
+                >
+                  Ответ
+                </Button>
+              </>
+            )
+          : buttonVisibility && (
+              <>
+                <Button
+                  onClick={() =>
+                    final !== false
+                      ? setBoardCondition("finalAnswer")
+                      : setBoardCondition("answer")
+                  }
+                >
+                  Ответ
+                </Button>
+              </>
+            )}
       </div>
     </>
   );

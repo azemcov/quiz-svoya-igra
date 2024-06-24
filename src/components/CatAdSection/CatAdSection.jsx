@@ -6,8 +6,11 @@ export default function CatAdSection({
   setBoardCondition,
   buttonVisibility,
   setPlayIndex,
+  setCat,
+  teams,
 }) {
   useEffect(() => {
+    setCat(true);
     setTimeout(() => setPlayIndex(9), 100);
   }, []);
   return (
@@ -21,13 +24,35 @@ export default function CatAdSection({
         />
         {buttonVisibility && (
           <>
-            <Button
-              onClick={() => {
-                setBoardCondition("question");
-              }}
-            >
-              К вопросу
-            </Button>
+            <div className={classes.center}>
+              <Button
+                style={{ margin: "10px" }}
+                onClick={() => {
+                  setCat(1);
+                  setBoardCondition("question");
+                }}
+              >
+                {teams.team1}
+              </Button>
+              <Button
+                style={{ margin: "10px" }}
+                onClick={() => {
+                  setCat(2);
+                  setBoardCondition("question");
+                }}
+              >
+                {teams.team2}
+              </Button>
+              <Button
+                style={{ margin: "10px" }}
+                onClick={() => {
+                  setCat(3);
+                  setBoardCondition("question");
+                }}
+              >
+                {teams.team3}
+              </Button>
+            </div>
           </>
         )}
       </div>

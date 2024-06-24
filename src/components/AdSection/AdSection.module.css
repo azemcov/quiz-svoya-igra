@@ -17,6 +17,6 @@
 }
 
 .image {
-  width: 30vw;
-  margin-bottom: 3vh;
+  max-width: 70vw;
+  max-height: 40vh;
 }

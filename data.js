@@ -10,7 +10,7 @@ export const allRoundQuetions = [
         {
           cat: false,
           typeOfQuestion: "picture",
-          question: "Фото-вопрос № 1 1",
+          question: "В каком году... № 1 1",
           linkQ:
             "https://www.vtl.de/wp-content/uploads/2020/10/VTL-Logo-RGB-1.png",
           typeOfAnswer: "audio",
