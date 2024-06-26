@@ -102,7 +102,7 @@ export default function FinalAnswerSection({
                       : classes.wrongText
                   }
                   type="text"
-                  placeholder="Ставка п1"
+                  placeholder="Ставка"
                   onChange={(e) =>
                     setDone((d) => ({
                       ...d,
@@ -134,7 +134,7 @@ export default function FinalAnswerSection({
                       : classes.wrongText
                   }
                   type="text"
-                  placeholder="Ставка н1"
+                  placeholder="Ставка"
                   onChange={(e) =>
                     setDone((d) => ({
                       ...d,

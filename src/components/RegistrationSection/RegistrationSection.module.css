@@ -31,7 +31,7 @@
   text-align: center;
 }
 .checkboxText {
-  font-size: 2vw;
+  font-size: calc(1.5vw + 1.5vh);
   color: grey;
 }
 .checkbox {

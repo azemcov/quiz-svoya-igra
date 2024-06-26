@@ -60,17 +60,19 @@ export default function RegistrationSection({
             />
           </div>
           <br />
-          <div
+          {/* <div
             onClick={() => setButtonVisibility((bv) => !bv)}
             className={classes.checkboxText}
+            style={{ cursor: "pointer" }}
           >
             <input
               className={classes.checkbox}
+              style={{ cursor: "pointer" }}
               type="checkbox"
               checked={buttonVisibility}
             />
             Показывать кнопки
-          </div>
+          </div> */}
           <br />
         </div>
         {buttonVisibility && (

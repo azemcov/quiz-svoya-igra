@@ -1,0 +1,84 @@
+.modal {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: rgba(0, 0, 0, 0.573);
+  border: unset;
+  width: 100%;
+  height: 100%;
+}
+.message {
+  display: flex;
+  gap: 10px;
+  position: absolute;
+  right: 50px;
+  bottom: 50px;
+  background-color: rgb(67, 67, 67);
+  border: 1px solid dimgray;
+  border-radius: 20px;
+  padding: 20px;
+}
+.saple {
+  min-width: 25px;
+  font-size: calc(1vw + 1vh);
+  padding: 10px;
+  margin: 0;
+  border: 1px solid dimgray;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+.text {
+  border: 1px solid rgb(67, 67, 67);
+  margin: 0;
+  padding: 10px;
+  font-size: calc(1vw + 1vh);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.keySection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+.textSection {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column;
+  gap: 10px;
+}
+.checkboxText {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  font-size: calc(1vw + 1vh);
+  border-radius: 10px;
+  padding: 5px;
+  background-color: rgb(60, 60, 60);
+  color: grey;
+  margin-top: 20px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+.checkbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3vw;
+  height: 3vh;
+}

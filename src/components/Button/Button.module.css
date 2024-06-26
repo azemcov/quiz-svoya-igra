@@ -5,10 +5,22 @@
   justify-content: center;
   height: 4vh;
   background-color: gray;
-  border-radius: 1rem;
-  -webkit-border-radius: 1rem;
-  -moz-border-radius: 1rem;
-  -ms-border-radius: 1rem;
-  -o-border-radius: 1rem;
-  font-size: 1vw;
+  border-radius: 0.3rem;
+  -webkit-border-radius: 0.3rem;
+  -moz-border-radius: 0.3rem;
+  -ms-border-radius: 0.3rem;
+  -o-border-radius: 0.3rem;
+  min-width: 1rem;
+  cursor: pointer;
+  font-size: calc(1vw + 1vh);
+  transition: background-color 0.3s ease-in, box-shadow 0.3s ease-in;
+  -webkit-transition: background-color 0.3s ease-in, box-shadow 0.3s ease-in;
+  -moz-transition: background-color 0.3s ease-in, box-shadow 0.3s ease-in;
+  -ms-transition: background-color 0.3s ease-in, box-shadow 0.3s ease-in;
+  -o-transition: background-color 0.3s ease-in, box-shadow 0.3s ease-in;
+}
+.score_button:hover {
+  background-color: dimgray;
+  border-color: rgb(86, 86, 86);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.373);
 }

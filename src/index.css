@@ -7,7 +7,7 @@
   font-style: normal;
   overflow: hidden;
 
-  font-size: 2.5vw;
+  font-size: calc(1.5vw + 1.5vh);
   text-align: center;
 
   color-scheme: light dark;
@@ -29,7 +29,7 @@ body {
 }
 
 .FAQ {
-  border: 1px dashed #ffffffde;
+  border: 1px solid gray;
   border-radius: 50%;
   width: 25px;
   height: 25px;

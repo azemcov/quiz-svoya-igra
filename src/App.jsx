@@ -11,6 +11,7 @@ import RegistrationSection from "/src/components/RegistrationSection/Registratio
 import AnswerSection from "./components/AnswerSection/AnswerSection.jsx";
 import CatAdSection from "./components/CatAdSection/CatAdSection.jsx";
 import FinalAnswerSection from "./components/FinalAnswerSection/FinalAnswerSection.jsx";
+import ModalSection from "./components/ModalSection/ModalSection.jsx";
 
 export default function App() {
   let [roundN, setRoundN] = useState(0);
@@ -46,7 +47,7 @@ export default function App() {
   });
   let [questionXY, setQuestionXY] = useState([0, 0]);
   let [buttonClicked, setButtonClicked] = useState({ 1: 0, 2: 0, 3: 0 });
-  let [buttonVisibility, setButtonVisibility] = useState(true);
+  let [buttonVisibility, setButtonVisibility] = useState(false);
   let [final, setFinal] = useState(false);
   let [playAnswerAudioPicture, setPlayAnswerAudioPicture] = useState(false);
 
@@ -74,6 +75,7 @@ export default function App() {
   let [cat, setCat] = useState(false);
 
   let [end, setEnd] = useState("");
+  let [modal, setModal] = useState(false);
 
   useEffect(() => {
     !Number.isNaN(done.D1) &&
@@ -118,8 +120,9 @@ export default function App() {
           setBoardCondition("registration");
           setPlayIndex(0);
         } else if (boardCondition === "registration") {
-          defaultTeamNames();
-          setBoardCondition("tableAd");
+          if (teams.team1 !== "" && teams.team2 !== "" && teams.team3 !== "") {
+            setBoardCondition("tableAd");
+          }
         } else if (boardCondition === "tableAd") {
           setBoardCondition("table");
           setPlayIndex(1);
@@ -353,16 +356,24 @@ export default function App() {
   }, [roundN]);
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  useEffect(() => {
-    console.log(boardCondition, done, bet, cat);
-  }, [boardCondition, done, bet, cat]);
+  // useEffect(() => {
+  //   console.log(boardCondition, done, bet, cat);
+  // }, [boardCondition, done, bet, cat]);
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   return (
     <>
       {
         <>
-          <div className="FAQ">?</div>
+          <div className="FAQ" onClick={() => setModal((m) => !m)}>
+            ?
+          </div>
+          <ModalSection
+            buttonVisibility={buttonVisibility}
+            setButtonVisibility={setButtonVisibility}
+            setModal={setModal}
+            open={modal}
+          />
         </>
       }
       {boardCondition === "start" && (
@@ -404,8 +415,8 @@ export default function App() {
             teams={teams}
             score={score}
             buttonClicked={buttonClicked}
-            increase={increase}
-            decrease={decrease}
+            increase={bet === 0 ? () => {} : increase}
+            decrease={bet === 0 ? () => {} : decrease}
             buttonVisibility={buttonVisibility}
           ></ScoreSection>
           {actualRound.map((_, i) => (

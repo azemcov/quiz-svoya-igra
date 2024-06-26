@@ -1,5 +1,5 @@
 import Button from "/src/components/Button/Button.jsx";
-import TeamNameAndCrore from "/src/components/TeamNameAndScore/TeamNameAndScore.jsx";
+import TeamNameAndSrore from "/src/components/TeamNameAndScore/TeamNameAndScore.jsx";
 import classes from "/src/components/ScoreSection/ScoreSection.module.css";
 
 export default function ScoreSection({
@@ -17,7 +17,7 @@ export default function ScoreSection({
           {buttonVisibility && (
             <Button onClick={() => decrease(`${i + 1}`)}>-</Button>
           )}
-          <TeamNameAndCrore
+          <TeamNameAndSrore
             name={teams[`team${i + 1}`]}
             score={score[`score${i + 1}`]}
             buttonClicked={buttonClicked[i + 1]}
