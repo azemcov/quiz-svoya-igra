@@ -50,10 +50,6 @@ export default function App() {
   let [buttonVisibility, setButtonVisibility] = useState(false);
   let [final, setFinal] = useState(false);
   let [playAnswerAudioPicture, setPlayAnswerAudioPicture] = useState(false);
-
-  useEffect(() => {
-    return setPlayAnswerAudioPicture(false);
-  }, [boardCondition]);
   let [playIndex, setPlayIndex] = useState(null);
   let audioFiles = [
     "/public/0_start.mp3",
@@ -67,21 +63,103 @@ export default function App() {
     "/public/8_applause.mp3",
     "/public/9_cat.mp3",
   ];
-
   let [FBS, setFBS] = useState({ B1: null, B2: null, B3: null });
   let [done, setDone] = useState({ D1: NaN, D2: NaN, D3: NaN });
-
   let [allDoneAreNumber, setAllDoneAreNumber] = useState(false);
   let [cat, setCat] = useState(false);
-
   let [end, setEnd] = useState("");
   let [modal, setModal] = useState(false);
 
+  let [allMediaFiles, setAllMediaFiles] = useState([]);
+  let [loadingPercent, setLoadingPercent] = useState(0);
+
+  // Эффект для составления списка всех медиафайлов
+  useEffect(() => {
+    let files = [];
+    allRoundQuetions.forEach((nGameRound) => {
+      nGameRound.forEach((nTheme) => {
+        nTheme.line.forEach((Q) => {
+          Q.typeOfQuestion === "picture" || Q.typeOfQuestion === "audio"
+            ? files.push([Q.typeOfQuestion, Q.linkQ])
+            : 0;
+          Q.typeOfAnswer === "picture" || Q.typeOfAnswer === "audio"
+            ? files.push([Q.typeOfAnswer, Q.linkA])
+            : 0;
+        });
+      });
+    });
+    finalQuestions.forEach((Q) => {
+      Q.typeOfQuestion === "picture" || Q.typeOfQuestion === "audio"
+        ? files.push([Q.typeOfQuestion, Q.linkQ])
+        : 0;
+      Q.typeOfAnswer === "picture" || Q.typeOfAnswer === "audio"
+        ? files.push([Q.typeOfAnswer, Q.linkA])
+        : 0;
+    });
+    let uniqueFiles = [];
+    files
+      .map((m) => m[1])
+      .reduce(
+        (a, c, i) =>
+          a.includes(c) ? a : (uniqueFiles.push(files[i]), [...a, c]),
+        []
+      );
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // console.log("files:", files, "uniqueFiles:", uniqueFiles);
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    setAllMediaFiles(uniqueFiles);
+  }, []);
+
+  // Эффект для загрузки всех медиафайлов и обновления процента загрузки
+  useEffect(() => {
+    let loadedFilesCount = 0;
+
+    function increaseLoadedFilesCount() {
+      loadedFilesCount += 1;
+      setLoadingPercent(
+        Math.floor((loadedFilesCount / allMediaFiles.length) * 1000) / 10
+      );
+    }
+
+    function loadFile(type, link) {
+      new Promise((resolve, reject) => {
+        if (type === "picture") {
+          let img = new Image();
+          img.src = link;
+          img.onload = () => {
+            increaseLoadedFilesCount();
+            resolve();
+          };
+          img.onerror = () => reject;
+        } else if (type === "audio") {
+          let audio = new Audio();
+          audio.src = link;
+          audio.oncanplaythrough = () => {
+            increaseLoadedFilesCount();
+            resolve();
+          };
+          audio.onerror = () => reject;
+        }
+      });
+    }
+
+    Promise.all(allMediaFiles.map((m) => loadFile(m[0], m[1]))).catch(
+      (error) => {
+        console.error("Ошибка при загрузке файлов:", error);
+      }
+    );
+  }, [allMediaFiles]);
+
+  // Эффект для остановки звуков при изменении boardCondition
+  useEffect(() => {
+    return setPlayAnswerAudioPicture(false);
+  }, [boardCondition]);
+
+  // Эффект для проверки корректности финальных ставок
   useEffect(() => {
     !Number.isNaN(done.D1) &&
     !Number.isNaN(done.D2) &&
     !Number.isNaN(done.D3) &&
-    //
     (score.score1 < 0
       ? done.D1 === 0
       : score.score1 - Math.abs(done.D1) >= 0) &&
@@ -93,6 +171,7 @@ export default function App() {
       : setAllDoneAreNumber(false);
   }, [done]);
 
+  // Эффект для музыки
   useEffect(() => {
     if (playIndex !== null) {
       const audio = new Audio(audioFiles[playIndex]);
@@ -105,7 +184,9 @@ export default function App() {
       audio.play();
 
       return () => {
-        audio.pause();
+        setTimeout(() => {
+          audio.pause();
+        }, 100);
         audio.currentTime = 0;
         setPlayIndex(null);
         audio.removeEventListener("ended", handleEnded);
@@ -113,6 +194,7 @@ export default function App() {
     }
   }, [playIndex, boardCondition, score]);
 
+  // Эффект для управления с клавиатуры
   useEffect(() => {
     function keyboard(event) {
       if (event.code === "Enter") {
@@ -382,6 +464,7 @@ export default function App() {
             buttonVisibility={buttonVisibility}
             setBoardCondition={setBoardCondition}
             setPlayIndex={setPlayIndex}
+            loadingPercent={loadingPercent}
           ></StartSection>
         </>
       )}

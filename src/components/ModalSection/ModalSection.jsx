@@ -62,6 +62,7 @@ export default function ModalSection({ ...props }) {
               style={{ cursor: "pointer" }}
               type="checkbox"
               checked={props.buttonVisibility}
+              onChange={() => {}}
             />
             Показывать кнопки
           </div>

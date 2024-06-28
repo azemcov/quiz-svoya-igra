@@ -25,7 +25,7 @@ export const allRoundQuetions = [
           typeOfAnswer: "picture",
           answer: "Фото-ответ № 1 2",
           linkA:
-            "https://www.vtl.de/wp-content/uploads/2020/10/VTL-Logo-RGB-1.png",
+            "https://s3.eu-west-1.amazonaws.com/s3.pr-cy.ru/prcy/qa/b93b1be6ffd09fa9c4485d5e918f18a3.png",
         },
         {
           cat: true,
@@ -47,18 +47,20 @@ export const allRoundQuetions = [
         },
         {
           cat: false,
-          typeOfQuestion: "text",
+          typeOfQuestion: "picture",
           question: "Это вопрос № 1 5",
-          linkQ: "",
+          linkQ:
+            "https://thumbs.dreamstime.com/b/snowboarder-snowboard-deck-icon-snowboarder-snowboard-deck-icon-flat-style-baby-whute-background-126042935.jpg",
           typeOfAnswer: "text",
           answer: "Это ответ № 1 5",
           linkA: "",
         },
         {
           cat: false,
-          typeOfQuestion: "text",
+          typeOfQuestion: "picture",
           question: "Это вопрос № 1 6",
-          linkQ: "",
+          linkQ:
+            "https://ne-kurim.ru/forum/attachments/hdjy_j-dh42-bgh7777777vfdffft_j-742cf_j-drffff-g3-2bgs_j-4-saljut-animacija3-gif.1390291/",
           typeOfAnswer: "text",
           answer: "Это ответ № 1 6",
           linkA: "",

@@ -13,6 +13,12 @@
   white-space: nowrap;
   padding-right: -3vw;
 }
+.absoluteText {
+  position: absolute;
+  width: 100%;
+  top: 65vh;
+  left: 0;
+}
 .center {
   display: flex;
   flex-direction: column;
@@ -20,4 +26,17 @@
 
 .image {
   width: 30vw;
+}
+
+.disappear {
+  animation: disappear 2s ease-in-out forwards;
+  -webkit-animation: disappear 2s ease-in-out forwards;
+}
+@keyframes disappear {
+  from {
+    color: white;
+  }
+  to {
+    color: rgba(255, 255, 255, 0);
+  }
 }
