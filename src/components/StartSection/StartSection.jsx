@@ -8,25 +8,47 @@ export default function StartSection({
   setPlayIndex,
   loadingPercent,
 }) {
-  let [loading, setLoading] = useState("Загрузка ");
+  let [loading, setLoading] = useState("");
   useEffect(() => {
-    setTimeout(() => {
-      if (loading === "Загрузка ") {
-        setLoading("Загрузка. ");
-      } else if (loading === "Загрузка. ") {
-        setLoading("Загрузка.. ");
-      } else if (loading === "Загрузка.. ") {
-        setLoading("Загрузка... ");
-      } else if (loading === "Загрузка... ") {
-        setLoading("Загрузка ");
-      }
-    }, 1000);
+    let timer;
+    if (!(loadingPercent < 100)) {
+      setLoading(null);
+    }
+    timer = setTimeout(() => {
+      setLoading((l) => {
+        switch (l) {
+          case "":
+            return ".";
+          case ".":
+            return "..";
+          case "..":
+            return "...";
+          case "...":
+            return "";
+        }
+      });
+    }, 300);
+
+    return () => {
+      clearTimeout(timer);
+    };
   }, [loading]);
   return (
     <>
-      <p className={`${classes.disappear} ${classes.absoluteText}`}>
-        {loadingPercent < 100 ? loading : "Загрузка "}
-        {loadingPercent < 100 ? `${loadingPercent}%` : ""}
+      <p
+        className={`${loadingPercent < 100 ? "" : classes.disappear} ${
+          classes.absoluteText
+        }`}
+      >
+        {loadingPercent < 100 ? "Загрузка " : "Загрузка "}
+        {loadingPercent < 100 ? `${loadingPercent}%` : "100%"}
+      </p>
+      <p
+        className={`${loadingPercent < 100 ? "" : classes.disappear} ${
+          classes.absoluteText2
+        }`}
+      >
+        {loading}
       </p>
       <div className={classes.result}>
         <div className={classes.center}>

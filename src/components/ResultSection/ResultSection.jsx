@@ -1,6 +1,5 @@
 import Button from "/src/components/Button/Button.jsx";
 import classes from "/src/components/ResultSection/ResultSection.module.css";
-import { allRoundQuetions } from "/data.js";
 import { useEffect } from "react";
 
 export default function ResultSection({
@@ -13,6 +12,7 @@ export default function ResultSection({
   buttonVisibility,
   setActualRound,
   setPlayIndex,
+  importedRoundQuestions,
 }) {
   useEffect(() => {
     setPlayIndex(2);
@@ -48,7 +48,7 @@ export default function ResultSection({
               <Button
                 onClick={() => {
                   roundN < qtyOfRounds - 1
-                    ? (setActualRound([...allRoundQuetions[roundN]]),
+                    ? (setActualRound([...importedRoundQuestions[roundN]]),
                       setRoundN(roundN + 1),
                       setBoardCondition("tableAd"))
                     : (setBoardCondition("finalAd"), setRoundN("final"));

@@ -1,0 +1,36 @@
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(1vw + 1vh);
+}
+
+.green {
+  width: 3vw;
+  height: 7vh;
+  margin: -0.5px;
+  box-sizing: border-box;
+  font-size: calc(1vw + 1vh);
+  background-color: rgb(28, 54, 28);
+  cursor: pointer;
+}
+.green:hover {
+  background-color: rgb(37, 71, 37);
+}
+.red {
+  width: 3vw;
+  height: 7vh;
+  margin: -0.5px;
+  box-sizing: border-box;
+  font-size: calc(1vw + 1vh);
+  background-color: rgb(100, 25, 25);
+  cursor: pointer;
+}
+.red:hover {
+  background-color: rgb(134, 32, 32);
+}
+.input {
+  box-sizing: border-box;
+  width: 10vw;
+  height: 7vh;
+}

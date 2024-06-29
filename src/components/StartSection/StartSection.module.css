@@ -19,6 +19,12 @@
   top: 65vh;
   left: 0;
 }
+.absoluteText2 {
+  position: absolute;
+  width: 100%;
+  top: 70vh;
+  left: 0;
+}
 .center {
   display: flex;
   flex-direction: column;

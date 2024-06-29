@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { allRoundQuetions, finalQuestions } from "/data.js";
+import { allRoundQuestions, finalQuestions } from "/data.js";
+import { defaultQuestions, defaultFinalQuestions } from "/data-default.js";
 import LineSection from "/src/components/LineSection/LineSection.jsx";
 import ScoreSection from "/src/components/ScoreSection/ScoreSection.jsx";
 import QuestionSection from "/src/components/QuestionSection/QuestionSection.jsx";
@@ -12,16 +13,27 @@ import AnswerSection from "./components/AnswerSection/AnswerSection.jsx";
 import CatAdSection from "./components/CatAdSection/CatAdSection.jsx";
 import FinalAnswerSection from "./components/FinalAnswerSection/FinalAnswerSection.jsx";
 import ModalSection from "./components/ModalSection/ModalSection.jsx";
+import EditSection from "./components/EditSection/EditSection.jsx";
 
 export default function App() {
+  let [importedRoundQuestions, setImportedRoundQuestions] =
+    useState(allRoundQuestions);
+  let [importedFinalQuestions, setImportedFinalQuestions] =
+    useState(finalQuestions);
+  let [rebut, setRebut] = useState(0);
+  let [editDefaultQ, setEditDefaultQ] = useState(defaultQuestions);
+  let [editDefaultSuperQ, setEditDefaultSuperQ] = useState(
+    defaultFinalQuestions
+  );
+
   let [roundN, setRoundN] = useState(0);
-  let qtyOfRounds = allRoundQuetions.length;
+  let [qtyOfRounds, setQtyOfRounds] = useState(importedRoundQuestions.length);
   let [actualRound, setActualRound] = useState(
     roundN !== "final"
-      ? [...allRoundQuetions[roundN]]
-      : [...allRoundQuetions[0]]
+      ? [...importedRoundQuestions[roundN]]
+      : [...importedRoundQuestions[0]]
   );
-  let [boardCondition, setBoardCondition] = useState("start");
+  let [boardCondition, setBoardCondition] = useState("editS"); ////////////BOARDCONDITION///////////////
   let [buttonCondition, setButtonCondition] = useState(
     Array(6).fill([
       (roundN + 1) * 1 * 100,
@@ -45,10 +57,13 @@ export default function App() {
     score2: 0,
     score3: 0,
   });
+  let [final, setFinal] = useState(false);
+  let [FBS, setFBS] = useState({ B1: null, B2: null, B3: null });
+  let [done, setDone] = useState({ D1: NaN, D2: NaN, D3: NaN });
+  let [allDoneAreNumber, setAllDoneAreNumber] = useState(false);
   let [questionXY, setQuestionXY] = useState([0, 0]);
   let [buttonClicked, setButtonClicked] = useState({ 1: 0, 2: 0, 3: 0 });
   let [buttonVisibility, setButtonVisibility] = useState(false);
-  let [final, setFinal] = useState(false);
   let [playAnswerAudioPicture, setPlayAnswerAudioPicture] = useState(false);
   let [playIndex, setPlayIndex] = useState(null);
   let audioFiles = [
@@ -63,20 +78,66 @@ export default function App() {
     "/public/8_applause.mp3",
     "/public/9_cat.mp3",
   ];
-  let [FBS, setFBS] = useState({ B1: null, B2: null, B3: null });
-  let [done, setDone] = useState({ D1: NaN, D2: NaN, D3: NaN });
-  let [allDoneAreNumber, setAllDoneAreNumber] = useState(false);
   let [cat, setCat] = useState(false);
   let [end, setEnd] = useState("");
   let [modal, setModal] = useState(false);
-
   let [allMediaFiles, setAllMediaFiles] = useState([]);
   let [loadingPercent, setLoadingPercent] = useState(0);
+  let [loadedFilesCount, setLoadedFilesCount] = useState(0);
+
+  // // Эффект чтобы скинуть всё до дефолта (кроме audioFiles и buttonVisibility) при загрузке новых вопросов
+  // useEffect(() => {
+  //   setRoundN(0);
+  //   setQtyOfRounds(importedRoundQuestions.length);
+  //   setActualRound(
+  //     roundN !== "final"
+  //       ? [...importedRoundQuestions[0]]
+  //       : [...importedRoundQuestions[0]]
+  //   );
+  //   setBoardCondition("start");
+  //   setButtonCondition(
+  //     Array(6).fill([
+  //       (roundN + 1) * 1 * 100,
+  //       (roundN + 1) * 2 * 100,
+  //       (roundN + 1) * 3 * 100,
+  //       (roundN + 1) * 4 * 100,
+  //       (roundN + 1) * 5 * 100,
+  //       (roundN + 1) * 6 * 100,
+  //       (roundN + 1) * 7 * 100,
+  //     ])
+  //   );
+  //   setFinalCondition([1, 1, 1, 1, 1, 1, 1]);
+  //   setBet(0);
+  //   setTeams({
+  //     team1: "",
+  //     team2: "",
+  //     team3: "",
+  //   });
+  //   setScore({
+  //     score1: 0,
+  //     score2: 0,
+  //     score3: 0,
+  //   });
+  //   setFinal(false);
+  //   setFBS({ B1: null, B2: null, B3: null });
+  //   setDone({ D1: NaN, D2: NaN, D3: NaN });
+  //   setAllDoneAreNumber(false);
+  //   setQuestionXY([0, 0]);
+  //   setButtonClicked({ 1: 0, 2: 0, 3: 0 });
+  //   setPlayAnswerAudioPicture(false);
+  //   setPlayIndex(null);
+  //   setCat(false);
+  //   setEnd("");
+  //   setModal(false);
+  //   setAllMediaFiles([]);
+  //   //setLoadingPercent(0);
+  //   //setLoadedFilesCount(0);
+  // }, [rebut]);
 
   // Эффект для составления списка всех медиафайлов
   useEffect(() => {
     let files = [];
-    allRoundQuetions.forEach((nGameRound) => {
+    importedRoundQuestions.forEach((nGameRound) => {
       nGameRound.forEach((nTheme) => {
         nTheme.line.forEach((Q) => {
           Q.typeOfQuestion === "picture" || Q.typeOfQuestion === "audio"
@@ -88,7 +149,7 @@ export default function App() {
         });
       });
     });
-    finalQuestions.forEach((Q) => {
+    importedFinalQuestions.forEach((Q) => {
       Q.typeOfQuestion === "picture" || Q.typeOfQuestion === "audio"
         ? files.push([Q.typeOfQuestion, Q.linkQ])
         : 0;
@@ -108,17 +169,18 @@ export default function App() {
     // console.log("files:", files, "uniqueFiles:", uniqueFiles);
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     setAllMediaFiles(uniqueFiles);
-  }, []);
+  }, [importedRoundQuestions, importedFinalQuestions]);
 
   // Эффект для загрузки всех медиафайлов и обновления процента загрузки
   useEffect(() => {
-    let loadedFilesCount = 0;
-
     function increaseLoadedFilesCount() {
-      loadedFilesCount += 1;
-      setLoadingPercent(
-        Math.floor((loadedFilesCount / allMediaFiles.length) * 1000) / 10
-      );
+      setLoadedFilesCount((lfc) => {
+        let newlfc = lfc + 1;
+        setLoadingPercent(
+          Math.floor((newlfc / allMediaFiles.length) * 1000) / 10
+        );
+        return newlfc;
+      });
     }
 
     function loadFile(type, link) {
@@ -130,7 +192,7 @@ export default function App() {
             increaseLoadedFilesCount();
             resolve();
           };
-          img.onerror = () => reject;
+          img.onerror = (err) => reject(err);
         } else if (type === "audio") {
           let audio = new Audio();
           audio.src = link;
@@ -138,7 +200,7 @@ export default function App() {
             increaseLoadedFilesCount();
             resolve();
           };
-          audio.onerror = () => reject;
+          audio.onerror = (err) => reject(err);
         }
       });
     }
@@ -217,7 +279,7 @@ export default function App() {
           setTimeout(() => setPlayIndex(1), 1);
         } else if (boardCondition === "results" && boardCondition !== "end") {
           roundN < qtyOfRounds - 1
-            ? (setActualRound([...allRoundQuetions[roundN]]),
+            ? (setActualRound([...importedRoundQuestions[roundN]]),
               setRoundN(roundN + 1),
               setBoardCondition("tableAd"))
             : (setBoardCondition("finalAd"), setRoundN("final"));
@@ -308,22 +370,22 @@ export default function App() {
           setBoardCondition("question");
         }
       }
-      //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      else if (boardCondition === "table") {
-        if (event.key === "±") {
-          setBoardCondition("final");
-          setFinalCondition([1, 1, 0, 0, 0, 0, 0]);
-        } else if (event.key === "/") {
-          setButtonCondition([
-            ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
-            ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
-            ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
-            ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
-            ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
-            ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", 9000],
-          ]);
-        }
-      }
+      /////БЫСТНОЕ ТЕСТИРОВАНИЕ ВОПРОСОВ///////////////////////////////////////////////////////////////////////////////
+      // else if (boardCondition === "table") {
+      //   if (event.key === "±") {
+      //     setBoardCondition("final");
+      //     setFinalCondition([1, 1, 0, 0, 0, 0, 0]);
+      //   } else if (event.key === "/") {
+      //     setButtonCondition([
+      //       ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
+      //       ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
+      //       ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
+      //       ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
+      //       ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
+      //       ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", 9000],
+      //     ]);
+      //   }
+      // }
       //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
     document.addEventListener("keydown", keyboard);
@@ -333,93 +395,12 @@ export default function App() {
     };
   }, [boardCondition, score, allDoneAreNumber, teams, cat]);
 
-  function isQuestionsOver() {
-    return buttonCondition
-      .map((arr) => arr.every((e) => e === "sleep"))
-      .every((e) => e === true);
-  }
-
-  function increase(num) {
-    typeof cat === "number" ? (num = cat) : 0;
-    if (bet > 0) {
-      setButtonClicked((prev) => ({ ...prev, [num]: "green" }));
-    }
-    setPlayIndex(8);
-    setScore({
-      ...score,
-      ["score" + num]: score["score" + num] + bet,
-    });
-
-    setBet(0);
-    setTimeout(() => setButtonClicked((prev) => ({ 1: 0, 2: 0, 3: 0 })), 1000);
-    setBoardCondition(isQuestionsOver() ? "results" : "table");
-    setCat(false);
-  }
-
-  function decrease(num) {
-    typeof cat === "number" ? (num = cat) : 0;
-    if (bet > 0) {
-      setButtonClicked((prev) => ({ ...prev, [num]: "red" }));
-    }
-    setPlayIndex(6);
-    setScore({ ...score, ["score" + num]: score["score" + num] - bet });
-
-    typeof cat === "number" ? setBet(0) : 0;
-    setTimeout(() => setButtonClicked((prev) => ({ 1: 0, 2: 0, 3: 0 })), 1000);
-    typeof cat === "number"
-      ? setBoardCondition(isQuestionsOver() ? "results" : "table")
-      : 0;
-    setCat(false);
-  }
-
-  function noAnswer() {
-    setBet(0);
-    setPlayIndex(7);
-    setBoardCondition(isQuestionsOver() ? "results" : "table");
-  }
-
-  function ifItsCat() {
-    actualRound[questionXY[0]].line[questionXY[1]].cat
-      ? setBoardCondition("cat")
-      : setBoardCondition("question");
-  }
-
-  function defaultTeamNames() {
-    if (teams.team1 === "") {
-      setTeams((t) => {
-        return { ...t, team1: "Команда № 1" };
-      });
-    }
-    if (teams.team2 === "") {
-      setTeams((t) => {
-        return { ...t, team2: "Команда № 2" };
-      });
-    }
-    if (teams.team3 === "") {
-      setTeams((t) => {
-        return { ...t, team3: "Команда № 3" };
-      });
-    }
-  }
-
-  function finalScore() {
-    let FS1 = score.score1 + done.D1;
-    let FS2 = score.score2 + done.D2;
-    let FS3 = score.score3 + done.D3;
-    let arr = [
-      [FS1, teams.team1],
-      [FS2, teams.team2],
-      [FS3, teams.team3],
-    ];
-    arr.sort((a, b) => b[0] - a[0]);
-    setEnd(arr);
-  }
-
+  // Эффект для установки раунда
   useEffect(() => {
     setActualRound(
       roundN !== "final"
-        ? [...allRoundQuetions[roundN]]
-        : [...allRoundQuetions[0]]
+        ? [...importedRoundQuestions[roundN]]
+        : [...importedRoundQuestions[0]]
     );
 
     setButtonCondition(
@@ -437,7 +418,90 @@ export default function App() {
     return () => {};
   }, [roundN]);
 
-  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Функция после конца раунда "будит" все кнопки вопросов
+  function isQuestionsOver() {
+    return buttonCondition
+      .map((arr) => arr.every((e) => e === "sleep"))
+      .every((e) => e === true);
+  }
+  // Функция увеличения счёта
+  function increase(num) {
+    typeof cat === "number" ? (num = cat) : 0;
+    if (bet > 0) {
+      setButtonClicked((prev) => ({ ...prev, [num]: "green" }));
+    }
+    setPlayIndex(8);
+    setScore({
+      ...score,
+      ["score" + num]: score["score" + num] + bet,
+    });
+
+    setBet(0);
+    setTimeout(() => setButtonClicked((prev) => ({ 1: 0, 2: 0, 3: 0 })), 1000);
+    setBoardCondition(isQuestionsOver() ? "results" : "table");
+    setCat(false);
+  }
+  // Функция уменьшенияния счёта
+  function decrease(num) {
+    typeof cat === "number" ? (num = cat) : 0;
+    if (bet > 0) {
+      setButtonClicked((prev) => ({ ...prev, [num]: "red" }));
+    }
+    setPlayIndex(6);
+    setScore({ ...score, ["score" + num]: score["score" + num] - bet });
+
+    typeof cat === "number" ? setBet(0) : 0;
+    setTimeout(() => setButtonClicked((prev) => ({ 1: 0, 2: 0, 3: 0 })), 1000);
+    typeof cat === "number"
+      ? setBoardCondition(isQuestionsOver() ? "results" : "table")
+      : 0;
+    setCat(false);
+  }
+  // Функция при отсутствии правильного ответа
+  function noAnswer() {
+    setBet(0);
+    setPlayIndex(7);
+    setBoardCondition(isQuestionsOver() ? "results" : "table");
+  }
+  // Функция если вопрос "кот в мешке"
+  function ifItsCat() {
+    actualRound[questionXY[0]].line[questionXY[1]].cat
+      ? setBoardCondition("cat")
+      : setBoardCondition("question");
+  }
+  // Функция ели не были заданы имена команд (актуальна только для управления кнопками)
+  function defaultTeamNames() {
+    if (teams.team1 === "") {
+      setTeams((t) => {
+        return { ...t, team1: "Команда № 1" };
+      });
+    }
+    if (teams.team2 === "") {
+      setTeams((t) => {
+        return { ...t, team2: "Команда № 2" };
+      });
+    }
+    if (teams.team3 === "") {
+      setTeams((t) => {
+        return { ...t, team3: "Команда № 3" };
+      });
+    }
+  }
+  // Функция подсчёта финального счёта
+  function finalScore() {
+    let FS1 = score.score1 + done.D1;
+    let FS2 = score.score2 + done.D2;
+    let FS3 = score.score3 + done.D3;
+    let arr = [
+      [FS1, teams.team1],
+      [FS2, teams.team2],
+      [FS3, teams.team3],
+    ];
+    arr.sort((a, b) => b[0] - a[0]);
+    setEnd(arr);
+  }
+
+  /////ДЭБАГ ВЫВОД В КОНСОЛЬ ВСЯКОГО/////////////////////////////////////////////////////////////////////////////
   // useEffect(() => {
   //   console.log(boardCondition, done, bet, cat);
   // }, [boardCondition, done, bet, cat]);
@@ -552,17 +616,17 @@ export default function App() {
             setBoardCondition={setBoardCondition}
             typeOfQuestion={
               typeof final === "number"
-                ? finalQuestions[final].typeOfQuestion
+                ? importedFinalQuestions[final].typeOfQuestion
                 : actualRound[questionXY[0]].line[questionXY[1]].typeOfQuestion
             }
             question={
               typeof final === "number"
-                ? finalQuestions[final].question
+                ? importedFinalQuestions[final].question
                 : actualRound[questionXY[0]].line[questionXY[1]].question
             }
             linkQ={
               typeof final === "number"
-                ? finalQuestions[final].linkQ
+                ? importedFinalQuestions[final].linkQ
                 : actualRound[questionXY[0]].line[questionXY[1]].linkQ
             }
             playAnswerAudioPicture={playAnswerAudioPicture}
@@ -609,6 +673,7 @@ export default function App() {
             setBoardCondition={setBoardCondition}
             buttonVisibility={buttonVisibility}
             setPlayIndex={setPlayIndex}
+            importedRoundQuestions={importedRoundQuestions}
           />
         </>
       )}
@@ -633,7 +698,7 @@ export default function App() {
             buttonVisibility={false}
           ></ScoreSection>
           <FinalSection
-            finalQuestions={finalQuestions}
+            importedFinalQuestions={importedFinalQuestions}
             finalCondition={finalCondition}
             setFinalCondition={setFinalCondition}
             setBoardCondition={setBoardCondition}
@@ -653,9 +718,9 @@ export default function App() {
           ></ScoreSection>
           <FinalAnswerSection
             buttonVisibility={buttonVisibility}
-            typeOfAnswer={finalQuestions[final].typeOfAnswer}
-            answer={finalQuestions[final].answer}
-            linkA={finalQuestions[final].linkA}
+            typeOfAnswer={importedFinalQuestions[final].typeOfAnswer}
+            answer={importedFinalQuestions[final].answer}
+            linkA={importedFinalQuestions[final].linkA}
             FBS={FBS}
             setFBS={setFBS}
             done={done}
@@ -679,6 +744,16 @@ export default function App() {
           >
             {"Финал"}
           </AdSection>
+        </>
+      )}
+      {boardCondition === "editS" && (
+        <>
+          <EditSection
+            editDefaultQ={editDefaultQ}
+            setEditDefaultQ={setEditDefaultQ}
+            editDefaultSuperQ={editDefaultSuperQ}
+            setEditDefaultSuperQ={setEditDefaultSuperQ}
+          ></EditSection>
         </>
       )}
     </>

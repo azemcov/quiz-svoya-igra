@@ -9,7 +9,10 @@ export default function ModalSection({ ...props }) {
       className={classes.modal}
       onClick={() => props.setModal((m) => !m)}
     >
-      <div className={classes.message}>
+      <div
+        className={classes.message}
+        onClick={() => props.setModal((m) => !m)}
+      >
         <div>
           <div className={classes.center}>
             <section className={classes.keySection}>
