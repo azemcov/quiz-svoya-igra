@@ -12,10 +12,16 @@
   box-sizing: border-box;
   font-size: calc(1vw + 1vh);
   background-color: rgb(28, 54, 28);
+  border: 1px solid gray;
   cursor: pointer;
 }
 .green:hover {
   background-color: rgb(37, 71, 37);
+  border: 1px solid gray;
+}
+.green:active {
+  background-color: rgb(28, 54, 28);
+  border: 1px solid gray;
 }
 .red {
   width: 3vw;
@@ -24,13 +30,19 @@
   box-sizing: border-box;
   font-size: calc(1vw + 1vh);
   background-color: rgb(100, 25, 25);
+  border: 1px solid gray;
   cursor: pointer;
 }
 .red:hover {
   background-color: rgb(134, 32, 32);
+  border: 1px solid gray;
+}
+.red:active {
+  background-color: rgb(100, 25, 25);
+  border: 1px solid gray;
 }
 .input {
   box-sizing: border-box;
-  width: 10vw;
+  width: 11vw;
   height: 7vh;
 }

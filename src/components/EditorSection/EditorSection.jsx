@@ -1,11 +1,14 @@
-import classes from "/src/components/EditSection/EditSection.module.css";
+import classes from "/src/components/EditorSection/EditorSection.module.css";
+import { useEffect } from "react";
 
-export default function EditSection({
+export default function EditorSection({
   editDefaultQ,
   setEditDefaultQ,
   editDefaultSuperQ,
   setEditDefaultSuperQ,
+  setBoardCondition,
 }) {
+  // Функция проверки заполненности фопросов
   function isQuestionOK(il, iq, rn) {
     if (typeof rn === "number") {
       let questionData = editDefaultQ[rn][il].line[iq];
@@ -62,6 +65,9 @@ export default function EditSection({
       return isValid ? classes.green : classes.red;
     }
   }
+
+  useEffect(() => {}, []);
+
   return (
     <>
       <img
@@ -74,25 +80,35 @@ export default function EditSection({
         src="https://getfile.dokpub.com/yandex/get/https://disk.yandex.ru/i/82Mg16QYi3UO_g"
         alt=""
       />
-      <div className={classes.center} style={{ gap: "30px", height: "70%" }}>
+      <div className={classes.center} style={{ gap: "30px", height: "60%" }}>
         <div
           className={classes.center}
           style={{ flexDirection: "column", height: "100%" }}
         >
           <p className={classes.center}>Вопросы первого раунда</p>
           {Array.from({ length: 6 }).map((_, il) => (
-            <div className={classes.center}>
+            <div key={`theme1${il}`} className={classes.center}>
               <input
                 className={classes.input}
                 type="text"
                 defaultValue={editDefaultQ[0][il].theme}
-                placeholder={`Название темы ${il + 1}`}
+                placeholder={`Название темы № ${il + 1}`}
                 onChange={(e) => {
-                  e.target.value;
+                  setEditDefaultQ(
+                    (d) => ((d[0][il].theme = e.target.value), d)
+                  );
                 }}
               ></input>
               {Array.from({ length: 7 }).map((_, iq) => (
-                <button className={isQuestionOK(il, iq, 0)}>{iq + 1}</button>
+                <button
+                  key={`line1${iq}`}
+                  onClick={() => {
+                    setBoardCondition("editRegularQ");
+                  }}
+                  className={isQuestionOK(il, iq, 0)}
+                >
+                  {iq + 1}
+                </button>
               ))}
             </div>
           ))}
@@ -103,18 +119,28 @@ export default function EditSection({
         >
           <p className={classes.center}>Вопросы второго раунда</p>
           {Array.from({ length: 6 }).map((_, il) => (
-            <div className={classes.center}>
+            <div key={`theme2${il}`} className={classes.center}>
               <input
                 className={classes.input}
                 type="text"
-                defaultValue={""}
-                placeholder={`Название темы ${il + 7}`}
+                defaultValue={editDefaultQ[1][il].theme}
+                placeholder={`Название темы № ${il + 7}`}
                 onChange={(e) => {
-                  e.target.value;
+                  setEditDefaultQ(
+                    (d) => ((d[1][il].theme = e.target.value), d)
+                  );
                 }}
               ></input>
               {Array.from({ length: 7 }).map((_, iq) => (
-                <button className={isQuestionOK(il, iq, 1)}>{iq + 1}</button>
+                <button
+                  key={`line2${iq}`}
+                  onClick={() => {
+                    setBoardCondition("editRegularQ");
+                  }}
+                  className={isQuestionOK(il, iq, 1)}
+                >
+                  {iq + 1}
+                </button>
               ))}
             </div>
           ))}
@@ -123,7 +149,10 @@ export default function EditSection({
       <p className={classes.center}>Вопросы супер игры</p>
       <div className={classes.center}>
         {Array.from({ length: 7 }).map((_, iq) => (
-          <button className={isQuestionOK(undefined, iq, "final")}>
+          <button
+            key={`final${iq}`}
+            className={isQuestionOK(undefined, iq, "final")}
+          >
             {iq + 1}
           </button>
         ))}

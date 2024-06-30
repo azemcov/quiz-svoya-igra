@@ -6,8 +6,8 @@ export default function RegistrationSection({
   setTeams,
   setBoardCondition,
   buttonVisibility,
-  setButtonVisibility,
-  defaultTeamNames,
+  inputBlink,
+  setInputBlink,
 }) {
   return (
     <>
@@ -19,7 +19,9 @@ export default function RegistrationSection({
           </div>
           <div>
             <input
-              className={classes.inputText}
+              className={`${classes.inputText} ${
+                inputBlink[0] ? classes.alert : ""
+              }`}
               type="text"
               defaultValue={teams.team1}
               placeholder="Название команды № 1"
@@ -33,7 +35,9 @@ export default function RegistrationSection({
           </div>
           <div>
             <input
-              className={classes.inputText}
+              className={`${classes.inputText} ${
+                inputBlink[1] ? classes.alert : ""
+              }`}
               type="text"
               defaultValue={teams.team2}
               placeholder="Название команды № 2"
@@ -47,7 +51,9 @@ export default function RegistrationSection({
           </div>
           <div>
             <input
-              className={classes.inputText}
+              className={`${classes.inputText} ${
+                inputBlink[2] ? classes.alert : ""
+              }`}
               type="text"
               defaultValue={teams.team3}
               placeholder="Название команды № 3"
@@ -59,28 +65,29 @@ export default function RegistrationSection({
               }
             />
           </div>
-          <br />
-          {/* <div
-            onClick={() => setButtonVisibility((bv) => !bv)}
-            className={classes.checkboxText}
-            style={{ cursor: "pointer" }}
-          >
-            <input
-              className={classes.checkbox}
-              style={{ cursor: "pointer" }}
-              type="checkbox"
-              checked={buttonVisibility}
-            />
-            Показывать кнопки
-          </div> */}
+
           <br />
         </div>
         {buttonVisibility && (
           <>
             <Button
               onClick={() => {
-                setBoardCondition("tableAd");
-                defaultTeamNames();
+                if (
+                  teams.team1.trim() !== "" &&
+                  teams.team2.trim() !== "" &&
+                  teams.team3.trim() !== ""
+                ) {
+                  setBoardCondition("tableAd");
+                } else {
+                  setInputBlink([
+                    teams.team1.trim() === "" ? 1 : 0,
+                    teams.team2.trim() === "" ? 1 : 0,
+                    teams.team3.trim() === "" ? 1 : 0,
+                  ]);
+                  setTimeout(() => {
+                    setInputBlink([0, 0, 0]);
+                  }, 1000);
+                }
               }}
             >
               Начать игру

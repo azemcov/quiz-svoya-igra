@@ -13,7 +13,8 @@ import AnswerSection from "./components/AnswerSection/AnswerSection.jsx";
 import CatAdSection from "./components/CatAdSection/CatAdSection.jsx";
 import FinalAnswerSection from "./components/FinalAnswerSection/FinalAnswerSection.jsx";
 import ModalSection from "./components/ModalSection/ModalSection.jsx";
-import EditSection from "./components/EditSection/EditSection.jsx";
+import EditorSection from "./components/EditorSection/EditorSection.jsx";
+import EditRegularQSection from "/src/components/EditRegularQSection/EditRegularQSection.jsx";
 
 export default function App() {
   let [importedRoundQuestions, setImportedRoundQuestions] =
@@ -25,7 +26,7 @@ export default function App() {
   let [editDefaultSuperQ, setEditDefaultSuperQ] = useState(
     defaultFinalQuestions
   );
-
+  let [inputBlink, setInputBlink] = useState([false, false, false]);
   let [roundN, setRoundN] = useState(0);
   let [qtyOfRounds, setQtyOfRounds] = useState(importedRoundQuestions.length);
   let [actualRound, setActualRound] = useState(
@@ -33,7 +34,7 @@ export default function App() {
       ? [...importedRoundQuestions[roundN]]
       : [...importedRoundQuestions[0]]
   );
-  let [boardCondition, setBoardCondition] = useState("editS"); ////////////BOARDCONDITION///////////////
+  let [boardCondition, setBoardCondition] = useState("editor"); ////////////BOARDCONDITION///////////////
   let [buttonCondition, setButtonCondition] = useState(
     Array(6).fill([
       (roundN + 1) * 1 * 100,
@@ -84,8 +85,9 @@ export default function App() {
   let [allMediaFiles, setAllMediaFiles] = useState([]);
   let [loadingPercent, setLoadingPercent] = useState(0);
   let [loadedFilesCount, setLoadedFilesCount] = useState(0);
+  let [editLevelProp, setEditLevelProp] = useState({});
 
-  // // Эффект чтобы скинуть всё до дефолта (кроме audioFiles и buttonVisibility) при загрузке новых вопросов
+  // Эффект чтобы скинуть всё до дефолта (кроме audioFiles и buttonVisibility) при загрузке новых вопросов
   // useEffect(() => {
   //   setRoundN(0);
   //   setQtyOfRounds(importedRoundQuestions.length);
@@ -130,6 +132,7 @@ export default function App() {
   //   setEnd("");
   //   setModal(false);
   //   setAllMediaFiles([]);
+  //   setInputBlink([false,false,false]);
   //   //setLoadingPercent(0);
   //   //setLoadedFilesCount(0);
   // }, [rebut]);
@@ -264,8 +267,21 @@ export default function App() {
           setBoardCondition("registration");
           setPlayIndex(0);
         } else if (boardCondition === "registration") {
-          if (teams.team1 !== "" && teams.team2 !== "" && teams.team3 !== "") {
+          if (
+            teams.team1.trim() !== "" &&
+            teams.team2.trim() !== "" &&
+            teams.team3.trim() !== ""
+          ) {
             setBoardCondition("tableAd");
+          } else {
+            setInputBlink([
+              teams.team1.trim() === "" ? 1 : 0,
+              teams.team2.trim() === "" ? 1 : 0,
+              teams.team3.trim() === "" ? 1 : 0,
+            ]);
+            setTimeout(() => {
+              setInputBlink([0, 0, 0]);
+            }, 1000);
           }
         } else if (boardCondition === "tableAd") {
           setBoardCondition("table");
@@ -469,24 +485,7 @@ export default function App() {
       ? setBoardCondition("cat")
       : setBoardCondition("question");
   }
-  // Функция ели не были заданы имена команд (актуальна только для управления кнопками)
-  function defaultTeamNames() {
-    if (teams.team1 === "") {
-      setTeams((t) => {
-        return { ...t, team1: "Команда № 1" };
-      });
-    }
-    if (teams.team2 === "") {
-      setTeams((t) => {
-        return { ...t, team2: "Команда № 2" };
-      });
-    }
-    if (teams.team3 === "") {
-      setTeams((t) => {
-        return { ...t, team3: "Команда № 3" };
-      });
-    }
-  }
+
   // Функция подсчёта финального счёта
   function finalScore() {
     let FS1 = score.score1 + done.D1;
@@ -539,8 +538,8 @@ export default function App() {
             setTeams={setTeams}
             buttonVisibility={buttonVisibility}
             setBoardCondition={setBoardCondition}
-            setButtonVisibility={setButtonVisibility}
-            defaultTeamNames={defaultTeamNames}
+            inputBlink={inputBlink}
+            setInputBlink={setInputBlink}
           ></RegistrationSection>
         </>
       )}
@@ -746,14 +745,26 @@ export default function App() {
           </AdSection>
         </>
       )}
-      {boardCondition === "editS" && (
+      {boardCondition === "editor" && (
         <>
-          <EditSection
+          <EditorSection
             editDefaultQ={editDefaultQ}
             setEditDefaultQ={setEditDefaultQ}
             editDefaultSuperQ={editDefaultSuperQ}
             setEditDefaultSuperQ={setEditDefaultSuperQ}
-          ></EditSection>
+            setBoardCondition={setBoardCondition}
+          ></EditorSection>
+        </>
+      )}
+      {boardCondition === "editRegularQ" && (
+        <>
+          <EditRegularQSection
+            editDefaultQ={editDefaultQ}
+            setEditDefaultQ={setEditDefaultQ}
+            editDefaultSuperQ={editDefaultSuperQ}
+            setEditDefaultSuperQ={setEditDefaultSuperQ}
+            setBoardCondition={setBoardCondition}
+          ></EditRegularQSection>
         </>
       )}
     </>
