@@ -17,16 +17,18 @@
 export const defaultQuestions = [
   [
     {
-      theme: "",
+      theme: "тема ебать-колотить",
       line: [
         {
-          cat: false,
-          typeOfQuestion: "text",
-          question: "1",
-          linkQ: "",
-          typeOfAnswer: "text",
-          answer: "1",
-          linkA: "",
+          cat: true,
+          typeOfQuestion: "picture",
+          question: "Вопрос № 1",
+          linkQ:
+            "https://getfile.dokpub.com/yandex/get/https://disk.yandex.ru/i/4bdOFkFmZtuw6Q",
+          typeOfAnswer: "audio",
+          answer: "Ответ № 1",
+          linkA:
+            "https://getfile.dokpub.com/yandex/get/https://disk.yandex.ru/d/FRNypOGk_1-oNg",
         },
         {
           cat: false,

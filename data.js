@@ -80,9 +80,10 @@ export const allRoundQuestions = [
         },
         {
           cat: false,
-          typeOfQuestion: "text",
+          typeOfQuestion: "audio",
           question: "Это вопрос № 1 7",
-          linkQ: "",
+          linkQ:
+            "https://getfile.dokpub.com/yandex/get/https://disk.yandex.ru/d/FRNypOGk_1-oNg",
           typeOfAnswer: "text",
           answer: "Это ответ № 1 7",
           linkA: "",

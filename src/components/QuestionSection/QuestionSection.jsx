@@ -118,7 +118,7 @@ export default function QuestionSection({
                     : typeOfQuestion === "picture"
                     ? "Показать изображение"
                     : typeOfQuestion === "audio"
-                    ? "Запуск / остановка"
+                    ? "Старт/стоп"
                     : typeOfQuestion === "text" && typeof final === "number"
                     ? "Таймер 30 секунд"
                     : null /* В случае, если ни одно условие не выполнено */

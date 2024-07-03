@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { allRoundQuestions, finalQuestions } from "/data.js";
 import { defaultQuestions, defaultFinalQuestions } from "/data-default.js";
+import Button from "/src/components/Button/Button.jsx";
 import LineSection from "/src/components/LineSection/LineSection.jsx";
 import ScoreSection from "/src/components/ScoreSection/ScoreSection.jsx";
 import QuestionSection from "/src/components/QuestionSection/QuestionSection.jsx";
@@ -14,7 +15,7 @@ import CatAdSection from "./components/CatAdSection/CatAdSection.jsx";
 import FinalAnswerSection from "./components/FinalAnswerSection/FinalAnswerSection.jsx";
 import ModalSection from "./components/ModalSection/ModalSection.jsx";
 import EditorSection from "./components/EditorSection/EditorSection.jsx";
-import EditRegularQSection from "/src/components/EditRegularQSection/EditRegularQSection.jsx";
+import EditQuestionSection from "/src/components/EditQuestionSection/EditQuestionSection.jsx";
 
 export default function App() {
   let [importedRoundQuestions, setImportedRoundQuestions] =
@@ -22,6 +23,7 @@ export default function App() {
   let [importedFinalQuestions, setImportedFinalQuestions] =
     useState(finalQuestions);
   let [rebut, setRebut] = useState(0);
+  let [EP, setEP] = useState([undefined, undefined, undefined]);
   let [editDefaultQ, setEditDefaultQ] = useState(defaultQuestions);
   let [editDefaultSuperQ, setEditDefaultSuperQ] = useState(
     defaultFinalQuestions
@@ -34,7 +36,7 @@ export default function App() {
       ? [...importedRoundQuestions[roundN]]
       : [...importedRoundQuestions[0]]
   );
-  let [boardCondition, setBoardCondition] = useState("editor"); ////////////BOARDCONDITION///////////////
+  let [boardCondition, setBoardCondition] = useState("start"); ////////////BOARDCONDITION///////////////
   let [buttonCondition, setButtonCondition] = useState(
     Array(6).fill([
       (roundN + 1) * 1 * 100,
@@ -85,57 +87,61 @@ export default function App() {
   let [allMediaFiles, setAllMediaFiles] = useState([]);
   let [loadingPercent, setLoadingPercent] = useState(0);
   let [loadedFilesCount, setLoadedFilesCount] = useState(0);
-  let [editLevelProp, setEditLevelProp] = useState({});
+  let [burger, setBurger] = useState(false);
+  let [qtyOfNewRounds, setQtyOfNewRounds] = useState(true);
 
   // Эффект чтобы скинуть всё до дефолта (кроме audioFiles и buttonVisibility) при загрузке новых вопросов
-  // useEffect(() => {
-  //   setRoundN(0);
-  //   setQtyOfRounds(importedRoundQuestions.length);
-  //   setActualRound(
-  //     roundN !== "final"
-  //       ? [...importedRoundQuestions[0]]
-  //       : [...importedRoundQuestions[0]]
-  //   );
-  //   setBoardCondition("start");
-  //   setButtonCondition(
-  //     Array(6).fill([
-  //       (roundN + 1) * 1 * 100,
-  //       (roundN + 1) * 2 * 100,
-  //       (roundN + 1) * 3 * 100,
-  //       (roundN + 1) * 4 * 100,
-  //       (roundN + 1) * 5 * 100,
-  //       (roundN + 1) * 6 * 100,
-  //       (roundN + 1) * 7 * 100,
-  //     ])
-  //   );
-  //   setFinalCondition([1, 1, 1, 1, 1, 1, 1]);
-  //   setBet(0);
-  //   setTeams({
-  //     team1: "",
-  //     team2: "",
-  //     team3: "",
-  //   });
-  //   setScore({
-  //     score1: 0,
-  //     score2: 0,
-  //     score3: 0,
-  //   });
-  //   setFinal(false);
-  //   setFBS({ B1: null, B2: null, B3: null });
-  //   setDone({ D1: NaN, D2: NaN, D3: NaN });
-  //   setAllDoneAreNumber(false);
-  //   setQuestionXY([0, 0]);
-  //   setButtonClicked({ 1: 0, 2: 0, 3: 0 });
-  //   setPlayAnswerAudioPicture(false);
-  //   setPlayIndex(null);
-  //   setCat(false);
-  //   setEnd("");
-  //   setModal(false);
-  //   setAllMediaFiles([]);
-  //   setInputBlink([false,false,false]);
-  //   //setLoadingPercent(0);
-  //   //setLoadedFilesCount(0);
-  // }, [rebut]);
+  useEffect(() => {
+    setRoundN(0);
+    setQtyOfRounds(importedRoundQuestions.length);
+    setActualRound(
+      roundN !== "final"
+        ? [...importedRoundQuestions[0]]
+        : [...importedRoundQuestions[0]]
+    );
+    setBoardCondition("start");
+    setButtonCondition(
+      Array(6).fill([
+        (roundN + 1) * 1 * 100,
+        (roundN + 1) * 2 * 100,
+        (roundN + 1) * 3 * 100,
+        (roundN + 1) * 4 * 100,
+        (roundN + 1) * 5 * 100,
+        (roundN + 1) * 6 * 100,
+        (roundN + 1) * 7 * 100,
+      ])
+    );
+    setFinalCondition([1, 1, 1, 1, 1, 1, 1]);
+    setBet(0);
+    setTeams({
+      team1: "",
+      team2: "",
+      team3: "",
+    });
+    setScore({
+      score1: 0,
+      score2: 0,
+      score3: 0,
+    });
+    setFinal(false);
+    setFBS({ B1: null, B2: null, B3: null });
+    setDone({ D1: NaN, D2: NaN, D3: NaN });
+    setAllDoneAreNumber(false);
+    setQuestionXY([0, 0]);
+    setButtonClicked({ 1: 0, 2: 0, 3: 0 });
+    setPlayAnswerAudioPicture(false);
+    setPlayIndex(null);
+    setCat(false);
+    setEnd("");
+    setModal(false);
+    setAllMediaFiles([]);
+    setInputBlink([false, false, false]);
+    setEP([undefined, undefined, undefined]);
+    setBurger(false);
+    setQtyOfNewRounds(true);
+    //setLoadingPercent(0);
+    //setLoadedFilesCount(0);
+  }, [rebut]);
 
   // Эффект для составления списка всех медиафайлов
   useEffect(() => {
@@ -387,21 +393,20 @@ export default function App() {
         }
       }
       /////БЫСТНОЕ ТЕСТИРОВАНИЕ ВОПРОСОВ///////////////////////////////////////////////////////////////////////////////
-      // else if (boardCondition === "table") {
-      //   if (event.key === "±") {
-      //     setBoardCondition("final");
-      //     setFinalCondition([1, 1, 0, 0, 0, 0, 0]);
-      //   } else if (event.key === "/") {
-      //     setButtonCondition([
-      //       ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
-      //       ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
-      //       ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
-      //       ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
-      //       ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
-      //       ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", 9000],
-      //     ]);
-      //   }
-      // }
+      else if (boardCondition === "table") {
+        if (event.key === "±") {
+          setBoardCondition("final");
+        } else if (event.key === "/") {
+          setButtonCondition([
+            ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
+            ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
+            ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
+            ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
+            ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
+            ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", 9000],
+          ]);
+        }
+      }
       //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
     document.addEventListener("keydown", keyboard);
@@ -500,12 +505,6 @@ export default function App() {
     setEnd(arr);
   }
 
-  /////ДЭБАГ ВЫВОД В КОНСОЛЬ ВСЯКОГО/////////////////////////////////////////////////////////////////////////////
-  // useEffect(() => {
-  //   console.log(boardCondition, done, bet, cat);
-  // }, [boardCondition, done, bet, cat]);
-  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
   return (
     <>
       {
@@ -520,6 +519,58 @@ export default function App() {
             open={modal}
           />
         </>
+      }
+
+      {
+        //бургер-меню
+        (boardCondition === "start" ||
+          boardCondition === "registration" ||
+          boardCondition === "editor") && (
+          <>
+            <div
+              onClick={() => {
+                setBurger((b) => !b);
+              }}
+              className="burger"
+            >
+              {!burger && <img src="/public/burger-menu.svg" alt="" />}
+              {burger && <img src="/public/burger-menu-closed.svg" alt="" />}
+            </div>
+            {(boardCondition === "start" ||
+              boardCondition === "registration") &&
+              burger && (
+                <>
+                  <div className="burgerMenu">
+                    <Button>Правила</Button>
+                    <Button
+                      onClick={() => {
+                        setBurger(false);
+                        setBoardCondition("editor");
+                      }}
+                    >
+                      Редактор
+                    </Button>
+                  </div>
+                </>
+              )}
+            {boardCondition === "editor" && burger && (
+              <>
+                <div className="burgerMenu">
+                  <Button
+                    onClick={() => {
+                      setBurger(false);
+                      setRebut((r) => ++r);
+                      setEP([undefined, undefined, undefined]);
+                      setBoardCondition("start");
+                    }}
+                  >
+                    выход
+                  </Button>
+                </div>
+              </>
+            )}
+          </>
+        )
       }
       {boardCondition === "start" && (
         <>
@@ -753,18 +804,27 @@ export default function App() {
             editDefaultSuperQ={editDefaultSuperQ}
             setEditDefaultSuperQ={setEditDefaultSuperQ}
             setBoardCondition={setBoardCondition}
+            EP={EP}
+            setEP={setEP}
+            qtyOfNewRounds={qtyOfNewRounds}
+            setQtyOfNewRounds={setQtyOfNewRounds}
+            setRebut={setRebut}
+            setImportedRoundQuestions={setImportedRoundQuestions}
+            setImportedFinalQuestions={setImportedFinalQuestions}
           ></EditorSection>
         </>
       )}
       {boardCondition === "editRegularQ" && (
         <>
-          <EditRegularQSection
+          <EditQuestionSection
             editDefaultQ={editDefaultQ}
             setEditDefaultQ={setEditDefaultQ}
             editDefaultSuperQ={editDefaultSuperQ}
             setEditDefaultSuperQ={setEditDefaultSuperQ}
             setBoardCondition={setBoardCondition}
-          ></EditRegularQSection>
+            EP={EP}
+            setEP={setEP}
+          ></EditQuestionSection>
         </>
       )}
     </>

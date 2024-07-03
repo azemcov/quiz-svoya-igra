@@ -2,7 +2,7 @@ import { useState } from "react";
 import classes from "/src/components/FinalSection/FinalSection.module.css";
 
 export default function FinalSection({
-  finalQuestions,
+  importedFinalQuestions,
   finalCondition,
   setFinalCondition,
   setBoardCondition,
@@ -40,7 +40,7 @@ export default function FinalSection({
   return (
     <>
       <div className={classes.final}>
-        {finalQuestions.map((_, i) => (
+        {importedFinalQuestions.map((_, i) => (
           <button
             key={i}
             onClick={() => {
@@ -59,7 +59,7 @@ export default function FinalSection({
             }`}
             disabled={finalCondition[i] !== 1}
           >
-            <p>{`№ ${i + 1}  ${finalQuestions[i].theme}`}</p>
+            <p>{`№ ${i + 1}  ${importedFinalQuestions[i].theme}`}</p>
           </button>
         ))}
       </div>
