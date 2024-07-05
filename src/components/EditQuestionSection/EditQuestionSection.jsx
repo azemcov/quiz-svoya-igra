@@ -1,6 +1,6 @@
 import { useState, useEffect, useDebugValue } from "react";
-import classes from "/src/components/EditQuestionSection/EditQuestionSection.module.css";
-import Button from "/src/components/Button/Button.jsx";
+import classes from "@components/EditQuestionSection/EditQuestionSection.module.css";
+import Button from "@components/Button/Button.jsx";
 
 export default function EditQuestionSection({
   editDefaultQ,

@@ -1,21 +1,33 @@
 import { useState, useEffect } from "react";
-import { allRoundQuestions, finalQuestions } from "/data.js";
-import { defaultQuestions, defaultFinalQuestions } from "/data-default.js";
-import Button from "./components/Button/Button.jsx";
-import LineSection from "./components/LineSection/LineSection.jsx";
-import ScoreSection from "./components/ScoreSection/ScoreSection.jsx";
-import QuestionSection from "./components/QuestionSection/QuestionSection.jsx";
-import ResultSection from "./components/ResultSection/ResultSection.jsx";
-import FinalSection from "./components/FinalSection/FinalSection.jsx";
-import AdSection from "./components/AdSection/AdSection.jsx";
-import StartSection from "./components/StartSection/StartSection.jsx";
-import RegistrationSection from "./components/RegistrationSection/RegistrationSection.jsx";
-import AnswerSection from "./components/AnswerSection/AnswerSection.jsx";
-import CatAdSection from "./components/CatAdSection/CatAdSection.jsx";
-import FinalAnswerSection from "./components/FinalAnswerSection/FinalAnswerSection.jsx";
-import ModalSection from "./components/ModalSection/ModalSection.jsx";
-import EditorSection from "./components/EditorSection/EditorSection.jsx";
-import EditQuestionSection from "./components/EditQuestionSection/EditQuestionSection.jsx";
+import { allRoundQuestions, finalQuestions } from "@/data.js";
+import { defaultQuestions, defaultFinalQuestions } from "@/data-default.js";
+import Button from "@components/Button/Button.jsx";
+import LineSection from "@components/LineSection/LineSection.jsx";
+import ScoreSection from "@components/ScoreSection/ScoreSection.jsx";
+import QuestionSection from "@components/QuestionSection/QuestionSection.jsx";
+import ResultSection from "@components/ResultSection/ResultSection.jsx";
+import FinalSection from "@components/FinalSection/FinalSection.jsx";
+import AdSection from "@components/AdSection/AdSection.jsx";
+import StartSection from "@components/StartSection/StartSection.jsx";
+import RegistrationSection from "@components/RegistrationSection/RegistrationSection.jsx";
+import AnswerSection from "@components/AnswerSection/AnswerSection.jsx";
+import CatAdSection from "@components/CatAdSection/CatAdSection.jsx";
+import FinalAnswerSection from "@components/FinalAnswerSection/FinalAnswerSection.jsx";
+import ModalSection from "@components/ModalSection/ModalSection.jsx";
+import EditorSection from "@components/EditorSection/EditorSection.jsx";
+import EditQuestionSection from "@components/EditQuestionSection/EditQuestionSection.jsx";
+import start_0 from "@sounds/0_start.mp3";
+import table_1 from "@sounds/1_table.mp3";
+import round_end_2 from "@sounds/2_round_end.mp3";
+import final_start_3 from "@sounds/3_final_start.mp3";
+import final_30sec_4 from "@sounds/4_final_30sec.mp3";
+import end_5 from "@sounds/5_end.mp3";
+import incorrect_6 from "@sounds/6_incorrect.mp3";
+import noanswer_7 from "@sounds/7_noanswer.mp3";
+import applause_8 from "@sounds/8_applause.mp3";
+import cat_9 from "@sounds/9_cat.mp3";
+import burgerMenuImage from "@images/burger-menu.svg";
+import burgerMenuClosedImage from "@images/burger-menu-closed.svg";
 
 export default function App() {
   let [importedRoundQuestions, setImportedRoundQuestions] =
@@ -70,16 +82,16 @@ export default function App() {
   let [playAnswerAudioPicture, setPlayAnswerAudioPicture] = useState(false);
   let [playIndex, setPlayIndex] = useState(null);
   let audioFiles = [
-    "/public/0_start.mp3",
-    "/public/1_table.mp3",
-    "/public/2_round_end.mp3",
-    "/public/3_final_start.mp3",
-    "/public/4_final_30sec.mp3",
-    "/public/5_end.mp3",
-    "/public/6_incorrect.mp3",
-    "/public/7_noanswer.mp3",
-    "/public/8_applause.mp3",
-    "/public/9_cat.mp3",
+    start_0,
+    table_1,
+    round_end_2,
+    final_start_3,
+    final_30sec_4,
+    end_5,
+    incorrect_6,
+    noanswer_7,
+    applause_8,
+    cat_9,
   ];
   let [cat, setCat] = useState(false);
   let [end, setEnd] = useState("");
@@ -508,6 +520,7 @@ export default function App() {
   return (
     <>
       {
+        //модальное окно
         <>
           <div className="FAQ" onClick={() => setModal((m) => !m)}>
             ?
@@ -520,7 +533,6 @@ export default function App() {
           />
         </>
       }
-
       {
         //бургер-меню
         (boardCondition === "start" ||
@@ -533,8 +545,8 @@ export default function App() {
               }}
               className="burger"
             >
-              {!burger && <img src="/public/burger-menu.svg" alt="[]" />}
-              {burger && <img src="/public/burger-menu-closed.svg" alt="X" />}
+              {!burger && <img src={burgerMenuImage} alt="[]" />}
+              {burger && <img src={burgerMenuClosedImage} alt="X" />}
             </div>
             {(boardCondition === "start" ||
               boardCondition === "registration") &&

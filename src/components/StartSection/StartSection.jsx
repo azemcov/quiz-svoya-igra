@@ -1,5 +1,6 @@
-import Button from "/src/components/Button/Button.jsx";
-import classes from "/src/components/StartSection/StartSection.module.css";
+import Button from "@components/Button/Button.jsx";
+import classes from "@components/StartSection/StartSection.module.css";
+import logoImage from "@images/logo.svg";
 import { useState, useEffect } from "react";
 
 export default function StartSection({
@@ -58,7 +59,7 @@ export default function StartSection({
               setPlayIndex(0);
             }}
           >
-            <img src="/public/logo.svg" alt="Logo" className={classes.image} />
+            <img src={logoImage} alt="Logo" className={classes.image} />
           </div>
           {buttonVisibility && (
             <>

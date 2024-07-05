@@ -1,7 +1,7 @@
-import classes from "/src/components/EditorSection/EditorSection.module.css";
 import { useState, useEffect } from "react";
-import Button from "/src/components/Button/Button.jsx";
-import { defaultQuestions, defaultFinalQuestions } from "/data-default.js";
+import { defaultQuestions, defaultFinalQuestions } from "@/data-default.js";
+import Button from "@components/Button/Button.jsx";
+import classes from "@components/EditorSection/EditorSection.module.css";
 
 export default function EditorSection({
   editDefaultQ,

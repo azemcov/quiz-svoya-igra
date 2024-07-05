@@ -1,5 +1,6 @@
-import Button from "/src/components/Button/Button.jsx";
-import classes from "/src/components/AdSection/AdSection.module.css";
+import Button from "@components/Button/Button.jsx";
+import classes from "@components/AdSection/AdSection.module.css";
+import winImage from "@images/win.png";
 import { useEffect } from "react";
 
 export default function AdSection({
@@ -23,11 +24,7 @@ export default function AdSection({
         <div className={classes.center}>
           {boardCondition === "end" && (
             <>
-              <img
-                className={classes.image}
-                src={"/public/win.png"}
-                alt="win!"
-              />
+              <img className={classes.image} src={winImage} alt="win!" />
             </>
           )}
           {boardCondition !== "end" && (

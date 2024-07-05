@@ -1,7 +1,7 @@
 import { useState } from "react";
-import QuestionButton from "/src/components/QuestionButton/QuestionButton.jsx";
-import classes from "/src/components/LineSection/LineSection.module.css";
-import {} from "/data.js";
+import QuestionButton from "@components/QuestionButton/QuestionButton.jsx";
+import classes from "@components/LineSection/LineSection.module.css";
+import {} from "@/data.js";
 
 export default function Line({
   children,

@@ -1,5 +1,6 @@
-import Button from "/src/components/Button/Button.jsx";
-import classes from "/src/components/FinalAnswerSection/FinalAnswerSection.module.css";
+import Button from "@components/Button/Button.jsx";
+import classes from "@components/FinalAnswerSection/FinalAnswerSection.module.css";
+import audioImage from "@images/audio.png";
 import { useEffect, useState } from "react";
 
 export default function FinalAnswerSection({
@@ -63,7 +64,7 @@ export default function FinalAnswerSection({
         <>
           <p>{answer}</p>
           <img
-            src={"/public/audio.png"}
+            src={audioImage}
             alt="audio answer"
             className={classes.smallimage}
           />

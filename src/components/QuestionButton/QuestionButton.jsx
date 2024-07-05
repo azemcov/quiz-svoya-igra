@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import classes from "/src/components/QuestionButton/QuestionButton.module.css";
+import classes from "@components/QuestionButton/QuestionButton.module.css";
 
 export default function QuestionButton({
   children,

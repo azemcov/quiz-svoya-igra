@@ -1,5 +1,6 @@
-import Button from "/src/components/Button/Button.jsx";
-import classes from "/src/components/CatAdSection/CatAdSection.module.css";
+import Button from "@components/Button/Button.jsx";
+import classes from "@components/CatAdSection/CatAdSection.module.css";
+import bagImage from "@images/bag.png";
 import { useEffect } from "react";
 
 export default function CatAdSection({
@@ -17,11 +18,7 @@ export default function CatAdSection({
     <>
       <div className={classes.question}>
         <p>Кот в мешке</p>
-        <img
-          className={classes.image}
-          src="/public/bag.png"
-          alt="pig in a poke"
-        />
+        <img className={classes.image} src={bagImage} alt="pig in a poke" />
         {buttonVisibility && (
           <>
             <div className={classes.center}>

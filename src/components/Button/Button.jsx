@@ -1,4 +1,4 @@
-import classes from "/src/components/Button/Button.module.css";
+import classes from "@components/Button/Button.module.css";
 
 export default function ScoreButton({ children, ...props }) {
   return (

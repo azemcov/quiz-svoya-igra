@@ -1,6 +1,6 @@
-import Button from "/src/components/Button/Button.jsx";
-import TeamNameAndSrore from "/src/components/TeamNameAndScore/TeamNameAndScore.jsx";
-import classes from "/src/components/ScoreSection/ScoreSection.module.css";
+import Button from "@components/Button/Button.jsx";
+import TeamNameAndSrore from "@components/TeamNameAndScore/TeamNameAndScore.jsx";
+import classes from "@components/ScoreSection/ScoreSection.module.css";
 
 export default function ScoreSection({
   teams,

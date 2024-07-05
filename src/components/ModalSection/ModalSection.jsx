@@ -1,5 +1,4 @@
-import Button from "/src/components/Button/Button.jsx";
-import classes from "/src/components/ModalSection/ModalSection.module.css";
+import classes from "@components/ModalSection/ModalSection.module.css";
 import ReactDOM from "react-dom";
 
 export default function ModalSection({ ...props }) {

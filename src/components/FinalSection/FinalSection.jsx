@@ -1,5 +1,5 @@
 import { useState } from "react";
-import classes from "/src/components/FinalSection/FinalSection.module.css";
+import classes from "@components/FinalSection/FinalSection.module.css";
 
 export default function FinalSection({
   importedFinalQuestions,

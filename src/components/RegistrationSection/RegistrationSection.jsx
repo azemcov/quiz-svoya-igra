@@ -1,5 +1,6 @@
-import Button from "/src/components/Button/Button.jsx";
-import classes from "/src/components/RegistrationSection/RegistrationSection.module.css";
+import Button from "@components/Button/Button.jsx";
+import classes from "@components/RegistrationSection/RegistrationSection.module.css";
+import logoImage from "@images/logo.svg";
 
 export default function RegistrationSection({
   teams,
@@ -13,7 +14,7 @@ export default function RegistrationSection({
     <>
       <div className={classes.result}>
         <div>
-          <img src="/public/logo.svg" alt="Logo" className={classes.image} />
+          <img src={logoImage} alt="Logo" className={classes.image} />
           <div>
             <p>Названия команд</p>
           </div>

@@ -1,5 +1,5 @@
-import Button from "/src/components/Button/Button.jsx";
-import classes from "/src/components/ResultSection/ResultSection.module.css";
+import Button from "@components/Button/Button.jsx";
+import classes from "@components/ResultSection/ResultSection.module.css";
 import { useEffect } from "react";
 
 export default function ResultSection({
