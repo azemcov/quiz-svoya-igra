@@ -63,9 +63,5 @@ body {
 
 @font-face {
   font-family: "Montserrat-Regular";
-  src: url("public/Montserrat-VariableFont_wght.ttf");
+  src: url("/public/Montserrat-VariableFont_wght.ttf");
 }
-/* @font-face {
-  font-family: "NanumGothic-Bold";
-  src: url("/public/NanumGothic-Bold.ttf");
-} */

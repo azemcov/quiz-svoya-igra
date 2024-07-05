@@ -1,21 +1,21 @@
 import { useState, useEffect } from "react";
 import { allRoundQuestions, finalQuestions } from "/data.js";
 import { defaultQuestions, defaultFinalQuestions } from "/data-default.js";
-import Button from "/src/components/Button/Button.jsx";
-import LineSection from "/src/components/LineSection/LineSection.jsx";
-import ScoreSection from "/src/components/ScoreSection/ScoreSection.jsx";
-import QuestionSection from "/src/components/QuestionSection/QuestionSection.jsx";
-import ResultSection from "/src/components/ResultSection/ResultSection.jsx";
-import FinalSection from "/src/components/FinalSection/FinalSection.jsx";
+import Button from "./components/Button/Button.jsx";
+import LineSection from "./components/LineSection/LineSection.jsx";
+import ScoreSection from "./components/ScoreSection/ScoreSection.jsx";
+import QuestionSection from "./components/QuestionSection/QuestionSection.jsx";
+import ResultSection from "./components/ResultSection/ResultSection.jsx";
+import FinalSection from "./components/FinalSection/FinalSection.jsx";
 import AdSection from "./components/AdSection/AdSection.jsx";
-import StartSection from "/src/components/StartSection/StartSection.jsx";
-import RegistrationSection from "/src/components/RegistrationSection/RegistrationSection.jsx";
+import StartSection from "./components/StartSection/StartSection.jsx";
+import RegistrationSection from "./components/RegistrationSection/RegistrationSection.jsx";
 import AnswerSection from "./components/AnswerSection/AnswerSection.jsx";
 import CatAdSection from "./components/CatAdSection/CatAdSection.jsx";
 import FinalAnswerSection from "./components/FinalAnswerSection/FinalAnswerSection.jsx";
 import ModalSection from "./components/ModalSection/ModalSection.jsx";
 import EditorSection from "./components/EditorSection/EditorSection.jsx";
-import EditQuestionSection from "/src/components/EditQuestionSection/EditQuestionSection.jsx";
+import EditQuestionSection from "./components/EditQuestionSection/EditQuestionSection.jsx";
 
 export default function App() {
   let [importedRoundQuestions, setImportedRoundQuestions] =
@@ -533,8 +533,8 @@ export default function App() {
               }}
               className="burger"
             >
-              {!burger && <img src="/public/burger-menu.svg" alt="" />}
-              {burger && <img src="/public/burger-menu-closed.svg" alt="" />}
+              {!burger && <img src="/public/burger-menu.svg" alt="[]" />}
+              {burger && <img src="/public/burger-menu-closed.svg" alt="X" />}
             </div>
             {(boardCondition === "start" ||
               boardCondition === "registration") &&
