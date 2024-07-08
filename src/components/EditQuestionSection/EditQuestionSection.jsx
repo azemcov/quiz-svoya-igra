@@ -57,17 +57,43 @@ export default function EditQuestionSection({
   }, [plays]);
 
   //Функция преобразует ссылку с яндекс диска
+  // function validLink(link) {
+  //   let YAtest = /https:\/\/disk\.yandex\.ru/.test(link);
+  //   let getfileTest = /getfile\.dokpub\.com/.test(link);
+  //   if (YAtest && getfileTest) {
+  //     return link;
+  //   } else if (YAtest) {
+  //     return `https://getfile.dokpub.com/yandex/get/${link}`;
+  //   } else {
+  //     return link;
+  //   }
+  // }
+
+  // Функция преобразует ссылку с google диска
+  // function validLink(link) {
+  //   const regex = /drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)\/view/;
+  //   const match = link.match(regex);
+  //   if (match) {
+  //     return `https://drive.google.com/uc?export=view&id=${match[1]}`;
+  //   } else {
+  //     return link;
+  //   }
+  // }
+
+  // Функция преобразует ссылку с dropbox диска
   function validLink(link) {
-    let YAtest = /https:\/\/disk\.yandex\.ru/.test(link);
-    let getfileTest = /getfile\.dokpub\.com/.test(link);
-    if (YAtest && getfileTest) {
-      return link;
-    } else if (YAtest) {
-      return `https://getfile.dokpub.com/yandex/get/${link}`;
+    let DropBoxTest = /www\.dropbox\.com/.test(link);
+    let DropBoxTest2 = /dl=0/.test(link);
+    if (DropBoxTest && DropBoxTest2) {
+      return link.substring(0, link.length - 1) + "1";
     } else {
       return link;
     }
   }
+
+  // function validLink(link) {
+  //   return link;
+  // }
 
   return (
     <>
@@ -592,6 +618,25 @@ export default function EditQuestionSection({
           </>
         )}
       </div>
+      <p style={{ fontSize: "calc(1vw + 1vh)", color: "gray" }}>
+        Пока работают только прямые ссылки ( картинки можно брать, например, с{" "}
+        <a
+          href="https://wikipedia.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          wikipedia.org
+        </a>{" "}
+        ), либо ссылки с{" "}
+        <a
+          href="https://www.dropbox.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          dropbox.com
+        </a>
+        , если нужно использовать аудиофайлы
+      </p>
     </>
   );
 }

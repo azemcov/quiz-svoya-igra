@@ -30,6 +30,7 @@ import burgerMenuImage from "@images/burger-menu.svg";
 import burgerMenuClosedImage from "@images/burger-menu-closed.svg";
 
 export default function App() {
+  //#region Переменные
   let [importedRoundQuestions, setImportedRoundQuestions] =
     useState(allRoundQuestions);
   let [importedFinalQuestions, setImportedFinalQuestions] =
@@ -101,7 +102,9 @@ export default function App() {
   let [loadedFilesCount, setLoadedFilesCount] = useState(0);
   let [burger, setBurger] = useState(false);
   let [qtyOfNewRounds, setQtyOfNewRounds] = useState(true);
+  //#endregion
 
+  //#region Эффекты
   // Эффект чтобы скинуть всё до дефолта (кроме audioFiles и buttonVisibility) при загрузке новых вопросов
   useEffect(() => {
     setRoundN(0);
@@ -153,6 +156,7 @@ export default function App() {
     setQtyOfNewRounds(true);
     //setLoadingPercent(0);
     //setLoadedFilesCount(0);
+    return () => {};
   }, [rebut]);
 
   // Эффект для составления списка всех медиафайлов
@@ -186,10 +190,8 @@ export default function App() {
           a.includes(c) ? a : (uniqueFiles.push(files[i]), [...a, c]),
         []
       );
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // console.log("files:", files, "uniqueFiles:", uniqueFiles);
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     setAllMediaFiles(uniqueFiles);
+    return () => {};
   }, [importedRoundQuestions, importedFinalQuestions]);
 
   // Эффект для загрузки всех медиафайлов и обновления процента загрузки
@@ -205,7 +207,7 @@ export default function App() {
     }
 
     function loadFile(type, link) {
-      new Promise((resolve, reject) => {
+      return new Promise((resolve, reject) => {
         if (type === "picture") {
           let img = new Image();
           img.src = link;
@@ -213,7 +215,10 @@ export default function App() {
             increaseLoadedFilesCount();
             resolve();
           };
-          img.onerror = (err) => reject(err);
+          img.onerror = (err) => {
+            console.error(link, err);
+            reject(err);
+          };
         } else if (type === "audio") {
           let audio = new Audio();
           audio.src = link;
@@ -221,16 +226,20 @@ export default function App() {
             increaseLoadedFilesCount();
             resolve();
           };
-          audio.onerror = (err) => reject(err);
+          audio.onerror = (err) => {
+            console.error(link, err);
+            reject(err);
+          };
         }
       });
     }
+    Promise.all(allMediaFiles.map((m) => loadFile(m[0], m[1])))
+      .then(() => {})
+      .catch((error) => {
+        console.error("Ошибка при загрузке файлов:", error, link);
+      });
 
-    Promise.all(allMediaFiles.map((m) => loadFile(m[0], m[1]))).catch(
-      (error) => {
-        console.error("Ошибка при загрузке файлов:", error);
-      }
-    );
+    return () => {};
   }, [allMediaFiles]);
 
   // Эффект для остановки звуков при изменении boardCondition
@@ -252,6 +261,7 @@ export default function App() {
     (score.score3 < 0 ? done.D3 === 0 : score.score3 - Math.abs(done.D3) >= 0)
       ? setAllDoneAreNumber(true)
       : setAllDoneAreNumber(false);
+    return () => {};
   }, [done]);
 
   // Эффект для музыки
@@ -275,6 +285,7 @@ export default function App() {
         audio.removeEventListener("ended", handleEnded);
       };
     }
+    return () => {};
   }, [playIndex, boardCondition, score]);
 
   // Эффект для управления с клавиатуры
@@ -405,20 +416,20 @@ export default function App() {
         }
       }
       /////БЫСТНОЕ ТЕСТИРОВАНИЕ ВОПРОСОВ///////////////////////////////////////////////////////////////////////////////
-      else if (boardCondition === "table") {
-        if (event.key === "±") {
-          setBoardCondition("final");
-        } else if (event.key === "/") {
-          setButtonCondition([
-            ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
-            ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
-            ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
-            ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
-            ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
-            ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", 9000],
-          ]);
-        }
-      }
+      // else if (boardCondition === "table") {
+      //   if (event.key === "±") {
+      //     setBoardCondition("final");
+      //   } else if (event.key === "/") {
+      //     setButtonCondition([
+      //       ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
+      //       ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
+      //       ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
+      //       ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
+      //       ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
+      //       ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", 9000],
+      //     ]);
+      //   }
+      // }
       //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
     document.addEventListener("keydown", keyboard);
@@ -447,10 +458,11 @@ export default function App() {
         (roundN + 1) * 7 * 100,
       ])
     );
-
     return () => {};
   }, [roundN]);
+  //#endregion
 
+  //#region Функции
   // Функция после конца раунда "будит" все кнопки вопросов
   function isQuestionsOver() {
     return buttonCondition
@@ -502,7 +514,6 @@ export default function App() {
       ? setBoardCondition("cat")
       : setBoardCondition("question");
   }
-
   // Функция подсчёта финального счёта
   function finalScore() {
     let FS1 = score.score1 + done.D1;
@@ -516,6 +527,7 @@ export default function App() {
     arr.sort((a, b) => b[0] - a[0]);
     setEnd(arr);
   }
+  //#endregion
 
   return (
     <>

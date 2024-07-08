@@ -13,6 +13,8 @@
 //       - picture: ответ-картинка
 //       - audio: аудио-ответ
 // linkA: ссылка на файл ответа (если тип ответа - картинка или аудио)
+import josephImg from "@media/Joseph.JPG";
+import demoMp3 from "@media/demo.mp3";
 
 export const allRoundQuestions = [
   [
@@ -22,28 +24,28 @@ export const allRoundQuestions = [
         {
           cat: false,
           typeOfQuestion: "picture",
-          question: "В каком году... № 1 1",
-          linkQ:
-            "https://www.vtl.de/wp-content/uploads/2020/10/VTL-Logo-RGB-1.png",
+          question: "Кто самый лучший пёсик на свете?",
+          linkQ: josephImg,
           typeOfAnswer: "audio",
-          answer: "Аудио-ответ № 1 1",
-          linkA: "https://sheba.spb.ru/go/mz/kd/KabyNeByloZimy.mp3",
+          answer: "Это Ёся - лучший в мире пёс и друг!",
+          linkA: demoMp3,
         },
         {
           cat: true,
           typeOfQuestion: "audio",
-          question: "Аудио-вопрос № 1 2",
-          linkQ: "https://sheba.spb.ru/go/mz/kd/KabyNeByloZimy.mp3",
+          question: "Это вопрос № 1 2",
+          linkQ: demoMp3,
           typeOfAnswer: "picture",
-          answer: "Фото-ответ № 1 2",
+          answer: "Это ответ № 1 2",
           linkA:
-            "https://s3.eu-west-1.amazonaws.com/s3.pr-cy.ru/prcy/qa/b93b1be6ffd09fa9c4485d5e918f18a3.png",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/P1030323.JPG/440px-P1030323.JPG",
         },
         {
           cat: true,
           typeOfQuestion: "picture",
           question: "Это вопрос № 1 3",
-          linkQ: "https://img.tourister.ru/files/2/5/6/3/7/9/0/0/original.jpg",
+          linkQ:
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Storsk%C3%A4r_IMG_5147_%2834229457096%29.jpg/600px-Storsk%C3%A4r_IMG_5147_%2834229457096%29.jpg",
           typeOfAnswer: "text",
           answer: "Это ответ № 1 3",
           linkA: "",
@@ -53,37 +55,35 @@ export const allRoundQuestions = [
           typeOfQuestion: "picture",
           question: "Это вопрос № 1 4",
           linkQ:
-            "https://pazlyigra.ru/uploads/posts/2022-12/1647817799_27-vsegda-pomnim-com-p-peshcheri-mira-foto-29.jpg",
+            "https://upload.wikimedia.org/wikipedia/en/1/1c/Swarm_Box_Cover.jpg",
           typeOfAnswer: "text",
           answer: "Это ответ № 1 4",
           linkA: "",
         },
         {
           cat: false,
-          typeOfQuestion: "picture",
+          typeOfQuestion: "text",
           question: "Это вопрос № 1 5",
-          linkQ:
-            "https://thumbs.dreamstime.com/b/snowboarder-snowboard-deck-icon-snowboarder-snowboard-deck-icon-flat-style-baby-whute-background-126042935.jpg",
-          typeOfAnswer: "text",
+          linkQ: "",
+          typeOfAnswer: "picture",
           answer: "Это ответ № 1 5",
-          linkA: "",
+          linkA:
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Louis_Marchand.jpg/480px-Louis_Marchand.jpg",
         },
         {
           cat: false,
-          typeOfQuestion: "picture",
+          typeOfQuestion: "text",
           question: "Это вопрос № 1 6",
-          linkQ:
-            "https://ne-kurim.ru/forum/attachments/hdjy_j-dh42-bgh7777777vfdffft_j-742cf_j-drffff-g3-2bgs_j-4-saljut-animacija3-gif.1390291/",
+          linkQ: "",
           typeOfAnswer: "text",
           answer: "Это ответ № 1 6",
           linkA: "",
         },
         {
           cat: false,
-          typeOfQuestion: "audio",
+          typeOfQuestion: "text",
           question: "Это вопрос № 1 7",
-          linkQ:
-            "https://getfile.dokpub.com/yandex/get/https://disk.yandex.ru/d/FRNypOGk_1-oNg",
+          linkQ: "",
           typeOfAnswer: "text",
           answer: "Это ответ № 1 7",
           linkA: "",
@@ -846,13 +846,12 @@ export const allRoundQuestions = [
 export const finalQuestions = [
   {
     theme: "Это супертема № 1",
-    typeOfQuestion: "audio",
-    question: "СУПЕР Аудио-вопрос № 1 !!!",
-    linkQ: "https://sheba.spb.ru/go/mz/kd/KabyNeByloZimy.mp3",
-    typeOfAnswer: "picture",
-    answer: "СУПЕР Фото-ответ № 1 !!!",
-    linkA:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Road_42_sign-FIN.svg/1517px-Road_42_sign-FIN.svg.png",
+    typeOfQuestion: "text",
+    question: "Это супервопрос № 1",
+    linkQ: "",
+    typeOfAnswer: "text",
+    answer: "Это суперответ № 1",
+    linkA: "",
   },
   {
     theme: "Это супертема № 2",

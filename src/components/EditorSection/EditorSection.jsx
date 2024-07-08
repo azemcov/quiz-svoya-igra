@@ -118,11 +118,6 @@ export default function EditorSection({
 
     URL.revokeObjectURL(url); // Освобождаем URL
   }
-  useEffect(() => {
-    console.log("editDefaultQ", editDefaultQ);
-    console.log("editDefaultSuperQ", editDefaultSuperQ);
-    console.log("defaultFinalQuestions", defaultFinalQuestions);
-  }, [editDefaultQ, editDefaultSuperQ]);
 
   return (
     <>
