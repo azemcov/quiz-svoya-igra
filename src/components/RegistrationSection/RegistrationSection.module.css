@@ -31,6 +31,11 @@
   text-align: center;
 }
 
+.formcontrol::placeholder {
+  color: gray; /* Цвет placeholder */
+  opacity: 1; /* Чтобы цвет применялся корректно */
+}
+
 .alert {
   animation: 0.7s ease-in-out forwards identifier;
   -webkit-animation: 0.7s ease-in-out forwards identifier;

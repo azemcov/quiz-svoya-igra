@@ -28,6 +28,8 @@ import applause_8 from "@sounds/8_applause.mp3";
 import cat_9 from "@sounds/9_cat.mp3";
 import burgerMenuImage from "@images/burger-menu.svg";
 import burgerMenuClosedImage from "@images/burger-menu-closed.svg";
+import faqButtton from "@images/faqButton.svg";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function App() {
   //#region Переменные
@@ -534,9 +536,12 @@ export default function App() {
       {
         //модальное окно
         <>
-          <div className="FAQ" onClick={() => setModal((m) => !m)}>
-            ?
-          </div>
+          <img
+            className="FAQ"
+            onClick={() => setModal((m) => !m)}
+            src={faqButtton}
+            alt="(?)"
+          />
           <ModalSection
             buttonVisibility={buttonVisibility}
             setButtonVisibility={setButtonVisibility}
@@ -648,7 +653,7 @@ export default function App() {
               setBet={setBet}
               setQuestionXY={setQuestionXY}
               lineN={i}
-              key={i}
+              key={`lineKeys-${i}`}
               ifItsCat={ifItsCat}
             >
               {actualRound[i].theme}

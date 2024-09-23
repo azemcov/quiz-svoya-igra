@@ -20,9 +20,10 @@ export default function RegistrationSection({
           </div>
           <div>
             <input
-              className={`${classes.inputText} ${
-                inputBlink[0] ? classes.alert : ""
-              }`}
+              className={`form-control form-control-sm bg-dark text-light ${
+                classes.formcontrol
+              } ${inputBlink[0] ? classes.alert : ""}`}
+              style={{ marginBottom: "0.5vw" }}
               type="text"
               defaultValue={teams.team1}
               placeholder="Название команды № 1"
@@ -36,9 +37,10 @@ export default function RegistrationSection({
           </div>
           <div>
             <input
-              className={`${classes.inputText} ${
-                inputBlink[1] ? classes.alert : ""
-              }`}
+              className={`form-control form-control-sm bg-dark text-light ${
+                classes.formcontrol
+              } ${inputBlink[1] ? classes.alert : ""}`}
+              style={{ marginBottom: "0.5vw" }}
               type="text"
               defaultValue={teams.team2}
               placeholder="Название команды № 2"
@@ -52,9 +54,9 @@ export default function RegistrationSection({
           </div>
           <div>
             <input
-              className={`${classes.inputText} ${
-                inputBlink[2] ? classes.alert : ""
-              }`}
+              className={`form-control form-control-sm bg-dark text-light ${
+                classes.formcontrol
+              } ${inputBlink[2] ? classes.alert : ""}`}
               type="text"
               defaultValue={teams.team3}
               placeholder="Название команды № 3"

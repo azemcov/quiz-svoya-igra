@@ -11,12 +11,21 @@
   text-align: center;
 
   color-scheme: light dark;
-  color: #ffffffde;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+p {
+  color: #ffffffde;
+  font-family: "Montserrat-Regular", sans-serif;
+}
+
+label {
+  color: #ffffffde;
+  font-family: "Montserrat-Regular", sans-serif;
 }
 
 body {
@@ -29,19 +38,12 @@ body {
 }
 
 .FAQ {
-  border: 1px solid gray;
-  border-radius: 50%;
   width: 25px;
   height: 25px;
-  font-size: 20px;
   position: absolute;
   cursor: pointer;
-  bottom: 20px;
-  right: 20px;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  -ms-border-radius: 50%;
-  -o-border-radius: 50%;
+  bottom: 15px;
+  right: 15px;
 }
 
 .burger {

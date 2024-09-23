@@ -1,7 +1,7 @@
-import { useState } from "react";
-import QuestionButton from "@components/QuestionButton/QuestionButton.jsx";
-import classes from "@components/LineSection/LineSection.module.css";
-import {} from "@/data.js";
+import { useState, useEffect } from 'react';
+import QuestionButton from '@components/QuestionButton/QuestionButton.jsx';
+import classes from '@components/LineSection/LineSection.module.css';
+import {} from '@/data.js';
 
 export default function Line({
   children,
@@ -13,19 +13,31 @@ export default function Line({
   ifItsCat,
 }) {
   let [buttonClicked, setButtonClicked] = useState(false);
+  // let [overflow, setOverflow] = useState(false);
   function flash() {
     setButtonClicked(true);
     setTimeout(() => {
       setButtonClicked(false);
     }, 700);
   }
+  // useEffect(() => {
+  //   let container = document.getElementById(`${lineN}-container`);
+  //   let text = document.getElementById(`${lineN}-text`);
+  //   if (text.scrollHeight > container.clientHeight) {
+  //     setOverflow(true);
+  //   }
+  //   return undefined;
+  // }, [document.scrollHeight]);
 
   return (
     <div className={classes.line}>
       <div
-        className={`${classes.theme} ${buttonClicked ? classes.blinking : ""}`}
+        id={`${lineN}-container`}
+        className={`${classes.theme} ${buttonClicked ? classes.blinking : ''}`}
       >
-        <p className={classes.text}>{children}</p>
+        <p id={`${lineN}-text`} className={`${classes.text}`}>
+          {children}
+        </p>
       </div>
 
       {buttonCondition[lineN].map((_, i) => (
@@ -39,7 +51,7 @@ export default function Line({
           setQuestionXY={setQuestionXY}
           lineN={lineN}
           columnN={i}
-          key={i}
+          key={`questionButtonKeys-${lineN}-${i}`}
           ifItsCat={ifItsCat}
         >
           {buttonCondition[lineN][i]}
