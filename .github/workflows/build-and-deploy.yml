@@ -1,0 +1,37 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main # запускаем на каждый push в ветку main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '22.4.0' # используемая версия Node.js
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build
+
+      - name: Deploy to other repo
+        run: |
+          git config --global user.name "azemcov"
+          git config --global user.email "de_la_table@mail.ru"
+          git clone --branch main https://github.com/azemcov/quiz_Svoya_Igra.git build-repo
+          rm -rf build-repo/*
+          cp -r build/* build-repo/
+          cd build-repo
+          git add .
+          git commit -m "Deploying new build"
+          git push origin main
