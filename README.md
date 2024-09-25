@@ -1,5 +1,5 @@
 <div align="center">
-<a href='https://azemcov.github.io/quiz_Svoya_Igra'><img src="./assets/logo-Dys92ceR.svg" alt="Логотип «Своя Игра»" width="40%"></a>
+<a href='https://azemcov.github.io/quiz_Svoya_Igra'><img src="./public/images/logo-Dys92ceR.svg" alt="Логотип «Своя Игра»" width="40%"></a>
 </div>
 
 <h1 align="center">Браузерный интерфейс для проведения квиза по мотивам ТВ-передачи «Своя Игра»</h1>
