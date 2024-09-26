@@ -4,7 +4,7 @@ import path from 'path';
 
 export default defineConfig({
   // потому, что будет на github в репозитории "quiz_Svoya_Igra"
-  base: '/-REACT-quiz_Svoya_Igra/',
+  base: '.',
   plugins: [react()],
 
   //подключаем пути-псевдонимы
