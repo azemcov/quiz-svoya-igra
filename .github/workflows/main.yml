@@ -1,43 +1,43 @@
-name: Build and Deploy
+# name: Build and Deploy
 
-on:
-  push:
-    branches:
-      - main
+# on:
+#   push:
+#     branches:
+#       - main
 
-jobs:
-  build-deploy:
-    runs-on: ubuntu-latest
+# jobs:
+#   build-deploy:
+#     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [22.x]
+#     strategy:
+#       matrix:
+#         node-version: [22.x]
 
-    steps:
-      - uses: actions/checkout@v4
+#     steps:
+#       - uses: actions/checkout@v4
 
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+#       - name: Use Node.js ${{ matrix.node-version }}
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: ${{ matrix.node-version }}
+#           cache: 'npm'
 
-      - name: Install dependencies
-        run: npm install
+#       - name: Install dependencies
+#         run: npm install
 
-      - name: Build project
-        run: npm run build
+#       - name: Build project
+#         run: npm run build
 
-      - name: Deploy to other repo
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git config --global user.name "azemcov"
-          git config --global user.email "de_la_table@mail.ru"
-          git clone --branch main https://github.com/azemcov/quiz_Svoya_Igra.git build-repo
-          rm -rf build-repo/*
-          cp -r build/* build-repo/
-          cd build-repo
-          git add .
-          git commit -m "Deploying new build"
-          git push https://${{ secrets.SECRET_SVOYA_IGRA }}@github.com/azemcov/quiz_Svoya_Igra.git main
+#       - name: Deploy to other repo
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#         run: |
+#           git config --global user.name "azemcov"
+#           git config --global user.email "de_la_table@mail.ru"
+#           git clone --branch main https://github.com/azemcov/quiz_Svoya_Igra.git build-repo
+#           rm -rf build-repo/*
+#           cp -r build/* build-repo/
+#           cd build-repo
+#           git add .
+#           git commit -m "Deploying new build"
+#           git push https://${{ secrets.SECRET_SVOYA_IGRA }}@github.com/azemcov/quiz_Svoya_Igra.git main
