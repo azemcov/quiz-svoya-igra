@@ -24,8 +24,8 @@
 
 ## ⚙️ Использованные технологии
 
-[React](react.dev)
-<br>
-[Vite](vitejs.dev)
-<br>
-[BootStrap](getbootstrap.com)
+<img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" height="50px"></img>
+<img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" height="50px"></img>
+<img src="https://upload.wikimedia.org/wikipedia/commons/3/38/HTML5_Badge.svg" height="50px"></img>
+<img src="https://upload.wikimedia.org/wikipedia/commons/6/62/CSS3_logo.svg" height="50px"></img>
+<img src="https://upload.wikimedia.org/wikipedia/commons/b/b2/Bootstrap_logo.svg" height="50px"></img>
