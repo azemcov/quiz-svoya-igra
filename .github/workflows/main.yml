@@ -41,7 +41,7 @@ jobs:
           git add .
           if [ -n "$(git status --porcelain)" ]; then
               git commit -m "Deploying new build"
-              git push https://${{ secrets.SECRET_SVOYA_IGRA }}@github.com/azemcov/quiz_Svoya_Igra.git main
+              git push https://${{ secrets.GITHUB_TOKEN }}@github.com/azemcov/quiz_Svoya_Igra.git main
           else
               echo "No changes to commit"
           fi
