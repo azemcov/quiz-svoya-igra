@@ -10,7 +10,7 @@
   cursor: default;
   border: 1px solid #f8e848;
   overflow: hidden;
-  white-space: normal;
+  white-space: pre-wrap;
   word-wrap: break-word;
 }
 

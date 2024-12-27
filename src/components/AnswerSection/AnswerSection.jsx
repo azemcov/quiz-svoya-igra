@@ -1,8 +1,8 @@
-import Button from "@components/Button/Button.jsx";
-import classes from "@components/AnswerSection/AnswerSection.module.css";
-import audioImage from "@images/audio.png";
+import Button from '@components/Button/Button.jsx';
+import classes from '@components/AnswerSection/AnswerSection.module.css';
+import audioImage from '@images/audio.png';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 export default function AnswerSection({
   buttonVisibility,
@@ -14,9 +14,9 @@ export default function AnswerSection({
   increase,
   decrease,
 }) {
-  let [qPicture, setQPicture] = useState("");
+  let [qPicture, setQPicture] = useState('');
   let [playIndex, setPlayIndex] = useState(null);
-  let [audioFile, setAudioFile] = useState("");
+  let [audioFile, setAudioFile] = useState('');
 
   useEffect(() => {
     if (playIndex !== null) {
@@ -25,22 +25,22 @@ export default function AnswerSection({
       function handleEnded() {
         setPlayIndex(null);
       }
-      audio.addEventListener("ended", handleEnded);
+      audio.addEventListener('ended', handleEnded);
       audio.play();
 
       return () => {
         audio.pause();
         audio.currentTime = 0;
         setPlayIndex(null);
-        audio.removeEventListener("ended", handleEnded);
+        audio.removeEventListener('ended', handleEnded);
       };
     }
   }, [playIndex]);
 
   useEffect(() => {
-    if (typeOfAnswer === "picture") {
+    if (typeOfAnswer === 'picture') {
       setQPicture(linkA);
-    } else if (typeOfAnswer === "audio") {
+    } else if (typeOfAnswer === 'audio') {
       setAudioFile(linkA);
       setPlayIndex(1);
     }
@@ -49,23 +49,23 @@ export default function AnswerSection({
   return (
     <>
       <div className={classes.question}>
-        {typeOfAnswer === "text" && <p>{answer}</p>}
-        {typeOfAnswer === "picture" && (
+        {typeOfAnswer === 'text' && <p>{`${answer}`}</p>}
+        {typeOfAnswer === 'picture' && (
           <>
-            <p>{answer}</p>
+            <p>{`${answer}`}</p>
             <img
               src={qPicture}
-              alt="picture question"
+              alt='picture question'
               className={classes.image}
             />
           </>
         )}
-        {typeOfAnswer === "audio" && (
+        {typeOfAnswer === 'audio' && (
           <>
-            <p>{answer}</p>
+            <p>{`${answer}`}</p>
             <img
               src={audioImage}
-              alt="audio question"
+              alt='audio question'
               className={classes.smallimage}
             />
             <br />
@@ -77,19 +77,17 @@ export default function AnswerSection({
         {buttonVisibility && cat && (
           <>
             <Button
-              style={{ margin: "10px" }}
+              style={{ margin: '10px' }}
               onClick={() => {
                 increase(cat);
-              }}
-            >
+              }}>
               Верно
             </Button>
             <Button
-              style={{ margin: "10px" }}
+              style={{ margin: '10px' }}
               onClick={() => {
                 decrease(cat);
-              }}
-            >
+              }}>
               Неверно
             </Button>
           </>

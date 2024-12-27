@@ -1,35 +1,35 @@
-import { useState, useEffect } from "react";
-import { allRoundQuestions, finalQuestions } from "@/data.js";
-import { defaultQuestions, defaultFinalQuestions } from "@/data-default.js";
-import Button from "@components/Button/Button.jsx";
-import LineSection from "@components/LineSection/LineSection.jsx";
-import ScoreSection from "@components/ScoreSection/ScoreSection.jsx";
-import QuestionSection from "@components/QuestionSection/QuestionSection.jsx";
-import ResultSection from "@components/ResultSection/ResultSection.jsx";
-import FinalSection from "@components/FinalSection/FinalSection.jsx";
-import AdSection from "@components/AdSection/AdSection.jsx";
-import StartSection from "@components/StartSection/StartSection.jsx";
-import RegistrationSection from "@components/RegistrationSection/RegistrationSection.jsx";
-import AnswerSection from "@components/AnswerSection/AnswerSection.jsx";
-import CatAdSection from "@components/CatAdSection/CatAdSection.jsx";
-import FinalAnswerSection from "@components/FinalAnswerSection/FinalAnswerSection.jsx";
-import ModalSection from "@components/ModalSection/ModalSection.jsx";
-import EditorSection from "@components/EditorSection/EditorSection.jsx";
-import EditQuestionSection from "@components/EditQuestionSection/EditQuestionSection.jsx";
-import start_0 from "@sounds/0_start.mp3";
-import table_1 from "@sounds/1_table.mp3";
-import round_end_2 from "@sounds/2_round_end.mp3";
-import final_start_3 from "@sounds/3_final_start.mp3";
-import final_30sec_4 from "@sounds/4_final_30sec.mp3";
-import end_5 from "@sounds/5_end.mp3";
-import incorrect_6 from "@sounds/6_incorrect.mp3";
-import noanswer_7 from "@sounds/7_noanswer.mp3";
-import applause_8 from "@sounds/8_applause.mp3";
-import cat_9 from "@sounds/9_cat.mp3";
-import burgerMenuImage from "@images/burger-menu.svg";
-import burgerMenuClosedImage from "@images/burger-menu-closed.svg";
-import faqButtton from "@images/faqButton.svg";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { useState, useEffect } from 'react';
+import { allRoundQuestions, finalQuestions } from '@/data.js';
+import { defaultQuestions, defaultFinalQuestions } from '@/data-default.js';
+import Button from '@components/Button/Button.jsx';
+import LineSection from '@components/LineSection/LineSection.jsx';
+import ScoreSection from '@components/ScoreSection/ScoreSection.jsx';
+import QuestionSection from '@components/QuestionSection/QuestionSection.jsx';
+import ResultSection from '@components/ResultSection/ResultSection.jsx';
+import FinalSection from '@components/FinalSection/FinalSection.jsx';
+import AdSection from '@components/AdSection/AdSection.jsx';
+import StartSection from '@components/StartSection/StartSection.jsx';
+import RegistrationSection from '@components/RegistrationSection/RegistrationSection.jsx';
+import AnswerSection from '@components/AnswerSection/AnswerSection.jsx';
+import CatAdSection from '@components/CatAdSection/CatAdSection.jsx';
+import FinalAnswerSection from '@components/FinalAnswerSection/FinalAnswerSection.jsx';
+import ModalSection from '@components/ModalSection/ModalSection.jsx';
+import EditorSection from '@components/EditorSection/EditorSection.jsx';
+import EditQuestionSection from '@components/EditQuestionSection/EditQuestionSection.jsx';
+import start_0 from '@sounds/0_start.mp3';
+import table_1 from '@sounds/1_table.mp3';
+import round_end_2 from '@sounds/2_round_end.mp3';
+import final_start_3 from '@sounds/3_final_start.mp3';
+import final_30sec_4 from '@sounds/4_final_30sec.mp3';
+import end_5 from '@sounds/5_end.mp3';
+import incorrect_6 from '@sounds/6_incorrect.mp3';
+import noanswer_7 from '@sounds/7_noanswer.mp3';
+import applause_8 from '@sounds/8_applause.mp3';
+import cat_9 from '@sounds/9_cat.mp3';
+import burgerMenuImage from '@images/burger-menu.svg';
+import burgerMenuClosedImage from '@images/burger-menu-closed.svg';
+import faqButtton from '@images/faqButton.svg';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function App() {
   //#region Переменные
@@ -47,11 +47,11 @@ export default function App() {
   let [roundN, setRoundN] = useState(0);
   let [qtyOfRounds, setQtyOfRounds] = useState(importedRoundQuestions.length);
   let [actualRound, setActualRound] = useState(
-    roundN !== "final"
+    roundN !== 'final'
       ? [...importedRoundQuestions[roundN]]
       : [...importedRoundQuestions[0]]
   );
-  let [boardCondition, setBoardCondition] = useState("start"); ////////////BOARDCONDITION///////////////
+  let [boardCondition, setBoardCondition] = useState('start'); ////////////BOARDCONDITION///////////////
   let [buttonCondition, setButtonCondition] = useState(
     Array(6).fill([
       (roundN + 1) * 1 * 100,
@@ -66,9 +66,9 @@ export default function App() {
   let [finalCondition, setFinalCondition] = useState([1, 1, 1, 1, 1, 1, 1]);
   let [bet, setBet] = useState(0);
   let [teams, setTeams] = useState({
-    team1: "",
-    team2: "",
-    team3: "",
+    team1: '',
+    team2: '',
+    team3: '',
   });
   let [score, setScore] = useState({
     score1: 0,
@@ -97,7 +97,7 @@ export default function App() {
     cat_9,
   ];
   let [cat, setCat] = useState(false);
-  let [end, setEnd] = useState("");
+  let [end, setEnd] = useState('');
   let [modal, setModal] = useState(false);
   let [allMediaFiles, setAllMediaFiles] = useState([]);
   let [loadingPercent, setLoadingPercent] = useState(0);
@@ -112,11 +112,11 @@ export default function App() {
     setRoundN(0);
     setQtyOfRounds(importedRoundQuestions.length);
     setActualRound(
-      roundN !== "final"
+      roundN !== 'final'
         ? [...importedRoundQuestions[0]]
         : [...importedRoundQuestions[0]]
     );
-    setBoardCondition("start");
+    setBoardCondition('start');
     setButtonCondition(
       Array(6).fill([
         (roundN + 1) * 1 * 100,
@@ -131,9 +131,9 @@ export default function App() {
     setFinalCondition([1, 1, 1, 1, 1, 1, 1]);
     setBet(0);
     setTeams({
-      team1: "",
-      team2: "",
-      team3: "",
+      team1: '',
+      team2: '',
+      team3: '',
     });
     setScore({
       score1: 0,
@@ -149,7 +149,7 @@ export default function App() {
     setPlayAnswerAudioPicture(false);
     setPlayIndex(null);
     setCat(false);
-    setEnd("");
+    setEnd('');
     setModal(false);
     setAllMediaFiles([]);
     setInputBlink([false, false, false]);
@@ -167,20 +167,20 @@ export default function App() {
     importedRoundQuestions.forEach((nGameRound) => {
       nGameRound.forEach((nTheme) => {
         nTheme.line.forEach((Q) => {
-          Q.typeOfQuestion === "picture" || Q.typeOfQuestion === "audio"
+          Q.typeOfQuestion === 'picture' || Q.typeOfQuestion === 'audio'
             ? files.push([Q.typeOfQuestion, Q.linkQ])
             : 0;
-          Q.typeOfAnswer === "picture" || Q.typeOfAnswer === "audio"
+          Q.typeOfAnswer === 'picture' || Q.typeOfAnswer === 'audio'
             ? files.push([Q.typeOfAnswer, Q.linkA])
             : 0;
         });
       });
     });
     importedFinalQuestions.forEach((Q) => {
-      Q.typeOfQuestion === "picture" || Q.typeOfQuestion === "audio"
+      Q.typeOfQuestion === 'picture' || Q.typeOfQuestion === 'audio'
         ? files.push([Q.typeOfQuestion, Q.linkQ])
         : 0;
-      Q.typeOfAnswer === "picture" || Q.typeOfAnswer === "audio"
+      Q.typeOfAnswer === 'picture' || Q.typeOfAnswer === 'audio'
         ? files.push([Q.typeOfAnswer, Q.linkA])
         : 0;
     });
@@ -210,7 +210,7 @@ export default function App() {
 
     function loadFile(type, link) {
       return new Promise((resolve, reject) => {
-        if (type === "picture") {
+        if (type === 'picture') {
           let img = new Image();
           img.src = link;
           img.onload = () => {
@@ -221,7 +221,7 @@ export default function App() {
             console.error(link, err);
             reject(err);
           };
-        } else if (type === "audio") {
+        } else if (type === 'audio') {
           let audio = new Audio();
           audio.src = link;
           audio.oncanplaythrough = () => {
@@ -238,7 +238,7 @@ export default function App() {
     Promise.all(allMediaFiles.map((m) => loadFile(m[0], m[1])))
       .then(() => {})
       .catch((error) => {
-        console.error("Ошибка при загрузке файлов:", error, link);
+        console.error('Ошибка при загрузке файлов:', error, link);
       });
 
     return () => {};
@@ -275,7 +275,7 @@ export default function App() {
         setPlayIndex(null);
       }
 
-      audio.addEventListener("ended", handleEnded);
+      audio.addEventListener('ended', handleEnded);
       audio.play();
 
       return () => {
@@ -284,7 +284,7 @@ export default function App() {
         }, 100);
         audio.currentTime = 0;
         setPlayIndex(null);
-        audio.removeEventListener("ended", handleEnded);
+        audio.removeEventListener('ended', handleEnded);
       };
     }
     return () => {};
@@ -293,150 +293,150 @@ export default function App() {
   // Эффект для управления с клавиатуры
   useEffect(() => {
     function keyboard(event) {
-      if (event.code === "Enter") {
-        if (boardCondition === "start") {
-          setBoardCondition("registration");
+      if (event.code === 'Enter') {
+        if (boardCondition === 'start') {
+          setBoardCondition('registration');
           setPlayIndex(0);
-        } else if (boardCondition === "registration") {
+        } else if (boardCondition === 'registration') {
           if (
-            teams.team1.trim() !== "" &&
-            teams.team2.trim() !== "" &&
-            teams.team3.trim() !== ""
+            teams.team1.trim() !== '' &&
+            teams.team2.trim() !== '' &&
+            teams.team3.trim() !== ''
           ) {
-            setBoardCondition("tableAd");
+            setBoardCondition('tableAd');
           } else {
             setInputBlink([
-              teams.team1.trim() === "" ? 1 : 0,
-              teams.team2.trim() === "" ? 1 : 0,
-              teams.team3.trim() === "" ? 1 : 0,
+              teams.team1.trim() === '' ? 1 : 0,
+              teams.team2.trim() === '' ? 1 : 0,
+              teams.team3.trim() === '' ? 1 : 0,
             ]);
             setTimeout(() => {
               setInputBlink([0, 0, 0]);
             }, 1000);
           }
-        } else if (boardCondition === "tableAd") {
-          setBoardCondition("table");
+        } else if (boardCondition === 'tableAd') {
+          setBoardCondition('table');
           setPlayIndex(1);
           setTimeout(() => setPlayIndex(1), 1);
-        } else if (boardCondition === "question") {
+        } else if (boardCondition === 'question') {
           setPlayAnswerAudioPicture((p) => !p);
-        } else if (boardCondition === "finalAd") {
-          setBoardCondition("final");
+        } else if (boardCondition === 'finalAd') {
+          setBoardCondition('final');
           setPlayIndex(1);
           setTimeout(() => setPlayIndex(1), 1);
-        } else if (boardCondition === "results" && boardCondition !== "end") {
+        } else if (boardCondition === 'results' && boardCondition !== 'end') {
           roundN < qtyOfRounds - 1
             ? (setActualRound([...importedRoundQuestions[roundN]]),
               setRoundN(roundN + 1),
-              setBoardCondition("tableAd"))
-            : (setBoardCondition("finalAd"), setRoundN("final"));
-        } else if (boardCondition === "finalAnswer" && allDoneAreNumber) {
+              setBoardCondition('tableAd'))
+            : (setBoardCondition('finalAd'), setRoundN('final'));
+        } else if (boardCondition === 'finalAnswer' && allDoneAreNumber) {
           finalScore();
-          setBoardCondition("end");
+          setBoardCondition('end');
         }
-      } else if (boardCondition === "question" && bet !== 0) {
-        if (event.key === "=") {
-          setBoardCondition("answer");
+      } else if (boardCondition === 'question' && bet !== 0) {
+        if (event.key === '=') {
+          setBoardCondition('answer');
         }
         if (cat === false) {
-          if (event.key === "1") {
+          if (event.key === '1') {
             increase(1);
-          } else if (event.key === "q" || event.key === "й") {
+          } else if (event.key === 'q' || event.key === 'й') {
             decrease(1);
-          } else if (event.key === "2") {
+          } else if (event.key === '2') {
             increase(2);
-          } else if (event.key === "w" || event.key === "ц") {
+          } else if (event.key === 'w' || event.key === 'ц') {
             decrease(2);
-          } else if (event.key === "3") {
+          } else if (event.key === '3') {
             increase(3);
-          } else if (event.key === "e" || event.key === "у") {
+          } else if (event.key === 'e' || event.key === 'у') {
             decrease(3);
           }
-        } else if (typeof cat === "number") {
-          if (event.key === "1" && cat === 1) {
+        } else if (typeof cat === 'number') {
+          if (event.key === '1' && cat === 1) {
             increase(1);
-          } else if ((event.key === "q" || event.key === "й") && cat === 1) {
+          } else if ((event.key === 'q' || event.key === 'й') && cat === 1) {
             decrease(1);
-          } else if (event.key === "2" && cat === 2) {
+          } else if (event.key === '2' && cat === 2) {
             increase(2);
-          } else if ((event.key === "w" || event.key === "ц") && cat === 2) {
+          } else if ((event.key === 'w' || event.key === 'ц') && cat === 2) {
             decrease(2);
-          } else if (event.key === "3" && cat === 3) {
+          } else if (event.key === '3' && cat === 3) {
             increase(3);
-          } else if ((event.key === "e" || event.key === "у") && cat === 3) {
+          } else if ((event.key === 'e' || event.key === 'у') && cat === 3) {
             decrease(3);
           }
         }
-      } else if (boardCondition === "question" && final !== false) {
-        if (event.key === "=") {
-          setBoardCondition("finalAnswer");
+      } else if (boardCondition === 'question' && final !== false) {
+        if (event.key === '=') {
+          setBoardCondition('finalAnswer');
         }
-      } else if (boardCondition === "answer") {
+      } else if (boardCondition === 'answer') {
         if (cat === false) {
-          if (event.key === "Backspace") {
+          if (event.key === 'Backspace') {
             noAnswer();
-          } else if (event.key === "1") {
+          } else if (event.key === '1') {
             increase(1);
-          } else if (event.key === "q" || event.key === "й") {
+          } else if (event.key === 'q' || event.key === 'й') {
             decrease(1);
-          } else if (event.key === "2") {
+          } else if (event.key === '2') {
             increase(2);
-          } else if (event.key === "w" || event.key === "ц") {
+          } else if (event.key === 'w' || event.key === 'ц') {
             decrease(2);
-          } else if (event.key === "3") {
+          } else if (event.key === '3') {
             increase(3);
-          } else if (event.key === "e" || event.key === "у") {
+          } else if (event.key === 'e' || event.key === 'у') {
             decrease(3);
           }
-        } else if (typeof cat === "number") {
-          if (event.key === "Backspace") {
+        } else if (typeof cat === 'number') {
+          if (event.key === 'Backspace') {
             decrease(1);
-          } else if (event.key === "1" && cat === 1) {
+          } else if (event.key === '1' && cat === 1) {
             increase(1);
-          } else if ((event.key === "q" || event.key === "й") && cat === 1) {
+          } else if ((event.key === 'q' || event.key === 'й') && cat === 1) {
             decrease(1);
-          } else if (event.key === "2" && cat === 2) {
+          } else if (event.key === '2' && cat === 2) {
             increase(2);
-          } else if ((event.key === "w" || event.key === "ц") && cat === 2) {
+          } else if ((event.key === 'w' || event.key === 'ц') && cat === 2) {
             decrease(2);
-          } else if (event.key === "3" && cat === 3) {
+          } else if (event.key === '3' && cat === 3) {
             increase(3);
-          } else if ((event.key === "e" || event.key === "у") && cat === 3) {
+          } else if ((event.key === 'e' || event.key === 'у') && cat === 3) {
             decrease(3);
           }
         }
-      } else if (boardCondition === "cat") {
-        if (event.key === "1") {
+      } else if (boardCondition === 'cat') {
+        if (event.key === '1') {
           setCat(1);
-          setBoardCondition("question");
-        } else if (event.key === "2") {
+          setBoardCondition('question');
+        } else if (event.key === '2') {
           setCat(2);
-          setBoardCondition("question");
-        } else if (event.key === "3") {
+          setBoardCondition('question');
+        } else if (event.key === '3') {
           setCat(3);
-          setBoardCondition("question");
+          setBoardCondition('question');
         }
       }
-      /////БЫСТНОЕ ТЕСТИРОВАНИЕ ВОПРОСОВ///////////////////////////////////////////////////////////////////////////////
-      // else if (boardCondition === "table") {
-      //   if (event.key === "±") {
-      //     setBoardCondition("final");
-      //   } else if (event.key === "/") {
-      //     setButtonCondition([
-      //       ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
-      //       ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
-      //       ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
-      //       ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
-      //       ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep"],
-      //       ["sleep", "sleep", "sleep", "sleep", "sleep", "sleep", 9000],
-      //     ]);
-      //   }
-      // }
-      //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      ///БЫСТНОЕ ТЕСТИРОВАНИЕ ВОПРОСОВ///////////////////////////////////////////////////////////////////////////////
+      else if (boardCondition === 'table') {
+        if (event.key === '±') {
+          setBoardCondition('final');
+        } else if (event.key === '/') {
+          setButtonCondition([
+            ['sleep', 'sleep', 'sleep', 'sleep', 'sleep', 'sleep', 'sleep'],
+            ['sleep', 'sleep', 'sleep', 'sleep', 'sleep', 'sleep', 'sleep'],
+            ['sleep', 'sleep', 'sleep', 'sleep', 'sleep', 'sleep', 'sleep'],
+            ['sleep', 'sleep', 'sleep', 'sleep', 'sleep', 'sleep', 'sleep'],
+            ['sleep', 'sleep', 'sleep', 'sleep', 'sleep', 'sleep', 'sleep'],
+            ['sleep', 'sleep', 'sleep', 'sleep', 'sleep', 'sleep', 9000],
+          ]);
+        }
+      }
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
-    document.addEventListener("keydown", keyboard);
+    document.addEventListener('keydown', keyboard);
     return () => {
-      document.removeEventListener("keydown", keyboard);
+      document.removeEventListener('keydown', keyboard);
       keyboard;
     };
   }, [boardCondition, score, allDoneAreNumber, teams, cat]);
@@ -444,7 +444,7 @@ export default function App() {
   // Эффект для установки раунда
   useEffect(() => {
     setActualRound(
-      roundN !== "final"
+      roundN !== 'final'
         ? [...importedRoundQuestions[roundN]]
         : [...importedRoundQuestions[0]]
     );
@@ -468,39 +468,39 @@ export default function App() {
   // Функция после конца раунда "будит" все кнопки вопросов
   function isQuestionsOver() {
     return buttonCondition
-      .map((arr) => arr.every((e) => e === "sleep"))
+      .map((arr) => arr.every((e) => e === 'sleep'))
       .every((e) => e === true);
   }
   // Функция увеличения счёта
   function increase(num) {
-    typeof cat === "number" ? (num = cat) : 0;
+    typeof cat === 'number' ? (num = cat) : 0;
     if (bet > 0) {
-      setButtonClicked((prev) => ({ ...prev, [num]: "green" }));
+      setButtonClicked((prev) => ({ ...prev, [num]: 'green' }));
     }
     setPlayIndex(8);
     setScore({
       ...score,
-      ["score" + num]: score["score" + num] + bet,
+      ['score' + num]: score['score' + num] + bet,
     });
 
     setBet(0);
     setTimeout(() => setButtonClicked((prev) => ({ 1: 0, 2: 0, 3: 0 })), 1000);
-    setBoardCondition(isQuestionsOver() ? "results" : "table");
+    setBoardCondition(isQuestionsOver() ? 'results' : 'table');
     setCat(false);
   }
   // Функция уменьшенияния счёта
   function decrease(num) {
-    typeof cat === "number" ? (num = cat) : 0;
+    typeof cat === 'number' ? (num = cat) : 0;
     if (bet > 0) {
-      setButtonClicked((prev) => ({ ...prev, [num]: "red" }));
+      setButtonClicked((prev) => ({ ...prev, [num]: 'red' }));
     }
     setPlayIndex(6);
-    setScore({ ...score, ["score" + num]: score["score" + num] - bet });
+    setScore({ ...score, ['score' + num]: score['score' + num] - bet });
 
-    typeof cat === "number" ? setBet(0) : 0;
+    typeof cat === 'number' ? setBet(0) : 0;
     setTimeout(() => setButtonClicked((prev) => ({ 1: 0, 2: 0, 3: 0 })), 1000);
-    typeof cat === "number"
-      ? setBoardCondition(isQuestionsOver() ? "results" : "table")
+    typeof cat === 'number'
+      ? setBoardCondition(isQuestionsOver() ? 'results' : 'table')
       : 0;
     setCat(false);
   }
@@ -508,13 +508,13 @@ export default function App() {
   function noAnswer() {
     setBet(0);
     setPlayIndex(7);
-    setBoardCondition(isQuestionsOver() ? "results" : "table");
+    setBoardCondition(isQuestionsOver() ? 'results' : 'table');
   }
   // Функция если вопрос "кот в мешке"
   function ifItsCat() {
     actualRound[questionXY[0]].line[questionXY[1]].cat
-      ? setBoardCondition("cat")
-      : setBoardCondition("question");
+      ? setBoardCondition('cat')
+      : setBoardCondition('question');
   }
   // Функция подсчёта финального счёта
   function finalScore() {
@@ -537,10 +537,10 @@ export default function App() {
         //модальное окно
         <>
           <img
-            className="FAQ"
+            className='FAQ'
             onClick={() => setModal((m) => !m)}
             src={faqButtton}
-            alt="(?)"
+            alt='(?)'
           />
           <ModalSection
             buttonVisibility={buttonVisibility}
@@ -552,47 +552,44 @@ export default function App() {
       }
       {
         //бургер-меню
-        (boardCondition === "start" ||
-          boardCondition === "registration" ||
-          boardCondition === "editor") && (
+        (boardCondition === 'start' ||
+          boardCondition === 'registration' ||
+          boardCondition === 'editor') && (
           <>
             <div
               onClick={() => {
                 setBurger((b) => !b);
               }}
-              className="burger"
-            >
-              {!burger && <img src={burgerMenuImage} alt="[]" />}
-              {burger && <img src={burgerMenuClosedImage} alt="X" />}
+              className='burger'>
+              {!burger && <img src={burgerMenuImage} alt='[]' />}
+              {burger && <img src={burgerMenuClosedImage} alt='X' />}
             </div>
-            {(boardCondition === "start" ||
-              boardCondition === "registration") &&
+            {(boardCondition === 'start' ||
+              boardCondition === 'registration') &&
               burger && (
                 <>
-                  <div className="burgerMenu">
+                  <div className='burgerMenu'>
                     <Button>Правила</Button>
                     <Button
                       onClick={() => {
                         setBurger(false);
-                        setBoardCondition("editor");
-                      }}
-                    >
+                        setBoardCondition('editor');
+                      }}>
                       Редактор
                     </Button>
                   </div>
                 </>
               )}
-            {boardCondition === "editor" && burger && (
+            {boardCondition === 'editor' && burger && (
               <>
-                <div className="burgerMenu">
+                <div className='burgerMenu'>
                   <Button
                     onClick={() => {
                       setBurger(false);
                       setRebut((r) => ++r);
                       setEP([undefined, undefined, undefined]);
-                      setBoardCondition("start");
-                    }}
-                  >
+                      setBoardCondition('start');
+                    }}>
                     выход
                   </Button>
                 </div>
@@ -601,17 +598,16 @@ export default function App() {
           </>
         )
       }
-      {boardCondition === "start" && (
+      {boardCondition === 'start' && (
         <>
           <StartSection
             buttonVisibility={buttonVisibility}
             setBoardCondition={setBoardCondition}
             setPlayIndex={setPlayIndex}
-            loadingPercent={loadingPercent}
-          ></StartSection>
+            loadingPercent={loadingPercent}></StartSection>
         </>
       )}
-      {boardCondition === "registration" && (
+      {boardCondition === 'registration' && (
         <>
           <RegistrationSection
             teams={teams}
@@ -619,23 +615,21 @@ export default function App() {
             buttonVisibility={buttonVisibility}
             setBoardCondition={setBoardCondition}
             inputBlink={inputBlink}
-            setInputBlink={setInputBlink}
-          ></RegistrationSection>
+            setInputBlink={setInputBlink}></RegistrationSection>
         </>
       )}
-      {boardCondition === "tableAd" && (
+      {boardCondition === 'tableAd' && (
         <>
           <AdSection
             setBoardCondition={setBoardCondition}
             boardCondition={boardCondition}
             buttonVisibility={buttonVisibility}
-            setPlayIndex={setPlayIndex}
-          >
+            setPlayIndex={setPlayIndex}>
             {`Раунд № ${roundN + 1}`}
           </AdSection>
         </>
       )}
-      {boardCondition === "table" && (
+      {boardCondition === 'table' && (
         <>
           <ScoreSection
             teams={teams}
@@ -643,8 +637,7 @@ export default function App() {
             buttonClicked={buttonClicked}
             increase={bet === 0 ? () => {} : increase}
             decrease={bet === 0 ? () => {} : decrease}
-            buttonVisibility={buttonVisibility}
-          ></ScoreSection>
+            buttonVisibility={buttonVisibility}></ScoreSection>
           {actualRound.map((_, i) => (
             <LineSection
               setBoardCondition={setBoardCondition}
@@ -654,14 +647,13 @@ export default function App() {
               setQuestionXY={setQuestionXY}
               lineN={i}
               key={`lineKeys-${i}`}
-              ifItsCat={ifItsCat}
-            >
+              ifItsCat={ifItsCat}>
               {actualRound[i].theme}
             </LineSection>
           ))}
         </>
       )}
-      {boardCondition === "cat" && (
+      {boardCondition === 'cat' && (
         <>
           <ScoreSection
             teams={teams}
@@ -669,18 +661,16 @@ export default function App() {
             buttonClicked={buttonClicked}
             increase={() => {}}
             decrease={() => {}}
-            buttonVisibility={buttonVisibility}
-          ></ScoreSection>
+            buttonVisibility={buttonVisibility}></ScoreSection>
           <CatAdSection
             setBoardCondition={setBoardCondition}
             buttonVisibility={buttonVisibility}
             setPlayIndex={setPlayIndex}
             setCat={setCat}
-            teams={teams}
-          ></CatAdSection>
+            teams={teams}></CatAdSection>
         </>
       )}
-      {boardCondition === "question" && (
+      {boardCondition === 'question' && (
         <>
           <ScoreSection
             teams={teams}
@@ -688,34 +678,34 @@ export default function App() {
             buttonClicked={buttonClicked}
             increase={cat === false ? increase : () => {}}
             decrease={cat === false ? decrease : () => {}}
-            buttonVisibility={final !== false ? false : buttonVisibility}
-          ></ScoreSection>
+            buttonVisibility={
+              final !== false ? false : buttonVisibility
+            }></ScoreSection>
           <QuestionSection
             buttonVisibility={buttonVisibility}
             setBoardCondition={setBoardCondition}
             typeOfQuestion={
-              typeof final === "number"
+              typeof final === 'number'
                 ? importedFinalQuestions[final].typeOfQuestion
                 : actualRound[questionXY[0]].line[questionXY[1]].typeOfQuestion
             }
             question={
-              typeof final === "number"
+              typeof final === 'number'
                 ? importedFinalQuestions[final].question
                 : actualRound[questionXY[0]].line[questionXY[1]].question
             }
             linkQ={
-              typeof final === "number"
+              typeof final === 'number'
                 ? importedFinalQuestions[final].linkQ
                 : actualRound[questionXY[0]].line[questionXY[1]].linkQ
             }
             playAnswerAudioPicture={playAnswerAudioPicture}
             setPlayAnswerAudioPicture={setPlayAnswerAudioPicture}
             final={final}
-            music={setPlayIndex}
-          ></QuestionSection>
+            music={setPlayIndex}></QuestionSection>
         </>
       )}
-      {boardCondition === "answer" && (
+      {boardCondition === 'answer' && (
         <>
           <ScoreSection
             teams={teams}
@@ -723,8 +713,7 @@ export default function App() {
             buttonClicked={buttonClicked}
             increase={cat === false ? increase : () => {}}
             decrease={cat === false ? decrease : () => {}}
-            buttonVisibility={buttonVisibility}
-          ></ScoreSection>
+            buttonVisibility={buttonVisibility}></ScoreSection>
           <AnswerSection
             buttonVisibility={buttonVisibility}
             noAnswer={noAnswer}
@@ -735,11 +724,10 @@ export default function App() {
             linkA={actualRound[questionXY[0]].line[questionXY[1]].linkA}
             cat={cat}
             increase={increase}
-            decrease={decrease}
-          ></AnswerSection>
+            decrease={decrease}></AnswerSection>
         </>
       )}
-      {boardCondition === "results" && (
+      {boardCondition === 'results' && (
         <>
           <ResultSection
             teams={teams}
@@ -756,45 +744,41 @@ export default function App() {
           />
         </>
       )}
-      {boardCondition === "finalAd" && (
+      {boardCondition === 'finalAd' && (
         <>
           <AdSection
             setBoardCondition={setBoardCondition}
             boardCondition={boardCondition}
             buttonVisibility={buttonVisibility}
-            setPlayIndex={setPlayIndex}
-          >
-            {"Финал"}
+            setPlayIndex={setPlayIndex}>
+            {'Финал'}
           </AdSection>
         </>
       )}
-      {boardCondition === "final" && (
+      {boardCondition === 'final' && (
         <>
           <ScoreSection
             teams={teams}
             score={score}
             buttonClicked={buttonClicked}
-            buttonVisibility={false}
-          ></ScoreSection>
+            buttonVisibility={false}></ScoreSection>
           <FinalSection
             importedFinalQuestions={importedFinalQuestions}
             finalCondition={finalCondition}
             setFinalCondition={setFinalCondition}
             setBoardCondition={setBoardCondition}
             setButtonVisibility={setButtonVisibility}
-            setFinal={setFinal}
-          ></FinalSection>
+            setFinal={setFinal}></FinalSection>
         </>
       )}
-      {boardCondition === "finalAnswer" && (
+      {boardCondition === 'finalAnswer' && (
         <>
           <ScoreSection
             teams={teams}
             score={score}
             buttonClicked={buttonClicked}
             buttonVisibility={false}
-            final={final}
-          ></ScoreSection>
+            final={final}></ScoreSection>
           <FinalAnswerSection
             buttonVisibility={buttonVisibility}
             typeOfAnswer={importedFinalQuestions[final].typeOfAnswer}
@@ -807,11 +791,10 @@ export default function App() {
             allDoneAreNumber={allDoneAreNumber}
             setBoardCondition={setBoardCondition}
             score={score}
-            finalScore={finalScore}
-          ></FinalAnswerSection>
+            finalScore={finalScore}></FinalAnswerSection>
         </>
       )}
-      {boardCondition === "end" && (
+      {boardCondition === 'end' && (
         <>
           <AdSection
             setBoardCondition={setBoardCondition}
@@ -819,13 +802,12 @@ export default function App() {
             buttonVisibility={buttonVisibility}
             setPlayIndex={setPlayIndex}
             end={end}
-            finalScore={finalScore}
-          >
-            {"Финал"}
+            finalScore={finalScore}>
+            {'Финал'}
           </AdSection>
         </>
       )}
-      {boardCondition === "editor" && (
+      {boardCondition === 'editor' && (
         <>
           <EditorSection
             editDefaultQ={editDefaultQ}
@@ -839,11 +821,12 @@ export default function App() {
             setQtyOfNewRounds={setQtyOfNewRounds}
             setRebut={setRebut}
             setImportedRoundQuestions={setImportedRoundQuestions}
-            setImportedFinalQuestions={setImportedFinalQuestions}
-          ></EditorSection>
+            setImportedFinalQuestions={
+              setImportedFinalQuestions
+            }></EditorSection>
         </>
       )}
-      {boardCondition === "editRegularQ" && (
+      {boardCondition === 'editRegularQ' && (
         <>
           <EditQuestionSection
             editDefaultQ={editDefaultQ}
@@ -852,8 +835,7 @@ export default function App() {
             setEditDefaultSuperQ={setEditDefaultSuperQ}
             setBoardCondition={setBoardCondition}
             EP={EP}
-            setEP={setEP}
-          ></EditQuestionSection>
+            setEP={setEP}></EditQuestionSection>
         </>
       )}
     </>
