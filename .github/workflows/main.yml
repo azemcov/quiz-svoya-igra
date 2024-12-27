@@ -1,0 +1,48 @@
+# name: Build and Deploy
+
+# on:
+#   push:
+#     branches:
+#       - main
+
+# jobs:
+#   build-deploy:
+#     runs-on: ubuntu-latest
+
+#     strategy:
+#       matrix:
+#         node-version: [22.x]
+
+#     steps:
+#       - uses: actions/checkout@v4
+
+#       - name: Use Node.js ${{ matrix.node-version }}
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: ${{ matrix.node-version }}
+#           cache: 'npm'
+
+#       - name: Install dependencies
+#         run: npm install
+
+#       - name: Build project
+#         run: npm run build
+
+#       - name: Deploy to other repo
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.SECRET_SVOYA_IGRA }}
+#         run: |
+#           git config --global user.name "azemcov"
+#           git config --global user.email "de_la_table@mail.ru"
+#           git clone --branch main https://github.com/azemcov/quiz_Svoya_Igra.git build-repo
+#           rm -rf build-repo/*
+#           cp -r dist/* build-repo/
+#           cd build-repo
+#           git add .
+#           if [ -n "$(git status --porcelain)" ]; then
+#               git commit -m "Deploying new build"
+#               git push https://${{ secrets.SECRET_SVOYA_IGRA }}@github.com/azemcov/quiz_Svoya_Igra.git main
+#           else
+#               echo "No changes to commit"
+#           fi
+          
