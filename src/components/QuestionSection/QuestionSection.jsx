@@ -96,7 +96,7 @@ export default function QuestionSection({
             <img
               src={audioImage}
               alt='audio question'
-              className={classes.smallimage}
+              className={classes.smallImage}
             />
           </>
         )}
