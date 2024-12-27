@@ -26,6 +26,7 @@
   height: 4vh;
 }
 .textarea {
+  font-size: calc(0.5vw + 0.5vh);
   box-sizing: border-box;
   height: 10vh;
   width: 30vw;
