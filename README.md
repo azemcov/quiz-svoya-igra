@@ -1,11 +1,11 @@
 <div align="center">
-<a href='https://azemcov.github.io/quiz_Svoya_Igra'><img src="./public/images/logo.svg" alt="Логотип «Своя Игра»" width="40%"></a>
+<a href='https://azemcov.github.io/quiz-svoya-igra/'><img src="./public/images/logo.svg" alt="Логотип «Своя Игра»" width="40%"></a>
 </div>
 
 <h1 align="center">Браузерный интерфейс для проведения квиза по мотивам ТВ-передачи «Своя Игра»</h1>
 
 <div align="center">
-<a href='https://azemcov.github.io/quiz_Svoya_Igra'>👉👉 ОТКРЫТЬ 👈👈</a>
+<a href='https://azemcov.github.io/quiz-svoya-igra/'>👉👉 ОТКРЫТЬ 👈👈</a>
 </div>
 
 ## 📖 Описание
@@ -18,7 +18,7 @@
 <br>
 
 <div align="center">
-<a href='https://azemcov.github.io/quiz_Svoya_Igra'><img src="./public/images/Sequence 01.gif" alt="Превью" width="40%"></a>
+<a href='https://azemcov.github.io/quiz-svoya-igra/'><img src="./public/images/Sequence 01.gif" alt="Превью" width="40%"></a>
 </div>
 
 ## 🔥 Обновления
@@ -28,13 +28,8 @@
 
 ## ⚙️ Использованные технологии
 
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" height="50px"></img> </a>
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"> <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" height="50px"></img> </a>
 <a href="https://react.dev/"> <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" height="50px"></img></a>
 <a href="https://html.spec.whatwg.org/multipage/"> <img src="https://upload.wikimedia.org/wikipedia/commons/3/38/HTML5_Badge.svg" height="50px"></img></a>
 <a href="https://www.w3.org/Style/CSS/Overview.en.html"> <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/CSS3_logo.svg" height="50px"></img></a>
 <a href="https://getbootstrap.com/"> <img src="https://upload.wikimedia.org/wikipedia/commons/b/b2/Bootstrap_logo.svg" height="50px"></img></a>
-
-
-
-
-
